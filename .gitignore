@@ -125,3 +125,4 @@ dmypy.json
 
 .idea/*
 images/*
+/umano/manosola/handfeatures/models/pose_iter_102000.caffemodel

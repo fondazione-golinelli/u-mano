@@ -1,5 +1,6 @@
-import numpy as np
+import os
 import cv2
+from umano.manosola.utils import annotate_frame_with_features
 
 
 def durerizer(LL):
@@ -64,24 +65,17 @@ def durerizer(LL):
                   I - middle_finger_half_height * 6 / 11 * 6 / 11)
     points[20] = (middle_finger_width / 2 + ring_finger_width + little_finger_width / 2 * 3 / 4, I)
 
-    return [(int(x), int(y)) for x,y in points]
+    return [(int(x), int(y)) for x, y in points]
 
 
 if __name__ == "__main__":
-    img = cv2.imread("durer_sample.png")
+    img = cv2.imread(os.path.join(os.path.dirname(__file__), "durer_sample.png"))
 
-    # translate points
+    # translate points to hand origin in image
     origin = (635, 675)
-    h = 590
+    h = 590  # height in pixel of hand in durer
     points = [(int(x) + int(origin[0]), int(origin[1]) - int(y)) for x, y in durerizer(h)]
-    for i in range(len(points)):
-        point = points[i]
-        cv2.circle(img, point, 8, (0, 0, 255), thickness=-1, lineType=cv2.FILLED)
-        cv2.putText(img, "{}".format(i),
-                    (int(point[0]), int(point[1])), cv2.FONT_HERSHEY_SIMPLEX, 1,
-                    (255, 0, 0),
-                    1, lineType=cv2.LINE_AA)
+    cv2.imshow('durer in the machine (any key to close)', annotate_frame_with_features(img, points=points))
 
-    cv2.imshow('durer in the machine (any key to close)', img)
     key = cv2.waitKey(0)
     cv2.destroyAllWindows()
