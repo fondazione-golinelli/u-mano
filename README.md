@@ -4,7 +4,7 @@
 * Once installed, open Anaconda Prompt
 
 <pre>
-> conda create -n umano python`
+> conda create -n umano python
 > activate umano
 
 (umano)> cd u-mano
