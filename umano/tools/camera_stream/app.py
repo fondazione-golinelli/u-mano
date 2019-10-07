@@ -51,9 +51,9 @@ if __name__ == '__main__':
         dest='camera',
         type=str,
         default="0",
-        help='local camera index to stream from (default 0)')
+        help='local camera index to stream from (default 0) or camera stream url')
 
-    AVAILABLE_PROCESSORS = ["BaseProcessing","BackgroundSubtraction"]
+    AVAILABLE_PROCESSORS = ["BaseProcessing", "BackgroundSubtraction"]
 
     parser.add_argument(
         '--processor',
@@ -61,8 +61,6 @@ if __name__ == '__main__':
         type=str,
         default="BaseProcessing",
         help='image processing to apply to frame {}'.format(AVAILABLE_PROCESSORS))
-
-    parser.print_help()
 
     args = parser.parse_args()
 
