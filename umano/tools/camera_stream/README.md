@@ -29,4 +29,4 @@ For a running example with laptop webcam open two terminal.
 
 </pre>
 
-Then open two browser window at http://localhost:5000 and http://localhost:5001 to have som fun :)
+Then open two browser window at http://localhost:5000 and http://localhost:5001 to have some fun :)
