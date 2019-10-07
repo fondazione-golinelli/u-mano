@@ -3,3 +3,5 @@ numpy==1.17.2
 imutils==0.5.3
 opencv-contrib-python==4.1.1.26
 python-osc==1.7.2
+nameko==2.12.0
+flask=1.1.1
