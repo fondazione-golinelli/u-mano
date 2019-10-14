@@ -4,8 +4,8 @@ from collections import Counter
 import numpy as np
 import cv2
 
-from umano.manosola.utils import annotate_frame_with_features
-from umano.manosola.settings import HAND_MODEL_URL
+from umano.onehand.utils import annotate_frame_with_features
+from umano.settings import ONEHAND_HANDPOSE_MODEL_URL
 
 
 class HandFeatureExtractor(object):
@@ -17,8 +17,8 @@ class HandFeatureExtractor(object):
 
         if not os.path.exists(weights_file):
             raise RuntimeError(
-                "Please download hand model from {} and copy it into manosola/handfeatrures/models folder".format(
-                    HAND_MODEL_URL))
+                "Please download hand model from {} and copy it into onehand/handfeatrures/models folder".format(
+                    ONEHAND_HANDPOSE_MODEL_URL))
 
         self.threshold = threshold
         self.net = cv2.dnn.readNetFromCaffe(proto_file, weights_file)
@@ -54,7 +54,8 @@ class HandFeatureExtractor(object):
             if prob > self.threshold:
                 # cv2.circle(processed_frame, (int(point[0]), int(point[1])), 8, (0, 255, 255), thickness=-1,
                 #            lineType=cv2.FILLED)
-                cv2.putText(processed_frame, "{}".format(i),
+                if self.live_output:
+                    cv2.putText(processed_frame, "{}".format(i),
                             (int(point[0]), int(point[1])), cv2.FONT_HERSHEY_SIMPLEX, 1,
                             (255, 0, 0),
                             2, lineType=cv2.LINE_AA)

@@ -1,9 +1,9 @@
-from umano.manosola.durer import durerizer
-from umano.manosola.utils import *
+from umano.onehand.durer import durerizer
+from umano.onehand.utils import *
 
 
 class HandFeature(object):
-    
+
     def __init__(self, image_points=None, reference_frequency=64, source_image=None):
         if isinstance(image_points, list):
             self.image_points = image_points
@@ -13,7 +13,8 @@ class HandFeature(object):
         self.reference_frequency = reference_frequency
 
         self.frequencies, self.distances, self.hand_length = points_to_frequencies(image_points, reference_frequency)
-        self.durer_frequencies, self.durer_distances, _ = points_to_frequencies(durerizer(self.hand_length), reference_frequency)
+        self.durer_frequencies, self.durer_distances, _ = points_to_frequencies(durerizer(self.hand_length),
+                                                                                reference_frequency)
         self.amplitudes = self.durer_amplitudes = []
         # TODO calcola le ampiezze a modo
         for f in self.frequencies:

@@ -5,10 +5,10 @@ import random
 import cv2
 
 
-from umano.manosola.models import HandFeature
-from umano.manosola.handfeatures.extractor import HandFeatureExtractor
-from umano.manosola.utils import rescale_frame, annotate_frame_with_features
-from umano.manosola.osc import send_to_max
+from umano.onehand.models import HandFeature
+from umano.onehand.handfeatures.extractor import HandFeatureExtractor
+from umano.onehand.utils import rescale_frame, annotate_frame_with_features
+from umano.onehand.osc import send_to_max
 
 
 if __name__ == "__main__":

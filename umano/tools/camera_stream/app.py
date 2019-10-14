@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """Video streaming home page."""
-    return render_template('index.html', title=app.config.get("title"))
+    return render_template('index.html', title=app.config.get("TITLE"))
 
 
 def gen(camera):
@@ -25,8 +25,13 @@ def gen(camera):
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(gen(Camera(app.config.get("camera_source"), processor=extra_config['processor'])),
+    return Response(gen(Camera(app.config.get("CAMERA_SOURCE"), processor=app.config.get('IMAGE_PROCESSOR', "BaseProcessing"))),
                     mimetype='multipart/x-mixed-replace; boundary=--frame')
+
+
+def main(config):
+    app.config.update(config)
+    app.run(config.get("HOST", "0.0.0.0"), port=config.get("PORT", 5000), threaded=True)
 
 
 if __name__ == '__main__':
@@ -64,18 +69,16 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    extra_config = dict(title=args.title)
+    extra_config = dict(TITLE=args.title, PORT=args.port)
 
     if args.camera in string.digits:
-        extra_config['camera_source'] = int(args.camera)
+        extra_config['CAMERA_SOURCE'] = int(args.camera)
     else:
-        extra_config['camera_source'] = args.camera
+        extra_config['CAMERA_SOURCE'] = args.camera
 
     if args.processor not in AVAILABLE_PROCESSORS:
         raise RuntimeError("Processor {} not available".format(args.processor))
 
-    extra_config['processor'] = getattr(image_processing, args.processor)()
+    extra_config['IMAGE_PROCESSOR'] = getattr(image_processing, args.processor)()
 
-    app.config.update(extra_config)
-
-    app.run(host='0.0.0.0', port=args.port, threaded=True)
+    main(extra_config)

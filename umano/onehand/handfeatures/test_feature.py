@@ -3,8 +3,8 @@ import cv2
 import os
 import random
 
-from umano.manosola.handfeatures.extractor import HandFeatureExtractor
-# from umano.manosola.utils import rescale_frame, annotate_frame_with_features
+from umano.onehand.handfeatures.extractor import HandFeatureExtractor
+# from umano.onehand.utils import rescale_frame, annotate_frame_with_features
 
 TEST_DIRECTORY = "C:\\Users\\u-man\\Projects\\Hands\\"
 OUTPUT_DIRECTORY = "C:\\Users\\u-man\\Projects\\Hands\\processed"

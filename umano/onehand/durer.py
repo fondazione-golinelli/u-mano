@@ -1,6 +1,6 @@
 import os
 import cv2
-from umano.manosola.utils import annotate_frame_with_features
+from umano.onehand.utils import annotate_frame_with_features
 
 
 def durerizer(LL):
