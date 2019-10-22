@@ -103,8 +103,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 75.0, 1066.409638643264771, 211.0, 22.0 ],
-					"text" : "route /umano/manosola/bang/bigbang"
+					"patching_rect" : [ 75.0, 1066.409638643264771, 205.0, 22.0 ],
+					"text" : "route /umano/onehand/bang/bigbang"
 				}
 
 			}
@@ -2035,8 +2035,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 75.0, 976.5, 187.0, 22.0 ],
-					"text" : "route /umano/manosola/hand/env"
+					"patching_rect" : [ 75.0, 976.5, 182.0, 22.0 ],
+					"text" : "route /umano/onehand/hand/env"
 				}
 
 			}
@@ -2047,8 +2047,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 75.0, 906.5, 191.0, 22.0 ],
-					"text" : "route /umano/manosola/hand/amp"
+					"patching_rect" : [ 75.0, 906.5, 186.0, 22.0 ],
+					"text" : "route /umano/onehand/hand/amp"
 				}
 
 			}
@@ -2059,8 +2059,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 75.0, 843.5, 189.0, 22.0 ],
-					"text" : "route /umano/manosola/hand/freq"
+					"patching_rect" : [ 75.0, 843.5, 183.0, 22.0 ],
+					"text" : "route /umano/onehand/hand/freq"
 				}
 
 			}
@@ -2082,8 +2082,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 75.0, 775.5, 193.0, 22.0 ],
-					"text" : "route /umano/manosola/durer/amp"
+					"patching_rect" : [ 75.0, 775.5, 187.0, 22.0 ],
+					"text" : "route /umano/onehand/durer/amp"
 				}
 
 			}
@@ -2105,8 +2105,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 75.0, 709.5, 190.0, 22.0 ],
-					"text" : "route /umano/manosola/durer/freq"
+					"patching_rect" : [ 75.0, 709.5, 185.0, 22.0 ],
+					"text" : "route /umano/onehand/durer/freq"
 				}
 
 			}
@@ -2297,12 +2297,12 @@
 					"patching_rect" : [ 1630.0, 450.0, 43.0, 22.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
+							"parameter_initial" : [ 64 ],
 							"parameter_shortname" : "number",
 							"parameter_type" : 3,
 							"parameter_longname" : "number",
 							"parameter_initial_enable" : 1,
-							"parameter_invisible" : 1,
-							"parameter_initial" : [ 64 ]
+							"parameter_invisible" : 1
 						}
 
 					}
@@ -4812,7 +4812,7 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "phalanx~.maxpat",
-				"bootpath" : "~/Projects/u-mano/umano/manosola/max",
+				"bootpath" : "~/Projects/u-mano/umano/onehand/max",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1

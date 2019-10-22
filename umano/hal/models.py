@@ -129,6 +129,7 @@ class OneHandTouch(OneHandData):
 class OneHandPicture(OneHandData):
     src: str  # image uri
     hand: bool
+    image_points: list
     features: str  # ref
 
 

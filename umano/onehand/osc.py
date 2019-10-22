@@ -3,10 +3,12 @@ from pythonosc.udp_client import SimpleUDPClient
 
 from umano import settings
 
-osc_client = SimpleUDPClient(address=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
 
+def send_to_max(hand, all=True, only_durer=False, only_hand=False, host=settings.ONEHAND_MAX_HOST,
+                port=settings.ONEHAND_MAX_PORT):
+    
+    osc_client = SimpleUDPClient(address=host, port=port)
 
-def send_to_max(hand, all=True, only_durer=False, only_hand=False):
     if all:
         osc_client.send_message(settings.ONEHAND_OSC_DURER_FREQ_ADDRESS, hand.durer_frequencies)
         osc_client.send_message(settings.ONEHAND_OSC_DURER_AMP_ADDRESS, hand.durer_amplitudes)

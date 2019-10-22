@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>onehand websocket demo</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <style type="text/css">
+        body {
+            font-family: "Courier New", sans-serif;
+            text-align: center;
+            background-color: black;
+            height: 800px;
+            touch-action: none; /* disable pitch zoom*/
+            overflow-y: hidden;
+        }
+
+        .state {
+            display: flex;
+            justify-content: center;
+            float: left;
+            font-size: 2em;
+            color: white;
+            position: absolute;
+            top: 90%;
+        }
+
+        .touch_area {
+            min-height: 700px;
+            width: 80%;
+            border: 2px solid white;
+            margin: auto;
+
+            -webkit-transition: 3s ease;
+            -moz-transition: 3  s ease;
+            -o-transition: 3s ease;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="state">
+    <span class="state_text">?</span>
+</div>
+<div class="touch_area">
+
+</div>
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+
+        $("body").on("contextmenu", function (e) {
+            return false;  //disable right click
+        });
+
+        document.addEventListener("touchmove", function (e) {
+            return false; // disable pitch zoom
+        }, {passive: false});
+
+        var touch_area = document.querySelector('.touch_area'),
+            state_text = document.querySelector('.state_text'),
+            websocket = new WebSocket("ws://127.0.0.1:6789/"),
+            touches = 0;
+
+        function touch_start(event) {
+            websocket.send(JSON.stringify({action: 'touch_start'}));
+            $(touch_area).css("background-color", "#1f1f1f");
+            touches = event.touches.length;
+        }
+
+        function touch_end(event) {
+            websocket.send(JSON.stringify({action: 'touch_end'}));
+            $(touch_area).css("background-color", "#000000");
+            touches = event.touches.length;
+        }
+
+        $(touch_area)
+            .on(
+                "touchstart", touch_start
+            )
+            .on(
+                "touchend", touch_end
+            )
+            .on(
+                "transitionend",
+                function(){
+                    var bg = $(touch_area).css("background-color"), hand_on = false;
+                    console.log("transition end; touches " + touches + "bg " + bg);
+                    if (bg === "rgb(255, 255, 255)"){
+                        hand_on = true;
+                    }
+                    if (hand_on){
+                        websocket.send(JSON.stringify({action: 'hand_on'}));
+                    } else {
+                        websocket.send(JSON.stringify({action: 'hand_off'}));
+                    }
+                }
+            )
+        ;
+
+
+        websocket.onmessage = function (event) {
+            var data = JSON.parse(event.data);
+            console.log(data);
+            switch (data.type) {
+                case 'state':
+                    state_text.textContent = data.value;
+                    break;
+                default:
+                    console.error(
+                        "unsupported event", data);
+            }
+        }
+    })
+    ;
+</script>
+</body>
+</html>

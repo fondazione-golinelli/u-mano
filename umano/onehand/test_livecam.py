@@ -11,10 +11,25 @@ from umano.onehand.handfeatures.extractor import HandFeatureExtractor
 from umano.onehand.utils import annotate_frame_with_features, rescale_frame
 from umano.onehand.osc import send_to_max
 
-VIDEO_SRC = 1
+VIDEO_SRC = "http://localhost:5000/video_feed"
+
 MAX_TIMEOUT = 20
 
 frame_processed = 0
+
+
+class VideoGrabber(object):
+
+    def __init__(self, video_source=None):
+        self.video_source = video_source
+
+    def grab(self):
+        capture = cv2.VideoCapture(self.video_source)
+        if capture.isOpened():
+            _, frame = capture.read()
+            capture.release()
+            return frame
+        return None
 
 
 if __name__ == '__main__':
@@ -25,7 +40,7 @@ if __name__ == '__main__':
     fps = 0
     live_output = True
 
-    video_capture = cv2.VideoCapture(VIDEO_SRC)
+    # video_capture = cv2.VideoCapture(VIDEO_SRC)
 
     extractor = HandFeatureExtractor(live_output=False)
 
@@ -33,7 +48,7 @@ if __name__ == '__main__':
 
     while True:
 
-        _, frame = video_capture.read()
+        frame = VideoGrabber(VIDEO_SRC).grab()
         index += 1
         num_frames += 1
 
@@ -57,5 +72,5 @@ if __name__ == '__main__':
             break
 
     cv2.destroyAllWindows()
-    video_capture.release()
+    # video_capture.release()
     sys.exit(0)
