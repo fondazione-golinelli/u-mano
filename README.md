@@ -5,7 +5,10 @@
 
 <pre>
 > conda create -n umano python
+# windows
 > activate umano
+# linux / macos
+> source activate umano
 
 (umano)> cd u-mano
 (umano)> pip install -r requirements.txt
