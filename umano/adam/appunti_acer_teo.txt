@@ -1,0 +1,19 @@
+IMPORTANTE: CONFIGURAZIONE CAVI USB
+    CAVO USB NERO SOPRA
+    CAVO USB BIANCO SOTTO
+
+APP BIONIT
+    INPUT EMG COM3
+    OUTPUT EMG COM7
+
+APP UMANO
+    INPUT COM4 Sensori di pressione
+    INPUT COM5 EMG
+
+
+INSTALLAZIONE
+    Installi arduino e tutti i driver seriali suggeriti
+    Installi drive seriali custom che trovi su drive
+    Nano Every   -> sensori pressione
+    Nano 33 BLE  -> sensori emg per software bionit
+
