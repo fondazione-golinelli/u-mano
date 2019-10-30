@@ -24,6 +24,31 @@ class HandFeature(object):
     def notes(self):
         return [frequency_to_note(f) for f in self.frequencies]
 
+    def finger_to_finger(self, start=1):
+        n_phalanx = 4
+        for i in range(len(self.frequencies)):
+            if 0 <= i < 4:
+                finger = "thumb"
+            elif 4 <= i < 8:
+                finger = "index"
+            elif 8 <= i < 12:
+                finger = "middle"
+            elif 12 <= i < 16:
+                finger = "ring"
+            else:
+                finger = "little"
+
+            data = [
+                round(self.distances[i]),
+                self.frequencies[i],
+                self.amplitudes[i],
+                round(self.durer_distances[i]),
+                self.durer_frequencies[i],
+                self.durer_amplitudes[i],
+                0.0  # placeholder for timing
+            ]
+            yield finger, start + i % n_phalanx, data
+
     @property
     def zeros(self):
         return [0.0] * len(self.frequencies)
@@ -32,40 +57,5 @@ class HandFeature(object):
     def ones(self):
         return [1.0] * len(self.frequencies)
 
-    @staticmethod
-    def get_index(a, b):
-        return a > 0 and a or b
 
-    def finger(self, a, b):
-        return dict(
-            f=[f for f in self.frequencies[a:b] if f]
-        )
 
-    def thumb(self):
-        return self.finger(0, 4)
-
-    def index(self):
-        return self.finger(4, 8)
-
-    def middle(self):
-        return self.finger(8, 12)
-
-    def ring(self):
-        return self.finger(12, 16)
-
-    def little(self):
-        return self.finger(16, 20)
-
-    def to_dict(self):
-        return dict(
-            src=self.source_image,
-            frequencies=self.frequencies,
-            distances=self.distances,
-            fingers=dict(
-                thumb=self.thumb(),
-                index=self.index(),
-                middle=self.middle(),
-                ring=self.ring(),
-                little=self.little()
-            )
-        )

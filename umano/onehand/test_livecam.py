@@ -1,36 +1,15 @@
-from queue import Full
-
 import cv2
 import datetime
 import sys
 
-import time
-
-from umano.onehand.models import HandFeature
+from umano.onehand.utils import VideoGrabber
 from umano.onehand.handfeatures.extractor import HandFeatureExtractor
-from umano.onehand.utils import annotate_frame_with_features, rescale_frame
-from umano.onehand.osc import send_to_max
 
 VIDEO_SRC = "http://localhost:5000/video_feed"
 
 MAX_TIMEOUT = 20
 
 frame_processed = 0
-
-
-class VideoGrabber(object):
-
-    def __init__(self, video_source=None):
-        self.video_source = video_source
-
-    def grab(self):
-        capture = cv2.VideoCapture(self.video_source)
-        if capture.isOpened():
-            _, frame = capture.read()
-            capture.release()
-            return frame
-        return None
-
 
 if __name__ == '__main__':
 

@@ -1,10 +1,12 @@
 import os
+import string
 import cv2
-from base_camera import BaseCamera
+from umano.tools.camera_stream.base_camera import BaseCamera
 
 
 class Camera(BaseCamera):
     video_source = 0
+    processor = None
 
     def __init__(self, source=0, processor=None):
         Camera.set_video_source(source)
@@ -13,6 +15,8 @@ class Camera(BaseCamera):
 
     @staticmethod
     def set_video_source(source):
+        if source in string.digits:
+            source = int(source)
         Camera.video_source = source
 
     @staticmethod
@@ -23,7 +27,7 @@ class Camera(BaseCamera):
     def frames():
         camera = cv2.VideoCapture(Camera.video_source)
         if not camera.isOpened():
-            raise RuntimeError('Could not start camera.')
+            raise RuntimeError('Could not start camera {}'.format(Camera.video_source))
 
         while True:
             # read current frame

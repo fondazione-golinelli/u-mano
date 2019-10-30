@@ -56,6 +56,11 @@ class HalData:
 
 
 @dataclass
+class TestData(HalData):
+    collection_name = settings.HAL_DATA_TEST_COLLECTION
+
+
+@dataclass
 class AdamsHandCalibration(HalData):
     collection_name = settings.HAL_DATA_ADAMSHAND_COLLECTION
 

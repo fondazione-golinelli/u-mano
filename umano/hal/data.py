@@ -21,8 +21,9 @@ def create(data_class, data):
 
 def store(instance=None, data_class=None, data=None, publish_after=True):
     if instance is None:
+        if isinstance(data_class, str):
+            data_class = class_from_classname(data_class)
         instance = create(data_class, data)
-
     instance.save()
 
     if publish_after:
@@ -31,7 +32,8 @@ def store(instance=None, data_class=None, data=None, publish_after=True):
     return instance
 
 
-def load(pk, classname):
-    cls = class_from_classname(classname)
-    data = cls.get_collection.find_one({"_id": ObjectId(pk)})
-    return create(cls, data)
+def load(pk, data_class):
+    if isinstance(data_class, str):
+        data_class = class_from_classname(data_class)
+    data = data_class.get_collection().find_one({"_id": ObjectId(pk)})
+    return create(data_class, data)

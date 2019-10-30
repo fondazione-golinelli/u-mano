@@ -6,7 +6,6 @@ from umano import settings
 
 def send_to_max(hand, all=True, only_durer=False, only_hand=False, host=settings.ONEHAND_MAX_HOST,
                 port=settings.ONEHAND_MAX_PORT):
-    
     osc_client = SimpleUDPClient(address=host, port=port)
 
     if all:
@@ -29,3 +28,9 @@ def send_to_max(hand, all=True, only_durer=False, only_hand=False, host=settings
 
     time.sleep(1)
     osc_client.send_message(settings.ONEHAND_OSC_BIGBANG_ADDRESS, ["bang"])
+
+
+def send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT):
+    osc_client = SimpleUDPClient(address=host, port=port)
+    for finger, i, data in hand.finger_to_finger():
+        osc_client.send_message(settings.ONEHAND_OSC_FINGER_ADDRESS.format(finger, i), data)

@@ -11,6 +11,7 @@ HANDPOINT_PAIRS = [
         [0, 17], [17, 18], [18, 19], [19, 20]  # little
     ]
 
+
 def rescale_frame(frame, wpercent=30, hpercent=30):
     width = int(frame.shape[1] * wpercent / 100)
     height = int(frame.shape[0] * hpercent / 100)
@@ -104,3 +105,17 @@ def annotate_frame_with_features(frame, points=None, hand=None):
                         (255, 0, 0), 2)
 
     return frame
+
+
+class VideoGrabber(object):
+
+    def __init__(self, video_source=None):
+        self.video_source = video_source
+
+    def grab(self):
+        capture = cv2.VideoCapture(self.video_source)
+        if capture.isOpened():
+            _, frame = capture.read()
+            capture.release()
+            return frame
+        return None
