@@ -1,0 +1,50 @@
+{% extends 'demo/demo_one.html' %}
+{% load static %}
+
+{% block extra_links %}
+    <a class="frame__github">{{picture.description}}</a>
+    <div class="frame__links">
+        <a href="#" id="save-shader-btn">save shader settings</a>
+    </div>
+{% endblock %}
+
+{% block demo_js_init %}
+    <script type="text/javascript">
+        const SAMPLES = ["{% get_media_prefix %}{{ picture.image }}"];
+
+        const SHADER_SETTINGS = {
+            particlesRandom:{{ picture.shader.particle_random }},
+            particlesDepth: {{ picture.shader.particle_depth }},
+            particlesSize: {{ picture.shader.particle_size}},
+            touchRadius: {{ picture.shader.touch_radius }}
+        };
+    </script>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static "demo_one/scripts/jquery-3.4.1.min.js" %}"></script>
+    <script type="text/javascript">
+        jQuery(function($){
+            $("#save-shader-btn").on(
+                "click",
+                function(){
+                    var data = {
+                        random: window.app.webgl.particles.object3D.material.uniforms.uRandom.value,
+		                depth: window.app.webgl.particles.object3D.material.uniforms.uDepth.value,
+		                size: window.app.webgl.particles.object3D.material.uniforms.uSize.value,
+                        radius: window.app.webgl.particles.touch.radius,
+                        pk: {{ picture.pk }}
+                    };
+                    $.ajax({
+                        method:"POST",
+                        data:data,
+                        url:"/demo/updateshader/",
+                        success:function(){
+                            alert("ok");
+                        }
+                    })
+                }
+            )
+        });
+    </script>
+{% endblock %}

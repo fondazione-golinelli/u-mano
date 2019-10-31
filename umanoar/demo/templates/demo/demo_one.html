@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>U.MANO | FONDAZIONE GOLINELLI</title>
+    <meta name="description"
+          content="Demo of a tutorial on how to draw a large number of particles with Three.js and make them interactive."/>
+    <meta name="keywords" content="three.js, tutorial, particles, interactive, javascript, webgl"/>
+    <meta name="author" content="Bruno Imbrizi for Codrops"/>
+    <link rel="stylesheet" type="text/css" href={% static "demo_one/css/base.css" %}/>
+    <link rel="stylesheet" type="text/css" href="{% static "demo_one/css/demo1.css" %}"/>
+    <script>document.documentElement.className = "js";
+    var supportsCssVars = function () {
+        var e, t = document.createElement("style");
+        return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e
+    };
+    supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+</head>
+<body class="demo-1">
+<main>
+    <div class="frame">
+        <div class="frame__title-wrap">
+            <h1 class="frame__title">U.MANO</h1>
+        </div>
+        {% block extra_links %}
+        <a class="frame__github" target="_blank" href="https://github.com/brunoimbrizi/interactive-particles">GitHub</a>
+        {% endblock %}
+    </div>
+</main>
+<div class="container"></div>
+
+
+{% block demo_js_init %}
+<script type="text/javascript">
+    const SAMPLES = ["static/demo_one/images/sample-01.png",
+            "static/demo_one/images/sample-02.png",
+            "static/demo_one/images/sample-03.png",
+            "static/demo_one/images/sample-04.png",
+            "static/demo_one/images/sample-05.png"
+    ];
+
+    const SHADER_SETTINGS = {
+        particlesRandom:2,
+        particlesDepth:4,
+        particlesSize:1.5,
+        touchRadius:0.15
+    };
+</script>
+{% endblock %}
+<script type="text/javascript" src="{% static "demo_one/scripts/index.9304dd621154b7d167fa.js" %}"></script>
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>
