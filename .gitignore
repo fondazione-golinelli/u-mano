@@ -126,3 +126,7 @@ dmypy.json
 .idea/*
 images/*
 /umano/onehand/handfeatures/models/pose_iter_102000.caffemodel
+
+/umanoar/static
+/umanoar/media
+.google-cookie

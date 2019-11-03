@@ -132,6 +132,9 @@ if not os.path.exists(STATIC_ROOT):
 if not os.path.exists(MEDIA_ROOT):
     os.mkdir(MEDIA_ROOT)
 
+# GOOGLE SEARCH
+GOOGLE_CUSTOMSEARCH_DEVELOPER_API_KEY = "AIzaSyA33KRBr0fMx1a6cPEeekmaOuf9TLwQufA"
+GOOGLE_CUSTOMSEARCH_ENGINE_ID = "006387640027498760821:5i7tgpfenim"
 
 try:
     from .local_settings import *

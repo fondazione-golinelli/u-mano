@@ -3,3 +3,9 @@ djangorestframework==3.10.3
 markdown==3.1.1
 django-filter==2.2.0
 Pillow==6.2.0
+google==2.0.2
+beautifulsoup4==4.8.1
+wikipedia==1.4.0
+Google-Images-Search  # https://github.com/arrrlo/Google-Images-Search
+# in windows pip install windows-curses
+networkx==2.4

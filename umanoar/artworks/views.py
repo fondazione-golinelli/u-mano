@@ -8,7 +8,7 @@ from .serializers import ArtworkSerializer, Artwork
 class ArtworkList(APIView):
     def get(self, request, format=None):
         artworks = Artwork.objects.all()
-        serializer = ArtworkSerializer(artworks, many=True)
+        serializer = ArtworkSerializer(artworks, many=True, context={"request": request})
         return Response(serializer.data)
 
 
