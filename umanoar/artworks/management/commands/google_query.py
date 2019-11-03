@@ -70,7 +70,7 @@ class Command(BaseCommand):
 
             try:
                 page = wikipedia.page(artwork.title)
-                if not check_existing(url, artwork, ArtworkQueryTextResult):
+                if not check_existing(page.url, artwork, ArtworkQueryTextResult):
                     website = create_website_for_url(page.url)
                     query_result = ArtworkQueryTextResult(
                         url=page.url,
