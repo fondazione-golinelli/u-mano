@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 138.0, 88.0, 1303.0, 916.0 ],
+		"rect" : [ 138.0, 88.0, 1715.0, 916.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -103,8 +103,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 75.0, 1066.409638643264771, 205.0, 22.0 ],
-					"text" : "route /umano/onehand/bang/bigbang"
+					"patching_rect" : [ 75.0, 1066.409638643264771, 159.0, 22.0 ],
+					"text" : "route /umano/onehand/bang"
 				}
 
 			}
@@ -2297,12 +2297,12 @@
 					"patching_rect" : [ 1630.0, 450.0, 43.0, 22.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_initial" : [ 64 ],
-							"parameter_shortname" : "number",
-							"parameter_type" : 3,
 							"parameter_longname" : "number",
 							"parameter_initial_enable" : 1,
-							"parameter_invisible" : 1
+							"parameter_invisible" : 1,
+							"parameter_initial" : [ 64 ],
+							"parameter_shortname" : "number",
+							"parameter_type" : 3
 						}
 
 					}
@@ -4812,7 +4812,7 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "phalanx~.maxpat",
-				"bootpath" : "~/Projects/u-mano/umano/onehand/max",
+				"bootpath" : "~/Projects/u-mano/umano/onehand/max/v1",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1

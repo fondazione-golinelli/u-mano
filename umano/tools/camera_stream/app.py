@@ -1,11 +1,11 @@
 import argparse
 import pyclbr
 
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, g
 
 from umano.tools.camera_stream.camera_opencv import Camera
 from umano.tools.camera_stream import image_processing
-
+from umano import settings
 app = Flask(__name__)
 
 AVAILABLE_PROCESSORS = [k for k, v in pyclbr.readmodule("umano.tools.camera_stream.image_processing").items() if
@@ -27,15 +27,21 @@ def gen(camera):
                b'Content-Type: image/jpeg\r\nContent-Length: ' + l + b'\r\n\r\n' + frame + b'\r\n')
 
 
-@app.route('/video_feed')
+@app.route(settings.CAMERA_STREAM_LIVE_URL)
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(
-        gen(Camera(app.config.get("CAMERA_SOURCE"), processor=app.config.get('IMAGE_PROCESSOR', "BaseProcessing"))),
+        gen(
+            Camera(
+                app.config.get("CAMERA_SOURCE"),
+                processor=app.config.get('IMAGE_PROCESSOR', "BaseProcessing"),
+                file_extension=app.config.get("FILE_EXTENSION")
+            ),
+        ),
         mimetype='multipart/x-mixed-replace; boundary=--frame')
 
 
-def main(config):
+def create_app(config):
     if not isinstance(config, dict):
         app.config.update(config.__dict__)
     else:
@@ -46,7 +52,7 @@ def main(config):
 
     app.config['IMAGE_PROCESSOR'] = getattr(image_processing, app.config.get("IMAGE_PROCESSOR"))()
 
-    app.run(app.config.get("HOST", "0.0.0.0"), port=app.config.get("PORT", 5000), threaded=True)
+    return app
 
 
 if __name__ == '__main__':
@@ -81,4 +87,5 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    main(args)
+    the_app = create_app(args)
+    the_app.run(the_app.config.get("HOST", "0.0.0.0"), port=the_app.config.get("PORT", 5000), threaded=True)

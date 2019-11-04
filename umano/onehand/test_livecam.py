@@ -5,7 +5,7 @@ import sys
 from umano.onehand.utils import VideoGrabber
 from umano.onehand.handfeatures.extractor import HandFeatureExtractor
 
-VIDEO_SRC = "http://localhost:5000/video_feed"
+VIDEO_SRC = 0 #"http://localhost:5000/video_feed"
 
 MAX_TIMEOUT = 20
 

@@ -26,8 +26,12 @@ def send_to_max(hand, all=True, only_durer=False, only_hand=False, host=settings
         osc_client.send_message(settings.ONEHAND_OSC_HAND_FREQ_ADDRESS, hand.frequencies)
         osc_client.send_message(settings.ONEHAND_OSC_HAND_AMP_ADDRESS, hand.amplitudes)
 
+    osc_client.send_message(settings.ONEHAND_OSC_HAND_BEAT_ADDRESS, hand.beats)
+    osc_client.send_message(settings.ONEHAND_OSC_HAND_ATTACK_ADDRESS, hand.attacks)
+    osc_client.send_message(settings.ONEHAND_OSC_HAND_RELEASE_ADDRESS, hand.releases)
+
     time.sleep(1)
-    osc_client.send_message(settings.ONEHAND_OSC_BIGBANG_ADDRESS, ["bang"])
+    osc_client.send_message(settings.ONEHAND_OSC_BANG_ADDRESS, ["bang"])
 
 
 def send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT):

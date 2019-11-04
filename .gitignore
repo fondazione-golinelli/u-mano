@@ -130,3 +130,5 @@ images/*
 /umanoar/static
 /umanoar/media
 .google-cookie
+ppath.bat
+media

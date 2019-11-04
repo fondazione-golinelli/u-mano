@@ -54,6 +54,10 @@ class HalData:
         else:
             self.collection.update({"_id": self._id}, self.to_dict())
 
+    def delete(self):
+        if not self._id:
+            return
+        self.collection.delete_one({"_id": self._id})
 
 @dataclass
 class TestData(HalData):
@@ -124,15 +128,17 @@ class OneHandData(HalData):
 
 
 @dataclass
-class OneHandTouch(OneHandData):
-    x: int
-    y: int
-    duration: float
+class OneHandTouch(HalData):
+    collection_name = settings.HAL_DATA_ONEHAND_TOUCH_COLLECTION
+    session_id: str
+    status: bool
 
 
 @dataclass
 class OneHandPicture(OneHandData):
+    session_id: str
     src: str  # image uri
+    filename: str
     hand: bool
     image_points: list
     features: str  # ref
@@ -177,8 +183,21 @@ class MachineFailure(HalData):
 class ServiceData(HalData):
     collection_name = settings.HAL_DATA_SERVICES_COLLECTION
     host: str  # the machine name
-    service: str
+    ip: str
+    name: str
+    description: str
 
+
+@dataclass
+class ServiceStatus(ServiceData):
+    collection_name = settings.HAL_DATA_SERVICES_STATUS_COLLECTION
+    status: str
+
+
+@dataclass
+class ServiceStreamingData(ServiceData):
+    collection_name = settings.HAL_DATA_SERVICES_STREAMING_COLLECTION
+    url: str
 
 @dataclass
 class ServiceStart(ServiceData):
@@ -212,3 +231,5 @@ class SoftwareException(HalData):
 class SourceCodeFile(HalData):
     collection_name = settings.HAL_DATA_SOFTWARE_COLLECTION
     src: str
+
+

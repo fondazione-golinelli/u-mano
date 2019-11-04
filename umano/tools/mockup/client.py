@@ -13,7 +13,7 @@ sys.path.append(
 
 from umano.onehand.models import HandFeature
 from umano.onehand.osc import send_to_max, send_to_vuo
-from umano.onehand.utils import rescale_frame
+from umano.onehand.utils import rescale_frame, annotate_frame_with_features
 from umano import settings
 
 if not os.path.exists(settings.ONEHAND_MOCKUP_DOWNLOAD_FOLDER):
@@ -36,8 +36,13 @@ if __name__ == "__main__":
             print("\nLoaded image features {}".format(hand_image_src))
             print("Image available at {}\n".format(output_path))
             hand = HandFeature(image_points=hand_json['image_points'])
+            print(hand.beats)
+            print(hand.attacks)
+            print(hand.releases)
 
-            cv2.imshow(output_path, rescale_frame(cv2.imread(output_path)))
+            cv2.imshow(output_path,
+                       rescale_frame(annotate_frame_with_features(cv2.imread(output_path), hand=hand), wpercent=50,
+                                     hpercent=50))
 
             send_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
             send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT)
@@ -52,6 +57,9 @@ if __name__ == "__main__":
                     send_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
                     send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT)
                     print("\n\t osc sent...")
+                elif key == ord('r'):
+                    hand.reverse()
+                    send_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
                 else:
                     cv2.destroyAllWindows()
                     break
