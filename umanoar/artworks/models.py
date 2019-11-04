@@ -57,7 +57,7 @@ class ArtworkQueryResultWebsite(models.Model):
 
 
 class ArtworkQueryResult(models.Model):
-    url = models.URLField(blank=False, null=False)
+    url = models.URLField(blank=False, null=False, max_length=512)
     website = models.ForeignKey(ArtworkQueryResultWebsite, null=True, on_delete=models.CASCADE)
     weight = models.FloatField(blank=False, null=False, default=0.0)
     artwork = models.ForeignKey(Artwork, null=True, on_delete=models.CASCADE)
@@ -68,7 +68,7 @@ class ArtworkQueryResult(models.Model):
 
 class ArtworkQueryTextResult(ArtworkQueryResult):
     title = models.CharField(max_length=512, default="", blank=True, null=True)
-    abstract = models.CharField(max_length=1024, default="", blank=True, null=True)
+    abstract = models.CharField(max_length=2048, default="", blank=True, null=True)
 
     def __str__(self):
         return "{} - {} {}".format(self.artwork.title, self.website.domain, self.title)
