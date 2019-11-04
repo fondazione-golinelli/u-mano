@@ -180,6 +180,16 @@ class ConsumerService(UmanoService):
 
 
 class DataFetcher(UmanoService):
+    option_list = UmanoService.option_list + [
+        make_option(
+            '--timeout',
+            dest='TIMEOUT',
+            type=int,
+            default=10,
+            help='Data fetch frequency in seconds (default 10)'
+        ),
+    ]
+
     def __init__(self, data_class="TestData", timeout=10) -> None:
         self.timeout = timeout
         self.data_class = data_class
@@ -198,6 +208,7 @@ class DataFetcher(UmanoService):
         pass
 
     def execute(self, args, options):
+        self.process_args_and_options(args, options)
         while True:
             try:
                 self.fetch_data()

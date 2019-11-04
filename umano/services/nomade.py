@@ -45,6 +45,10 @@ async def hand_on_callback(session_id, status):
     print("Touch {} {}".format(session_id, status))
 
 
+def new_touch_session_id():
+    return str(uuid.uuid4())
+
+
 async def onehand_backend(websocket, path):
     global STATE
     global TOUCH_ID
@@ -64,7 +68,7 @@ async def onehand_backend(websocket, path):
                 STATE = STATUS.ACQUIRING
 
                 if TOUCH_ID is None:
-                    TOUCH_ID = str(uuid.uuid4())
+                    TOUCH_ID = new_touch_session_id()
                 await hand_on_callback(TOUCH_ID, True)
 
             elif data['action'] == "hand_off":

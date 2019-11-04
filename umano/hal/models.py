@@ -1,9 +1,8 @@
-from collections import UserDict
 from dataclasses import dataclass
 from datetime import datetime
 from bson import ObjectId
 
-from dacite import from_dict, Optional
+from dacite import Optional
 
 from umano import settings
 from umano.hal.db import database
@@ -135,23 +134,21 @@ class OneHandTouch(HalData):
 
 
 @dataclass
-class OneHandPicture(OneHandData):
-    session_id: str
-    src: str  # image uri
+class OneHandPicture(HalData):
+    collection_name = settings.HAL_DATA_ONEHAND_PICTURES_COLLECTION
+    touch_session_id: str
+    src: str
     filename: str
     hand: bool
     image_points: list
-    features: str  # ref
 
 
 @dataclass
-class OneHandFeatures(OneHandData):
-    src: str  # image uri
-    frequencies: list
-    amplitudes: list
-    envelopes: list  # attack? decay? releases! time
-    timeline: list  # fireworks!
-    bpm: list
+class OneHandFeatures(HalData):
+    collection_name = settings.HAL_DATA_ONEHAND_FEATURES_COLLECTION
+    uid: str
+    touch_session_id: str
+    image_points: list
 
 
 @dataclass

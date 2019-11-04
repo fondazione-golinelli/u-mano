@@ -56,10 +56,12 @@ def updated_after(data_class, update_time):
     return find(data_class, {"create_time": {"$gte": update_time}})
 
 
-def last(data_class):
+def last(data_class, query=None):
     if isinstance(data_class, str):
         data_class = class_from_classname(data_class)
     try:
-        return create(data_class, data_class.get_collection().find().sort("create_time", direction=-1).limit(1)[0])
+        if query is None:
+            query = dict()
+        return create(data_class, data_class.get_collection().find(query).sort("create_time", direction=-1).limit(1)[0])
     except IndexError:
         return None

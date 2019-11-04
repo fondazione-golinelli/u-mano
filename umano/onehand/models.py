@@ -1,4 +1,5 @@
 import random
+import uuid
 
 from umano.onehand.durer import durerizer
 from umano.onehand.utils import *
@@ -117,3 +118,7 @@ class HandFeature(object):
     def ones(self):
         return [1.0] * len(self.frequencies)
 
+    @property
+    def uid(self):
+        # TODO saprai sicuramente inventarti degli id più accattivanti!
+        return str(uuid.uuid4())[:8]

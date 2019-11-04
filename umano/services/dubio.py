@@ -54,6 +54,18 @@ class DuBio(ConsumerService):
         send_to_max(hand)
         sound_duration = 10
         print("time taken {}".format(time.time() - self.start_time))
+
+        store(
+            data_class="OneHandFeatures",
+            data=dict(
+                uid=hand.uid,
+                touch_session_id=self.session_id,
+                image_points=hand.image_points
+            )
+        )
+        for picture in self.hand_frames:
+            picture.save()
+
         time.sleep(sound_duration)
         self.reset()
 
@@ -96,7 +108,7 @@ class DuBio(ConsumerService):
         if image_points is not None:
             if self.start_time is None:
                 self.start_time = time.time()
-            filename = temporary_name()
+            filename = temporary_name() + settings.ONEHAND_HAND_PICTURES_EXTENSION
             filepath = os.path.join(settings.ONEHAND_HAND_PICTURES_FOLDER,
                                     filename) + settings.ONEHAND_HAND_PICTURES_EXTENSION
             cv2.imwrite(filepath, frame)
@@ -108,16 +120,16 @@ class DuBio(ConsumerService):
             self.hand_frames.append(
                 create(data_class="OneHandPicture",
                        data=dict(
-                           session_id=session_id,
+                           touch_session_id=session_id,
                            hand=True,
-                           image_points=image_points,
-                           features="",
                            src=filepath,
-                           filename=filename
+                           filename=filename,
+                           image_points=image_points,
                        )
                        )
             )
         else:
+            # save no hands images?
             print("no hands!")
 
 
