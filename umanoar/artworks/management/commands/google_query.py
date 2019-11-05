@@ -96,6 +96,8 @@ class Command(BaseCommand):
                     continue
 
                 for url in search(artwork.get_query(), stop=20, lang='it'):
+                    if '.pdf' in url:
+                        continue
                     try:
                         print("\t- url: {}".format(url))
 
@@ -108,6 +110,8 @@ class Command(BaseCommand):
                             print("\t\t skip! [status code {}]".format(page.status_code))
                             continue
                     except requests.exceptions.ContentDecodingError:
+                        continue
+                    except requests.exceptions.ConnectionError:
                         continue
 
                     website = create_website_for_url(url)
