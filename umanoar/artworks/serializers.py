@@ -24,7 +24,10 @@ def to_query_node(instance, data, request):
 
     if isinstance(instance, (ArtworkQueryTextResult, ArtworkQueryImageResult)):
         data['website'] = instance.website.domain
-        data['favicon'] = "{}://{}/media/{}".format(request.scheme, request.META.get("HTTP_HOST"), instance.website.favicon)
+        if instance.website.favicon:
+            data['favicon'] = "{}://{}/media/{}".format(request.scheme, request.META.get("HTTP_HOST"), instance.website.favicon)
+        else:
+            data['favicon'] = None
         data['url'] = instance.url
 
     if isinstance(instance, ArtworkQueryImageResult):
