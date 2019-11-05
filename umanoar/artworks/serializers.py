@@ -118,7 +118,7 @@ class ArtworkSerializer(serializers.ModelSerializer):
                     )
             elif node.kind == 1:
                 query_results = [
-                    (i, x) for i, x in enumerate(ArtworkQueryTextResult.objects.all())
+                    (i, x) for i, x in enumerate(ArtworkQueryTextResult.objects.filter(artwork=instance).all())
                 ]
                 G = nx.random_internet_as_graph(len(query_results), seed=42)
                 ad_list = dict([(i, x) for i, x in enumerate(nx.adjlist.generate_adjlist(G))])
