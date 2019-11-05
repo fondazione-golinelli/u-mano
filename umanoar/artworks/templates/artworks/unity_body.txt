@@ -1,0 +1,8 @@
+<size=50>{{card.title}}</size>
+<b>{{card.author}}</b>
+({{card.author_info}})
+
+<i>{{card.date}}</i>
+{{card.abstract}}
+
+{{card.body}}

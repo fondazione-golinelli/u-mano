@@ -1,6 +1,6 @@
-import mimetypes
 from django.db import models
 from django.core import validators
+from django.template.loader import render_to_string
 
 
 class Artwork(models.Model):
@@ -44,7 +44,7 @@ class ArtworkCard(models.Model):
         return "{} CARD".format(self.artwork.uid)
 
     def to_rich_text(self):
-        return self.body
+        return render_to_string('artworks/unity_body.txt', {'card': self})
 
 
 class ShaderParameters(models.Model):

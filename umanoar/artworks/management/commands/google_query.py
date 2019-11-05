@@ -74,7 +74,7 @@ class Command(BaseCommand):
                     website = create_website_for_url(page.url)
                     query_result = ArtworkQueryTextResult(
                         url=page.url,
-                        abstract=page.summary,
+                        body=page.summary,
                         title=page.title,
                         website=website,
                         artwork=artwork
@@ -113,7 +113,7 @@ class Command(BaseCommand):
 
                 query_result = ArtworkQueryTextResult(
                     url=base_url(page.url),
-                    abstract=abstract,
+                    body=abstract,
                     title=title,
                     website=website,
                     artwork=artwork
