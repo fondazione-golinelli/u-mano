@@ -11,6 +11,7 @@ import wikipedia
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError, no_translations
 from django.core.files import File
+from django.core.exceptions import MultipleObjectsReturned
 
 from artworks.models import Artwork, ArtworkQueryTextResult, ArtworkQueryImageResult, ArtworkQueryResultWebsite
 from artworks.utils import domain_from_url, base_url
@@ -30,7 +31,11 @@ def save_image_from_url(model, image_field, image_url, image_filename):
 def create_website_for_url(url):
     favicon = "favicon.ico"
     scheme, domain = domain_from_url(url)
-    website, created = ArtworkQueryResultWebsite.objects.get_or_create(domain=domain)
+    try:
+        website, created = ArtworkQueryResultWebsite.objects.get_or_create(domain=domain)
+    except MultipleObjectsReturned:
+        website = ArtworkQueryResultWebsite.objects.filter(domain=domain).first()
+        created = False
     if created:
         filename = "{}_{}".format(domain.replace(".", "_"), favicon)
         ok_icon = save_image_from_url(website, "favicon", urljoin("{}://{}".format(scheme, domain), favicon), filename)
