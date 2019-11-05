@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Artwork, ShaderParameters, ApplicationSettings, ArtworkQueryResultWebsite, \
-    ArtworkQueryTextResult, ArtworkQueryImageResult
+    ArtworkQueryTextResult, ArtworkQueryImageResult, ArtworkGraphNode, ArtworkCard, ArtworkGraphSettings
 
 
 class ArtworkAdmin(admin.ModelAdmin):
@@ -43,3 +43,24 @@ class ArtworkQueryImageResultAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ArtworkQueryImageResult, ArtworkQueryImageResultAdmin)
+
+
+class ArtworkGraphNodeAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(ArtworkGraphNode, ArtworkGraphNodeAdmin)
+
+
+class ArtworkCardAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(ArtworkCard, ArtworkCardAdmin)
+
+
+class ArtworkGraphSettingsAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(ArtworkGraphSettings, ArtworkGraphSettingsAdmin)

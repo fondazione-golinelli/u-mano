@@ -8,7 +8,7 @@
       }
     },
     "color": {
-      "value": "#ffffff"
+      "value": "#0a0a0a"
     },
     "shape": {
       "type": "circle",
@@ -30,11 +30,12 @@
 	        "draw": {
 	            "enable": true,
 	            "stroke": {
-	                "color": "rgba(255, 255, 255, .2)"
+	                "color": "#0a0a0a"
 	            }
 	        }
 	    },
       "image": {
+        "enabled": false,
         "src": "http://localhost:8000/img/hand.svg",
         "width": 100,
         "height": 100
@@ -63,7 +64,7 @@
     "line_linked": {
       "enable": true,
       "distance": 150,
-      "color": "#ffffff",
+      "color": "#0a0a0a",
       "opacity": 0.4,
       "width": 1
     },

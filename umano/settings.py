@@ -29,6 +29,7 @@ ONEHAND_VUO_HOST = "127.0.0.1"
 ONEHAND_VUO_PORT = 8889
 
 ONEHAND_OSC_BANG_ADDRESS = "/umano/onehand/bang"
+ONEHAND_OSC_RECORD_FILENAME_ADDRESS = "/umano/onehand/filename"
 ONEHAND_OSC_DURER_FREQ_ADDRESS = "/umano/onehand/durer/freq"
 ONEHAND_OSC_DURER_AMP_ADDRESS = "/umano/onehand/durer/amp"
 ONEHAND_OSC_HAND_FREQ_ADDRESS = "/umano/onehand/hand/freq"
@@ -36,7 +37,6 @@ ONEHAND_OSC_HAND_AMP_ADDRESS = "/umano/onehand/hand/amp"
 ONEHAND_OSC_HAND_BEAT_ADDRESS = "/umano/onehand/beat"
 ONEHAND_OSC_HAND_ATTACK_ADDRESS = "/umano/onehand/attack"
 ONEHAND_OSC_HAND_RELEASE_ADDRESS = "/umano/onehand/release"
-
 ONEHAND_OSC_FINGER_ADDRESS = "/umano/onehand/{}/{}"
 
 ONEHAND_HANDPOSE_MODEL_URL = "http://posefs1.perception.cs.cmu.edu/OpenPose/models/hand/pose_iter_102000.caffemodel"
@@ -44,6 +44,7 @@ ONEHAND_HANDPOSE_MODEL_URL = "http://posefs1.perception.cs.cmu.edu/OpenPose/mode
 ONEHAND_HAND_PICTURES_FOLDER = os.path.join(MEDIA_ROOT, "onehand/pictures")
 ONEHAND_HAND_PICTURES_EXTENSION = ".jpg"
 ONEHAND_HAND_AUDIO_FOLDER = os.path.join(MEDIA_ROOT, "onehand/audio")
+ONEHAND_HAND_AUDIO_EXTENSION = ".aiff"
 
 
 ADAM_SERIAL_BAUDRATE = 115200

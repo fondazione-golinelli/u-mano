@@ -3,7 +3,8 @@
 <head>
     <title>onehand websocket demo</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style type="text/css">
         body {
             font-family: "Courier New", sans-serif;
@@ -14,7 +15,7 @@
             background-color: black;
         }
 
-        .bg{
+        .bg {
             background: url("/img/bg.png") center black;
             background-size: cover;
             opacity: 0.1;
@@ -45,27 +46,43 @@
             -webkit-transition: 3s ease;
             -moz-transition: 3s ease;
             -o-transition: 3s ease;
-            background-color: transparent;
+            background-color: black;
+        }
+        .touch_area_inside {
+            padding: 10%;
+            background-color: black;
+            display: block;
+        }
+
+        .unselectable {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
 
     </style>
 </head>
 <body>
-    <div class="state">
-        <span class="state_text">?</span>
-    </div>
+<div class="state unselectable">
+    <span class="state_text">?</span>
+</div>
     <div class="touch_area">
-
+        <div class="touch_area_inside"></div>
+    </div>
     <div id="particles-js"></div>
+
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script src="js/particles.js"></script>
 </body>
 <script type="text/javascript">
     jQuery(function ($) {
 
-        particlesJS.load('particles-js', 'assets/particles.json', function() {
-          console.log('callback - particles.js config loaded');
+        particlesJS.load('particles-js', 'assets/particles.json', function () {
+            console.log('callback - particles.js config loaded');
         });
 
         $("body").on("contextmenu", function (e) {
@@ -76,12 +93,12 @@
             return false; // disable pitch zoom
         }, {passive: false});
 
-        var touch_bg = "rgb(10, 10, 10)", hand_on = false;
+        var touch_bg = "rgb(15, 15, 15)", hand_on = false;
 
         var touch_area = document.querySelector('.touch_area'),
             state_text = document.querySelector('.state_text'),
             websocket = new WebSocket("ws://127.0.0.1:6789/"),
-           // websocket = new WebSocket("ws://192.168.1.164:6789/"),
+            // websocket = new WebSocket("ws://192.168.1.164:6789/"),
             touches = 0;
 
         function touch_start(event) {
@@ -91,9 +108,11 @@
         }
 
         function touch_end(event) {
-            websocket.send(JSON.stringify({action: 'touch_end'}));
-            $(touch_area).css("background-color", "#000000");
             touches = event.touches.length;
+            if (touches === 0){
+             websocket.send(JSON.stringify({action: 'touch_end'}));
+             $(touch_area).css("background-color", "#000000");
+            }
         }
 
         $(touch_area)
@@ -105,7 +124,7 @@
             )
             .on(
                 "transitionend",
-                function(){
+                function () {
                     var bg = $(touch_area).css("background-color");
                     console.log("transition end; touches " + touches + "bg " + bg);
                     hand_on = bg === touch_bg;
@@ -114,14 +133,16 @@
                 }
             )
         ;
-        function send_hand_state(){
-            if (hand_on){
+
+        function send_hand_state() {
+            if (hand_on) {
                 websocket.send(JSON.stringify({action: 'hand_on'}));
             } else {
                 websocket.send(JSON.stringify({action: 'hand_off'}));
             }
             //console.log(hand_on);
         }
+
         setInterval(send_hand_state, 1000);
 
 
