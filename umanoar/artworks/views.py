@@ -1,3 +1,4 @@
+import json
 from django.http import JsonResponse, HttpResponseBadRequest
 
 from rest_framework.response import Response
@@ -49,7 +50,10 @@ def post_interaction(request, uid):
 @csrf_exempt
 def post_time(request, uid):
     if request.method == "POST":
-        tt = float(request.POST.get("time"))
+        if request.content_type == "application/json":
+            tt = float(json.loads(request.body).get("time"))
+        else:
+            tt = float(request.POST.get("time"))
         artwork = Artwork.objects.get(uid=uid)
         if tt > artwork.max_time:
             artwork.max_time = tt
