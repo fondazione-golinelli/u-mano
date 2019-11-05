@@ -33,13 +33,15 @@ class Artwork(models.Model):
 
 class ArtworkCard(models.Model):
     artwork = models.ForeignKey(Artwork, null=True, on_delete=models.CASCADE)
-    title = models.CharField(max_length=64, blank=False, null=False)
-    author = models.CharField(max_length=64, blank=False, null=False)
-    abstract = models.CharField(max_length=2048, default="", blank=True, null=True)
-    body = models.CharField(max_length=4096, default="", blank=True, null=True)
+    title = models.CharField(max_length=128, blank=False, null=False)
+    author = models.CharField(max_length=128, blank=False, null=False)
+    author_info = models.CharField(max_length=128, default="", blank=False, null=False)
+    date = models.CharField(max_length=128, default="", blank=False, null=False)
+    abstract = models.TextField(default="", blank=True, null=True)
+    body = models.TextField(default="", blank=True, null=True)
 
     def __str__(self):
-        return "{} - {}".format(self.artwork, self.title)
+        return "{} CARD".format(self.artwork.uid)
 
     def to_rich_text(self):
         return self.body
@@ -74,7 +76,7 @@ class ArtworkGraphNode(models.Model):
                                    help_text="Interactive node position in graph (zero based)")
 
     def __str__(self):
-        return "{} - #{} {}  position {}".format(self.artwork, self.kind, self.title, self.position)
+        return "{} - #{} {}  position {}".format(self.artwork.uid, self.kind, self.title, self.position)
 
 
 class ArtworkGraphSettings(models.Model):
@@ -93,11 +95,11 @@ class ArtworkGraphSettings(models.Model):
     z_mov = models.FloatField(default=0.05, blank=False, null=False)
 
     def __str__(self):
-        return "{} graph settings".format(self.artwork)
+        return "{} graph settings".format(self.artwork.uid)
 
 
 class ArtworkQueryResultWebsite(models.Model):
-    domain = models.CharField(max_length=64, blank=False, null=False, default="example.org")
+    domain = models.CharField(max_length=128, blank=False, null=False, default="example.org")
     favicon = models.ImageField(blank=True, null=True)
 
     def __str__(self):
@@ -105,7 +107,7 @@ class ArtworkQueryResultWebsite(models.Model):
 
 
 class ArtworkQueryResult(models.Model):
-    url = models.URLField(blank=False, null=False, max_length=512)
+    url = models.URLField(blank=False, null=False, max_length=1024)
     website = models.ForeignKey(ArtworkQueryResultWebsite, null=True, on_delete=models.CASCADE)
     weight = models.FloatField(blank=False, null=False, default=0.0)
     artwork = models.ForeignKey(Artwork, null=True, on_delete=models.CASCADE)
@@ -115,8 +117,8 @@ class ArtworkQueryResult(models.Model):
 
 
 class ArtworkQueryTextResult(ArtworkQueryResult):
-    title = models.CharField(max_length=512, default="", blank=True, null=True)
-    body = models.CharField(max_length=2048, default="", blank=True, null=True)
+    title = models.CharField(max_length=1024, default="", blank=True, null=True)
+    body = models.TextField(default="", blank=True, null=True)
 
     def __str__(self):
         return "{} - {} {}".format(self.artwork.title, self.website.domain, self.title)

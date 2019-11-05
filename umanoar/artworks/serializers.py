@@ -21,7 +21,6 @@ def to_query_node(instance, data, request):
     if isinstance(instance, (ArtworkQueryTextResult, ArtworkCard)):
         data['title'] = instance.title
         data['body'] = instance.to_rich_text()
-        data.pop("abstract", None)
 
     if isinstance(instance, (ArtworkQueryTextResult, ArtworkQueryImageResult)):
         data['website'] = instance.website.domain
@@ -56,7 +55,7 @@ class ArtworkGraphNodeSerializer(serializers.ModelSerializer):
 class ArtworkCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtworkCard
-        exclude = ['id', 'artwork']
+        exclude = ['id', 'artwork', 'abstract', 'author', 'author_info', 'date']
 
 
 class ArtworkQueryTextResultSerializer(serializers.ModelSerializer):

@@ -1,1 +1,871 @@
-[{"model": "contenttypes.contenttype", "pk": 1, "fields": {"app_label": "admin", "model": "logentry"}}, {"model": "contenttypes.contenttype", "pk": 2, "fields": {"app_label": "auth", "model": "permission"}}, {"model": "contenttypes.contenttype", "pk": 3, "fields": {"app_label": "auth", "model": "group"}}, {"model": "contenttypes.contenttype", "pk": 4, "fields": {"app_label": "auth", "model": "user"}}, {"model": "contenttypes.contenttype", "pk": 5, "fields": {"app_label": "contenttypes", "model": "contenttype"}}, {"model": "contenttypes.contenttype", "pk": 6, "fields": {"app_label": "sessions", "model": "session"}}, {"model": "contenttypes.contenttype", "pk": 7, "fields": {"app_label": "artworks", "model": "applicationsettings"}}, {"model": "contenttypes.contenttype", "pk": 8, "fields": {"app_label": "artworks", "model": "artwork"}}, {"model": "contenttypes.contenttype", "pk": 9, "fields": {"app_label": "artworks", "model": "shaderparameters"}}, {"model": "contenttypes.contenttype", "pk": 10, "fields": {"app_label": "artworks", "model": "artworkinformation"}}, {"model": "sessions.session", "pk": "xwslxwxcnyxg8w1kny77xj91mnmjqtq3", "fields": {"session_data": "NTlkZTIwMzA2ZDgyY2FiMzJlNzUyNTUyYzBjZTlmMWJlOWZiYTk5ODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkN2ZiNzdmMjMyNWNmOTdkZjI1NmVmY2E1M2RlN2QyNGI2NTFhOTc5In0=", "expire_date": "2019-10-07T13:15:49.306Z"}}, {"model": "artworks.artwork", "pk": 1, "fields": {"uid": "QUADRO-01", "title": "Madonna col Bambino", "shader": 1}}, {"model": "artworks.artworkinformation", "pk": 1, "fields": {"title": "a title", "mime": "txt/plain", "summary": "bla bla bla", "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisl enim, vehicula at velit at, accumsan ornare mauris. Nunc lobortis id metus a bibendum. Aenean metus nulla, scelerisque imperdiet ligula quis, commodo aliquam leo. Maecenas laoreet purus lectus, quis euismod erat porttitor ut. Aenean lacinia, metus vel mattis ultrices, ipsum ante efficitur libero, vel ultrices enim felis ac arcu. Sed orci tellus, sollicitudin nec consectetur ac, varius sit amet sem. Integer dapibus, dolor eu ornare auctor, mauris lorem iaculis est, quis consectetur lorem nulla ut lectus. Pellentesque lobortis neque ante, quis vestibulum tortor pretium sit amet. Curabitur tristique nec ligula ut volutpat. Mauris tempor massa nec eros pharetra tincidunt. Nunc at nisi pharetra, aliquet purus at, varius risus.", "weight": 0.0, "artwork": 1, "url": null, "interactive": true}}, {"model": "artworks.artworkinformation", "pk": 2, "fields": {"title": "a title 2", "mime": "txt/plain", "summary": "bla bla bla bla bla bla", "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisl enim, vehicula at velit at, accumsan ornare mauris. Nunc lobortis id metus a bibendum. Aenean metus nulla, scelerisque imperdiet ligula quis, commodo aliquam leo. Maecenas laoreet purus lectus, quis euismod erat porttitor ut. Aenean lacinia, metus vel mattis ultrices, ipsum ante efficitur libero, vel ultrices enim felis ac arcu. Sed orci tellus, sollicitudin nec consectetur ac, varius sit amet sem. Integer dapibus, dolor eu ornare auctor, mauris lorem iaculis est, quis consectetur lorem nulla ut lectus. Pellentesque lobortis neque ante, quis vestibulum tortor pretium sit amet. Curabitur tristique nec ligula ut volutpat. Mauris tempor massa nec eros pharetra tincidunt. Nunc at nisi pharetra, aliquet purus at, varius risus.", "weight": 0.0, "artwork": 1, "url": null, "interactive": true}}, {"model": "artworks.artworkinformation", "pk": 3, "fields": {"title": "an image", "mime": "image/jpeg", "summary": "non \u00e8 quella vera", "body": "", "weight": 0.7, "artwork": 1, "url": "https://www.barberinicorsini.org/wp-content/uploads/2016/11/Corsini-Gentileschi-Madonna-col-Bambino-dettaglio.jpg", "interactive": true}}, {"model": "artworks.shaderparameters", "pk": 1, "fields": {"parameters": "1,2,3,4,5,6"}}, {"model": "artworks.applicationsettings", "pk": 1, "fields": {"chaos": 0.5}}, {"model": "auth.permission", "pk": 1, "fields": {"name": "Can add log entry", "content_type": 1, "codename": "add_logentry"}}, {"model": "auth.permission", "pk": 2, "fields": {"name": "Can change log entry", "content_type": 1, "codename": "change_logentry"}}, {"model": "auth.permission", "pk": 3, "fields": {"name": "Can delete log entry", "content_type": 1, "codename": "delete_logentry"}}, {"model": "auth.permission", "pk": 4, "fields": {"name": "Can view log entry", "content_type": 1, "codename": "view_logentry"}}, {"model": "auth.permission", "pk": 5, "fields": {"name": "Can add permission", "content_type": 2, "codename": "add_permission"}}, {"model": "auth.permission", "pk": 6, "fields": {"name": "Can change permission", "content_type": 2, "codename": "change_permission"}}, {"model": "auth.permission", "pk": 7, "fields": {"name": "Can delete permission", "content_type": 2, "codename": "delete_permission"}}, {"model": "auth.permission", "pk": 8, "fields": {"name": "Can view permission", "content_type": 2, "codename": "view_permission"}}, {"model": "auth.permission", "pk": 9, "fields": {"name": "Can add group", "content_type": 3, "codename": "add_group"}}, {"model": "auth.permission", "pk": 10, "fields": {"name": "Can change group", "content_type": 3, "codename": "change_group"}}, {"model": "auth.permission", "pk": 11, "fields": {"name": "Can delete group", "content_type": 3, "codename": "delete_group"}}, {"model": "auth.permission", "pk": 12, "fields": {"name": "Can view group", "content_type": 3, "codename": "view_group"}}, {"model": "auth.permission", "pk": 13, "fields": {"name": "Can add user", "content_type": 4, "codename": "add_user"}}, {"model": "auth.permission", "pk": 14, "fields": {"name": "Can change user", "content_type": 4, "codename": "change_user"}}, {"model": "auth.permission", "pk": 15, "fields": {"name": "Can delete user", "content_type": 4, "codename": "delete_user"}}, {"model": "auth.permission", "pk": 16, "fields": {"name": "Can view user", "content_type": 4, "codename": "view_user"}}, {"model": "auth.permission", "pk": 17, "fields": {"name": "Can add content type", "content_type": 5, "codename": "add_contenttype"}}, {"model": "auth.permission", "pk": 18, "fields": {"name": "Can change content type", "content_type": 5, "codename": "change_contenttype"}}, {"model": "auth.permission", "pk": 19, "fields": {"name": "Can delete content type", "content_type": 5, "codename": "delete_contenttype"}}, {"model": "auth.permission", "pk": 20, "fields": {"name": "Can view content type", "content_type": 5, "codename": "view_contenttype"}}, {"model": "auth.permission", "pk": 21, "fields": {"name": "Can add session", "content_type": 6, "codename": "add_session"}}, {"model": "auth.permission", "pk": 22, "fields": {"name": "Can change session", "content_type": 6, "codename": "change_session"}}, {"model": "auth.permission", "pk": 23, "fields": {"name": "Can delete session", "content_type": 6, "codename": "delete_session"}}, {"model": "auth.permission", "pk": 24, "fields": {"name": "Can view session", "content_type": 6, "codename": "view_session"}}, {"model": "auth.permission", "pk": 25, "fields": {"name": "Can add application settings", "content_type": 7, "codename": "add_applicationsettings"}}, {"model": "auth.permission", "pk": 26, "fields": {"name": "Can change application settings", "content_type": 7, "codename": "change_applicationsettings"}}, {"model": "auth.permission", "pk": 27, "fields": {"name": "Can delete application settings", "content_type": 7, "codename": "delete_applicationsettings"}}, {"model": "auth.permission", "pk": 28, "fields": {"name": "Can view application settings", "content_type": 7, "codename": "view_applicationsettings"}}, {"model": "auth.permission", "pk": 29, "fields": {"name": "Can add artwork", "content_type": 8, "codename": "add_artwork"}}, {"model": "auth.permission", "pk": 30, "fields": {"name": "Can change artwork", "content_type": 8, "codename": "change_artwork"}}, {"model": "auth.permission", "pk": 31, "fields": {"name": "Can delete artwork", "content_type": 8, "codename": "delete_artwork"}}, {"model": "auth.permission", "pk": 32, "fields": {"name": "Can view artwork", "content_type": 8, "codename": "view_artwork"}}, {"model": "auth.permission", "pk": 33, "fields": {"name": "Can add shader parameters", "content_type": 9, "codename": "add_shaderparameters"}}, {"model": "auth.permission", "pk": 34, "fields": {"name": "Can change shader parameters", "content_type": 9, "codename": "change_shaderparameters"}}, {"model": "auth.permission", "pk": 35, "fields": {"name": "Can delete shader parameters", "content_type": 9, "codename": "delete_shaderparameters"}}, {"model": "auth.permission", "pk": 36, "fields": {"name": "Can view shader parameters", "content_type": 9, "codename": "view_shaderparameters"}}, {"model": "auth.permission", "pk": 37, "fields": {"name": "Can add artwork information", "content_type": 10, "codename": "add_artworkinformation"}}, {"model": "auth.permission", "pk": 38, "fields": {"name": "Can change artwork information", "content_type": 10, "codename": "change_artworkinformation"}}, {"model": "auth.permission", "pk": 39, "fields": {"name": "Can delete artwork information", "content_type": 10, "codename": "delete_artworkinformation"}}, {"model": "auth.permission", "pk": 40, "fields": {"name": "Can view artwork information", "content_type": 10, "codename": "view_artworkinformation"}}, {"model": "auth.user", "pk": 1, "fields": {"password": "pbkdf2_sha256$150000$nAcLNbEEJMGX$gYhgakLNQbfVlPJH23DSsqKkeJxKNKdv+sWlctRqKjI=", "last_login": "2019-09-23T13:15:49.303Z", "is_superuser": true, "username": "admin", "first_name": "", "last_name": "", "email": "balasoft.inc@gmail.com", "is_staff": true, "is_active": true, "date_joined": "2019-09-23T13:15:28.766Z", "groups": [], "user_permissions": []}}, {"model": "admin.logentry", "pk": 1, "fields": {"action_time": "2019-09-23T14:01:05.349Z", "user": 1, "content_type": 8, "object_id": "1", "object_repr": "Artwork object (1)", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 2, "fields": {"action_time": "2019-09-23T14:06:02.504Z", "user": 1, "content_type": 10, "object_id": "1", "object_repr": "ArtworkInformation object (1)", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 3, "fields": {"action_time": "2019-09-23T14:06:15.183Z", "user": 1, "content_type": 10, "object_id": "2", "object_repr": "ArtworkInformation object (2)", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 4, "fields": {"action_time": "2019-09-23T14:22:13.732Z", "user": 1, "content_type": 9, "object_id": "1", "object_repr": "ShaderParameters object (1)", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 5, "fields": {"action_time": "2019-09-23T14:22:47.869Z", "user": 1, "content_type": 7, "object_id": "1", "object_repr": "ApplicationSettings object (1)", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 6, "fields": {"action_time": "2019-09-23T14:23:08.831Z", "user": 1, "content_type": 8, "object_id": "1", "object_repr": "QUADRO-01 - Madonna col Bambino", "action_flag": 2, "change_message": "[{\"changed\": {\"fields\": [\"shader\"]}}]"}}, {"model": "admin.logentry", "pk": 7, "fields": {"action_time": "2019-09-23T14:34:24.555Z", "user": 1, "content_type": 10, "object_id": "3", "object_repr": "an image - QUADRO-01 - Madonna col Bambino", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}]
+[
+  {
+    "model": "artworks.artwork",
+    "pk": 2,
+    "fields": {
+      "uid": "Q-DELPIOMBO",
+      "title": "Ritratto di Francesco Arsilli",
+      "shader": null,
+      "query_keyword": "Ritratto di Francesco Arsilli Sebastiano del Piombo",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artwork",
+    "pk": 3,
+    "fields": {
+      "uid": "Q-CARRACCI",
+      "title": "Madonna con il Bambino",
+      "shader": null,
+      "query_keyword": "Madonna con il Bambino Ludovico Carracci",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artwork",
+    "pk": 4,
+    "fields": {
+      "uid": "Q-CARAVAGGIO",
+      "title": "Madonna col Bambino",
+      "shader": null,
+      "query_keyword": "Madonna col Bambino Caravaggio (attribuito a)",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artwork",
+    "pk": 5,
+    "fields": {
+      "uid": "Q-CERANO",
+      "title": "Giuditta e Oloferne",
+      "shader": null,
+      "query_keyword": "Giuditta e Oloferne Giovan Battista Crespi, il Cerano",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artwork",
+    "pk": 6,
+    "fields": {
+      "uid": "Q-GUERCINO",
+      "title": "San Giovanni Battista",
+      "shader": null,
+      "query_keyword": "San Giovanni Battista Guercino",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artwork",
+    "pk": 7,
+    "fields": {
+      "uid": "Q-PRETI",
+      "title": "La moneta del tributo",
+      "shader": null,
+      "query_keyword": "La moneta del tributo Mattia Preti",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artwork",
+    "pk": 8,
+    "fields": {
+      "uid": "L-DURER",
+      "title": "De symmetria partium in rectis formis humanorum corporum",
+      "shader": null,
+      "query_keyword": "De symmetria partium in rectis formis humanorum corporum Albrecht D\u00fcrer",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artwork",
+    "pk": 9,
+    "fields": {
+      "uid": "L-VESALIO",
+      "title": "De Humani Corporis Fabrica",
+      "shader": null,
+      "query_keyword": "De Humani Corporis Fabrica. Libri septem. Andrea Vesalio",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artwork",
+    "pk": 10,
+    "fields": {
+      "uid": "L-PARE",
+      "title": "La mani\u00e8re de traicter les playes",
+      "shader": null,
+      "query_keyword": "La mani\u00e8re de traicter les playes... Ambroise Par\u00e9",
+      "interactions": 0,
+      "visits": 0,
+      "likes": 0,
+      "avg_time": 0.0,
+      "max_time": 0.0,
+      "min_time": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 1,
+    "fields": {
+      "artwork": 2,
+      "title": "Ritratto di Francesco Arsilli",
+      "author": "Sebastiano del Piombo",
+      "author_info": "Sebastiano Luciani, Venezia 1485 ca. \u2013 Roma 1547",
+      "date": "1516 ca.",
+      "abstract": "Olio su tavola\r\n85 x 69 cm\r\n\r\nAncona, Collezione Civica - Pinacoteca Comunale \u201cF. Podesti\u201d",
+      "body": "Dopo aver lavorato insieme a Tiziano nella bottega di Giorgione, nel 1511 Sebastiano si trasferisce da Venezia a Roma per lavorare agli affreschi della villa Farnesina, residenza del banchiere senese Agostino Chigi in via della Lungara. Nei primi anni romani (durante i quali il pittore era chiamato Sebastiano Veneziano: il soprannome di \u201cdel Piombo\u201d gli verr\u00e0 dato dopo il 1531) si confronta con la personalit\u00e0 di Raffaello, per poi entrare nell\u2019orbita potente di Michelangelo, con cui Sebastiano stringe una durevole amicizia: ne \u00e8 una diretta conferma questo intenso personaggio, citato come amico e medico personale da Sebastiano del Piombo proprio in una lettera a Michelangelo. L\u2019influsso michelangiolesco \u00e8 d\u2019altra parte gi\u00e0 ben riconoscibile nella monumentalit\u00e0 e nell\u2019energia severa del ritratto. Francesco Arsilli, originario di Senigallia, indossa un mantello rosso con il collo e le maniche bordati di pelliccia, indice dell\u2019appartenenza a un ceto elevato: presentato in un\u2019insolita posa in rotazione, che accentua il dialogo con chi guarda, il medico regge un libro aperto additandone il testo. La gestualit\u00e0 delle mani ha un ruolo molto importante, e guida lo spettatore a \u201cleggere\u201d letteralmente il ritratto. Sulla pagina di sinistra compare in alto la parola \u201cPYRMILLA\u201d, nome dell\u2019innamorata per la quale il medico cambi\u00f2 il proprio cognome da Selvatici ad Arsilli, italianizzazione delle parole latine arsit illi, cio\u00e8 che bruci\u00f2 d\u2019amore. Sulla pagina di destra, al centro, si scorgono le parole \u201cLAPIS PHILOSOR\u201d, cio\u00e8 lapis philosophorum (pietra filosofale), che allude al suo interesse per le scienze alchemiche. In basso, la firma \u201cSEBASTIANUS VINET. FACIEBAT\u201d. Il dipinto \u00e8 rimasto presso i discendenti, i conti Augusti Arsilli di Senigallia, che l\u2019hanno donato alla Pinacoteca Civica di Ancona nel 1975."
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 2,
+    "fields": {
+      "artwork": 3,
+      "title": "Madonna con il Bambino",
+      "author": "Ludovico Carracci",
+      "author_info": "Bologna, 1555 -1619",
+      "date": "1618 ca.",
+      "abstract": "Olio su tela circolare\r\nDiametro 114 cm\r\nRoma, Musei Capitolini, Pinacoteca Capitolina\r\nArchivio Fotografico dei Musei Capitolini",
+      "body": "Raffinato frutto dell\u2019estrema stagione creativa del pittore bolognese, durante la permanenza nella collezione Sacchetti la tela \u00e8 stata ampliata di qualche centimetro lungo l\u2019intero perimetro per costituire un pendant con un tondo un po\u2019 pi\u00f9 grande di Alessandro Tiarini, anch\u2019esso oggi nella Pinacoteca Capitolina. Si tratta apparentemente di una dolce opera destinata al collezionismo e alla devozione privata: Ludovico Carracci distende con serena tranquillit\u00e0 i gesti, i colori, le profondit\u00e0 di un paesaggio lontano all\u2019imbrunire. Non mancano evidenti citazioni di Raffaello, come il dito della Vergine infilato nel libro o la nappa dorata del cuscino che sporge in primo piano. Eppure, questo sorridente e semplice tondo contiene un interessante messaggio a proposito del valore delle mani come mezzo di conoscenza sensibile del mondo. Quello che pu\u00f2 apparire un semplice gioco infantile \u00e8 in realt\u00e0 un esercizio che serve letteralmente a \u201cimpadronirsi\u201d della realt\u00e0 fisica. Riprendendo una formidabile intuizione di Leonardo (Madonna del garofano, oggi nella Alte Pinakothek di Monaco di Baviera), la Madonna tiene con il braccio teso un rametto di fiori davanti al Bambino: il piccolo Ges\u00f9 cerca di afferrarlo, e a sua volta si protende in avanti, cercando di coordinare lo sguardo e il gesto."
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 3,
+    "fields": {
+      "artwork": 4,
+      "title": "Madonna col Bambino",
+      "author": "Caravaggio (attribuito a)",
+      "author_info": "Michelangelo Merisi, Milano 1573 \u2013 Porto Ercole, 1610",
+      "date": "1605 ca.",
+      "abstract": "Olio su tela\r\n123 x 91cm\r\nCollezione privata",
+      "body": "Il pubblico e gli studiosi hanno l\u2019occasione di ammirare in mostra una tela ricca di fascino, finora accessibile solo a pochi specialisti e inedita nella bibliografia. La Madonna col Bambino \u00e8 un dipinto di grande qualit\u00e0 stilistica: la composizione si lega in modo chiaro alla Madonna dei pellegrini, dipinta da Caravaggio per la chiesa di Sant\u2019Agostino a Roma, riprendendone il gruppo principale. Dagli anni Ottanta del secolo in poi si sono susseguite ripetute indagini radiografiche, chimiche e fisiche, che hanno fornito una serie di informazioni preziose sui materiali utilizzati, sui \u201cpentimenti\u201d (i cambiamenti apportati dal pittore in corso d\u2019opera), e soprattutto sulla presenza, nell\u2019angolo inferiore di destra, di due figure sovrapposte, e successivamente cancellate: il volto di un donatore in preghiera e un San Giovannino. Questi aspetti, che non compaiono nelle copie e nelle derivazioni, hanno portato alla supposizione che il dipinto possa essere considerato una prova preliminare da parte del pittore lombardo, in vista dell\u2019esecuzione della pala d\u2019altare destinata alla cappella Cavalletti in Sant\u2019Agostino. Maria, appoggiata allo stipite della porta di casa, sorregge con una certa difficolt\u00e0 il Bambino gi\u00e0 alquanto cresciuto: la mano destra preme in modo realistico sulle carni del Figlio. La Madonna e il piccolo Ges\u00f9 rivolgono lo sguardo verso l\u2019angolo in basso a destra, dove in origine si trovava la figura messa in evidenza dalle radiografie."
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 4,
+    "fields": {
+      "artwork": 5,
+      "title": "Giuditta e Oloferne",
+      "author": "Giovan Battista Crespi, il Cerano",
+      "author_info": "Romagnano Sesia 1573 \u2013 Milano 1632",
+      "date": "1630 ca.",
+      "abstract": "Olio su tela\r\n113 x 191 cm\r\n\r\nCollezione privata",
+      "body": "Il dipinto si lega direttamente a una delle pi\u00f9 grandi imprese artistiche dell\u2019inizio del Seicento a Milano: la decorazione delle cinque porte della facciata del Duomo con grandi altorilievi marmorei dedicati alle \u201cdonne forti\u201d dell\u2019Antico Testamento, promossa dal cardinale Federico Borromeo e affidata al suo artista preferito, il Cerano. Il pittore fornisce tra il 1628 e il 1629 i grandi bozzetti a monocromo, tuttora conservati nel Museo del Duomo, in base ai quali lo scultore Gaspare Vismara realizza prima i modelli in terracotta e successivamente i rilievi marmorei collocati sulle porte. La vicenda \u00e8 stata ben riassunta da Giulio Bora nel catalogo della mostra Sacro Lombardo. Dai Borromeo al Simobolismo (Milano, 2010, p. 52 sgg.), in cui \u00e8 stato presentato anche questo dipinto. La tela \u00e8 infatti la trasposizione pittorica del modello per la porta del Duomo, un soggetto che ottiene subito largo successo, confermato da numerose derivazioni e copie. In questa importante versione autografa, descritta da Bora come \u00abun\u2019autonoma rivisitazione e reinterpretazione del ben pi\u00f9 severo e drammatico originale a monocromo\u00bb, Cerano riprende le dimensioni e la composizione generale, ma con densi colori e alcune significative varianti (i ricchi gioielli di Giuditta, l\u2019elegante brocca) che indirizzano l\u2019opera verso il collezionismo privato. Molto suggestivo \u00e8 l\u2019incrocio della mani dei tre protagonisti: quelle di Oloferne, pesantemente addormentato, si incrociano inerti; l\u2019energia drammatica di quelle di Giuditta contrasta efficacemente con il morbido incarnato e il lieve sorriso della ragazza; il robusto braccio e la mano appoggiata della schiava Abra segnano la potente quinta della composizione sulla destra."
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 5,
+    "fields": {
+      "artwork": 6,
+      "title": "San Giovanni Battista",
+      "author": "Guercino",
+      "author_info": "Giovanni Francesco Barbieri, Cento 1591 \u2013 Bologna 1666",
+      "date": "1650 ca.",
+      "abstract": "Olio su tela\r\n81 x 65 cm\r\n\r\nRoma, Musei Capitolini, Pinacoteca\r\nCapitolina \u2013 Archivio Fotografico dei Musei Capitolini",
+      "body": "Il tema del Battista a mezza figura, destinato al collezionismo, \u00e8 frequente nella pittura di Guercino, soprattutto negli anni della maturit\u00e0: la stessa Pinacoteca Capitolina ne possiede un\u2019altra versione. La prima traccia documentaria di questa tela riporta agli inventari della famiglia Sacchetti, in cui \u00e8 registrato anche il tondo di Ludovico Carracci presente in mostra. Il dipinto \u00e8 stato ripetutamente preso in esame dagli studiosi, con varie proposte di datazione (mai comunque anteriori alla morte di Guido Reni nel 1642 e al successivo trasferimento di Guercino a Bologna) e con qualche dubbio di completa autografia del maestro di Cento, legato anche all\u2019ingiallimento delle vernici. Pur in una tela di routine, Guercino infonde al Battista adolescente una intensit\u00e0 venata di malinconia. La comunicazione dei sentimenti \u00e8 affidata anche al gesto delle mani portate al petto, in perfetta sintonia con lo sguardo rivolto al cielo."
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 6,
+    "fields": {
+      "artwork": 7,
+      "title": "La moneta del tributo",
+      "author": "Mattia Preti",
+      "author_info": "Taverna Calabra, 1613 \u2013 La Valletta, 1699",
+      "date": "1660 ca.",
+      "abstract": "Olio su tela\r\n113 x 96 cm\r\n\r\nCollezione privata",
+      "body": "Nel corso della lunga e felice carriera, Mattia Preti ha pi\u00f9 volte raffigurato il celebre episodio narrato dai tre Vangeli sinottici con la risposta data da Cristo ai farisei che gli chiedevano se si dovessero o no pagare i tributi: \u201crendete a Cesare quello che \u00e8 di Cesare e a Dio quello che \u00e8 di Dio\u201d. Il tema ha una ampia fortuna iconografica: il pittore calabrese richiama esplicitamente i modelli di Tiziano, autore di due diverse versioni, una giovanile destinata alla corte estense e una successiva, ormai negli anni della maturit\u00e0, per Filippo II di Spagna. In quest\u2019ultima compare il gesto di Cristo con l\u2019indice puntato verso il cielo, ripresa anche da Mattia Preti in questo dipinto. Il fariseo che porge la moneta compare, con un gesto analogo, nella versione della scena conservata a Toronto, nella Art Gallery of Ontario. La tela \u00e8 inserita nel catalogo generale del pittore, curato da John Spike e pubblicato nel 1999 in occasione del terzo centenario della morte del pittore, fra le opere della fine degli anni Sessanta, quando Mattia Preti si era ormai stabilito a La Valletta, come pittore di riferimento dei Cavalieri di Malta. Un confronto ravvicinato \u00e8 offerto dall\u2019analogo gesto del Battista in predicazione nella tela conservata nella Pinacoteca di Palazzo Arnone a Cosenza, databile 1668: tuttavia, la maggiore energia chiaroscurale della Moneta del tributo potrebbe suggerire di anticiparne la datazione agli anni napoletani del pittore (1653-58)."
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 7,
+    "fields": {
+      "artwork": 8,
+      "title": "De symmetria partium in rectis formis humanorum corporum",
+      "author": "Albrecht D\u00fcrer",
+      "author_info": "Norimberga, 1471-1528",
+      "date": "1532",
+      "abstract": "Edizione a stampa a cura di Agnes Frey vedova D\u00fcrer\r\nTipografia Formschneider, Norimberga\r\n312 x 195 mm\r\n\r\nMilano, Collezione privata",
+      "body": "Affaticato dalla malaria contratta durante il viaggio nei Paesi Bassi, D\u00fcrer ha dedicato le ultime energie di una carriera di straordinaria intensit\u00e0 alla redazione di un volume sulle proporzioni del corpo umano. Sintesi degli studi su Vitruvio e Piero della Francesca, dei possibili incontri in Lombardia con Leonardo e con Pacioli, il volume cerca ancora una volta di fissare in modo matematico le corrette proporzioni anatomiche del corpo umano. Questa ricerca era diventata un\u2019autentica ossessione per D\u00fcrer, e fonte di profonde delusioni, compendiate nella frase \u00abma cosa sia la Bellezza, io non lo so\u00bb, scritta proprio nel momento di massimo successo. Nel suo ultimo trattato, il genio tedesco introduce importanti varianti rispetto all\u2019impostazione degli anni precedenti. Abbandonata l\u2019utopia di una perfezione \u201cideale\u201d, prende in considerazione le differenze tra le proporzioni del bambino e dell\u2019adulto, suddividendo poi diverse possibili complessioni e le et\u00e0. Una attenzione particolare \u00e8 dedicata alla forma della mano, analizzata nelle sue componenti articolari e proporzionali. Nella versione originale in tedesco (intitolata Von Menlischer Proportion) il   35 volume \u00e8 stato pubblicato subito dopo la morte dell\u2019artista, avvenuta nell\u2019aprile del 1528. Per dare la massima diffusione europea al trattato Agnes, vedova di D\u00fcrer, ne ha fatto tradurre il testo in latino dall\u2019umanista Joachim Camerarius. L\u2019edizione in latino esce a Norimberga nel 1532, un sontuoso volume in-folio, presente in mostra con uno splendido esemplare che comprende tutte le incisioni predisposte da D\u00fcrer, ben 85 xilografie e due diagrammi di teste."
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 8,
+    "fields": {
+      "artwork": 9,
+      "title": "De Humani Corporis Fabrica. Libri septem.",
+      "author": "Andrea Vesalio",
+      "author_info": "(Andreas van Wesel, Bruxelles 1514 \u2013 Zante 1564",
+      "date": "1543",
+      "abstract": "Prima edizione, Basilea,\r\nJoannes Oporinus\r\n403 x 275 mm\r\n\r\nMilano, Collezione privata",
+      "body": "Il trattato di anatomia del fiammingo Vesalio \u00e8 uno dei libri che hanno cambiato il corso della storia della medicina, pietra miliare per la scienza e per l\u2019illustrazione del corpo umano: basti ricordare che dalla prima pubblicazione nel 1543 al 1782 se ne contano non meno di venticinque diverse edizioni. Frutto di cinque anni di studio presso l\u2019Universit\u00e0 di Padova e di diverse dissezioni anatomiche condotte personalmente, il trattato venne pubblicato a Basilea simultaneamente in latino e in tedesco: \u00e8 il primo trattato medico in assoluto dedicato all\u2019intero corpo umano. Si avvale del meraviglioso apparato di illustrazioni predisposto a Venezia da Johann Stephan Calcar, allievo di Tiziano. Il grande maestro veneto probabilmente collabor\u00f2 a sua volta personalmente nell\u2019impresa, in particolare nelle immagini a piena pagina del corpo umano scorticato, sullo sfondo di pacifici paesaggi della campagna padovana: da considerare, intrinsecamente, capolavori dell\u2019arte   37 incisoria del pieno Rinascimento. All\u2019inizio del volume si trova il ritratto dell\u2019ancora giovane Vesalio (all\u2019epoca della pubblicazione aveva solo 28 anni): significativamente, sta mostrando la dissezione di un avambraccio e di una mano, considerata la parte dell\u2019anatomia umana pi\u00f9 complessa e significativa per le dimostrazioni accademiche. La trattazione \u00e8 organizzata in sette sezioni. La prima \u00e8 dedicata all\u2019anatomia delle ossa e delle giunture; la seconda ai muscoli (ed \u00e8 in questa parte del volume che sono inserite le illustrazioni degli scorticati, visti di fronte e di schiena). La terza sezione illustra il sistema vascolare, la quarta quello nervoso. La quinta sezione mostra l\u2019addome e gli organi interni, con particolare attenzione sull\u2019intestino; la sesta parte ha come oggetto il cuore, la settima e ultima il cervello."
+    }
+  },
+  {
+    "model": "artworks.artworkcard",
+    "pk": 9,
+    "fields": {
+      "artwork": 10,
+      "title": "La mani\u00e8re de traicter les playes...",
+      "author": "Ambroise Par\u00e9",
+      "author_info": "Bourg-Hersant 1510 \u2013 Parigi 1590",
+      "date": "1552",
+      "abstract": "Seconda edizione, Parigi, Arnoul l\u2019Angeli\u00e9\r\n172x112 mm\r\nRilegato insieme a La M\u00e8thode curative des playes\u2026,\r\nParigi, 1561\r\n\r\nMilano, Collezione privata",
+      "body": "A lungo medico e chirurgo di guarnigione, pur non avendo ricevuto una formazione accademica classica Ambroise Par\u00e9 ha sviluppato una competenza particolare nell\u2019ambito delle ferite di guerra, proponendo trattamenti innovativi per la cura e la cauterizzazione, metodi per rintracciare ed estrarre i proiettili, e anche soluzioni protesiche in caso di amputazioni. Per la sua abilit\u00e0 divenne in seguito medico personale di diversi re di Francia. Non avendo studiato il latino e il greco, Par\u00e9 scriveva in francese, e l\u2019approccio molto pratico e diretto ha reso molto popolari i suoi libri, concretamente indirizzati alla pratica medica e chirurgica. Il trattato sulla cura delle ferite da   39 armi da fuoco, frecce e armi bianche \u00e8 stato appositamente concepito in un formato maneggevole per essere consultato direttamente sui campi di battaglia. Il volume ha conosciuto una prima edizione nel 1545, e una seconda edizione, significativamente arricchita e dotata di un nuovo corpus di illustrazioni nel 1552. L\u2019esemplare presente in mostra, di particolare pregio e rarit\u00e0, appartiene a questa seconda edizione: fra le novit\u00e0 apportate da Par\u00e9 figura anche l\u2019eccezionale modello di una mano artificiale, il primo in assoluto ad essere illustrato nella storia dei trattati di medicina. La mano protesica, in ferro, \u00e8 dotata di complessi meccanismi per articolare le singole giunture delle dita."
+    }
+  },
+  {
+    "model": "artworks.shaderparameters",
+    "pk": 1,
+    "fields": {
+      "parameters": "1,2,3,4,5,6"
+    }
+  },
+  {
+    "model": "artworks.applicationsettings",
+    "pk": 1,
+    "fields": {
+      "chaos": 0.5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 4,
+    "fields": {
+      "artwork": 2,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 5,
+    "fields": {
+      "artwork": 3,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 6,
+    "fields": {
+      "artwork": 4,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 7,
+    "fields": {
+      "artwork": 5,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 8,
+    "fields": {
+      "artwork": 6,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 9,
+    "fields": {
+      "artwork": 7,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 10,
+    "fields": {
+      "artwork": 8,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 11,
+    "fields": {
+      "artwork": 9,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 12,
+    "fields": {
+      "artwork": 10,
+      "title": "scheda",
+      "kind": 0,
+      "position": 0
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 13,
+    "fields": {
+      "artwork": 2,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 14,
+    "fields": {
+      "artwork": 3,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 15,
+    "fields": {
+      "artwork": 4,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 16,
+    "fields": {
+      "artwork": 5,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 17,
+    "fields": {
+      "artwork": 6,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 18,
+    "fields": {
+      "artwork": 7,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 19,
+    "fields": {
+      "artwork": 8,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 20,
+    "fields": {
+      "artwork": 9,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 21,
+    "fields": {
+      "artwork": 10,
+      "title": "query",
+      "kind": 1,
+      "position": 2
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 22,
+    "fields": {
+      "artwork": 2,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 23,
+    "fields": {
+      "artwork": 3,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 24,
+    "fields": {
+      "artwork": 4,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 25,
+    "fields": {
+      "artwork": 5,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 26,
+    "fields": {
+      "artwork": 6,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 27,
+    "fields": {
+      "artwork": 7,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 28,
+    "fields": {
+      "artwork": 8,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 29,
+    "fields": {
+      "artwork": 9,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphnode",
+    "pk": 30,
+    "fields": {
+      "artwork": 10,
+      "title": "galleria",
+      "kind": 2,
+      "position": 5
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 2,
+    "fields": {
+      "artwork": 2,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 3,
+    "fields": {
+      "artwork": 3,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 4,
+    "fields": {
+      "artwork": 4,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 5,
+    "fields": {
+      "artwork": 5,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 6,
+    "fields": {
+      "artwork": 6,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 7,
+    "fields": {
+      "artwork": 7,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 8,
+    "fields": {
+      "artwork": 8,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 9,
+    "fields": {
+      "artwork": 9,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkgraphsettings",
+    "pk": 10,
+    "fields": {
+      "artwork": 10,
+      "x_dim": 5,
+      "y_dim": 5,
+      "z_dim": 3,
+      "max_lines": 2,
+      "density": 7,
+      "seed": 9,
+      "random_seed": false,
+      "min_distance": 3.0,
+      "duration": 1.0,
+      "y_mov": 0.05,
+      "x_mov": 0.05,
+      "z_mov": 0.05
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 3,
+    "fields": {
+      "domain": "it.wikipedia.org",
+      "favicon": "it_wikipedia_org_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 4,
+    "fields": {
+      "domain": "www.uffizi.it",
+      "favicon": "www_uffizi_it_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 5,
+    "fields": {
+      "domain": "www.gallerieaccademia.it",
+      "favicon": ""
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 6,
+    "fields": {
+      "domain": "www.analisidellopera.it",
+      "favicon": "www_analisidellopera_it_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 7,
+    "fields": {
+      "domain": "www.amazon.it",
+      "favicon": "www_amazon_it_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 8,
+    "fields": {
+      "domain": "www.magnanirocca.it",
+      "favicon": "www_magnanirocca_it_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 9,
+    "fields": {
+      "domain": "www.fanpage.it",
+      "favicon": "www_fanpage_it_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 10,
+    "fields": {
+      "domain": "www.pinacotecabologna.beniculturali.it",
+      "favicon": ""
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 11,
+    "fields": {
+      "domain": "www.finestresullarte.info",
+      "favicon": ""
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 12,
+    "fields": {
+      "domain": "gallerianazionaledellumbria.it",
+      "favicon": "gallerianazionaledellumbria_it_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 13,
+    "fields": {
+      "domain": "www.antoniosocci.com",
+      "favicon": "www_antoniosocci_com_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 14,
+    "fields": {
+      "domain": "upload.wikimedia.org",
+      "favicon": "upload_wikimedia_org_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 15,
+    "fields": {
+      "domain": "www.casabuonarroti.it",
+      "favicon": "www_casabuonarroti_it_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 16,
+    "fields": {
+      "domain": "izi.travel",
+      "favicon": ""
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 17,
+    "fields": {
+      "domain": "www.arte.it",
+      "favicon": "www_arte_it_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 18,
+    "fields": {
+      "domain": "www.florence.net",
+      "favicon": "www_florence_net_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 19,
+    "fields": {
+      "domain": "media.izi.travel",
+      "favicon": "media_izi_travel_favicon.ico"
+    }
+  },
+  {
+    "model": "artworks.artworkqueryresultwebsite",
+    "pk": 20,
+    "fields": {
+      "domain": "www.borghiditoscana.net",
+      "favicon": "www_borghiditoscana_net_favicon.ico"
+    }
+  }
+]
