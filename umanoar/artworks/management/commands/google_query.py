@@ -54,6 +54,12 @@ class Command(BaseCommand):
             action='store_true',
             help='Delete existing query result',
         )
+        parser.add_argument(
+            '--only_images',
+            action='store_true',
+            default=False,
+            help='Fetch only images',
+        )
 
     @no_translations
     def handle(self, *args, **options):
@@ -67,58 +73,70 @@ class Command(BaseCommand):
 
         for artwork in Artwork.objects.all():
             print("- Processing artwork {}".format(artwork.title))
+            if not options.get("only_images"):
+                try:
+                    page = wikipedia.page(artwork.title)
+                    if not check_existing(page.url, artwork, ArtworkQueryTextResult):
+                        website = create_website_for_url(page.url)
+                        query_result = ArtworkQueryTextResult(
+                            url=page.url,
+                            body=page.summary,
+                            title=page.title,
+                            website=website,
+                            artwork=artwork
+                        )
+                        query_result.save()
+                        print("\t Wikipedia page saved correctly")
+                    else:
+                        print("\t Wikipedia page already in db")
+                except wikipedia.exceptions.PageError:
+                    print("no wikipedia pages found with the artwork title!")
 
-            try:
-                page = wikipedia.page(artwork.title)
-                if not check_existing(page.url, artwork, ArtworkQueryTextResult):
-                    website = create_website_for_url(page.url)
+                if ArtworkQueryTextResult.objects.filter(artwork=artwork).count() > 10:
+                    continue
+
+                for url in search(artwork.get_query(), stop=20, lang='it'):
+                    try:
+                        print("\t- url: {}".format(url))
+
+                        if check_existing(url, artwork, ArtworkQueryTextResult):
+                            print("\t\t skip! [already in db]")
+                            continue
+
+                        page = requests.get(url)
+                        if page.status_code != 200:
+                            print("\t\t skip! [status code {}]".format(page.status_code))
+                            continue
+                    except requests.exceptions.ContentDecodingError:
+                        continue
+
+                    website = create_website_for_url(url)
+
+                    soup = BeautifulSoup(page.text, 'html.parser')
+                    try:
+                        title = soup.find("title").text
+                        abstract = soup.find("title").text
+                    except AttributeError:
+                        continue
+
+
+                    try:
+                        abstract = soup.find("meta", {"name": "description"}).attrs['content']
+                    except Exception:
+                        pass
+                    try:
+                        abstract += sorted([p.text for p in soup.find_all("p")], key=lambda p: len(p), reverse=True)[0]
+                    except IndexError:
+                        continue
+
                     query_result = ArtworkQueryTextResult(
-                        url=page.url,
-                        body=page.summary,
-                        title=page.title,
+                        url=base_url(page.url),
+                        body=abstract,
+                        title=title,
                         website=website,
                         artwork=artwork
                     )
                     query_result.save()
-                    print("\t Wikipedia page saved correctly")
-                else:
-                    print("\t Wikipedia page already in db")
-            except wikipedia.exceptions.PageError:
-                print("no wikipedia pages found with the artwork title!")
-
-            for url in search(artwork.get_query(), stop=20, lang='it'):
-                print("\t- url: {}".format(url))
-
-                if check_existing(url, artwork, ArtworkQueryTextResult):
-                    print("\t\t skip! [already in db]")
-                    continue
-
-                page = requests.get(url)
-                if page.status_code != 200:
-                    print("\t\t skip! [status code {}]".format(page.status_code))
-                    continue
-
-                website = create_website_for_url(url)
-
-                soup = BeautifulSoup(page.text, 'html.parser')
-                title = soup.find("title").text
-                abstract = soup.find("title").text
-
-                try:
-                    abstract = soup.find("meta", {"name": "description"}).attrs['content']
-                except Exception:
-                    pass
-
-                abstract += sorted([p.text for p in soup.find_all("p")], key=lambda p: len(p), reverse=True)[0]
-
-                query_result = ArtworkQueryTextResult(
-                    url=base_url(page.url),
-                    body=abstract,
-                    title=title,
-                    website=website,
-                    artwork=artwork
-                )
-                query_result.save()
 
             print("\n\t search for images")
             gis = GoogleImagesSearch(
