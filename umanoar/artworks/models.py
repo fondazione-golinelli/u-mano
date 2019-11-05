@@ -92,6 +92,9 @@ class ArtworkGraphSettings(models.Model):
     x_mov = models.FloatField(default=0.05, blank=False, null=False)
     z_mov = models.FloatField(default=0.05, blank=False, null=False)
 
+    def __str__(self):
+        return "{} graph settings".format(self.artwork)
+
 
 class ArtworkQueryResultWebsite(models.Model):
     domain = models.CharField(max_length=64, blank=False, null=False, default="example.org")

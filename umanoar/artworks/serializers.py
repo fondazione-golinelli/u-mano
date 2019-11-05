@@ -83,6 +83,12 @@ class ShaderParametersSerializer(serializers.ModelSerializer):
         fields = ["parameters"]
 
 
+class ArtworkLightSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artwork
+        exclude = ['id', 'query_keyword', 'shader']
+
+
 class ArtworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artwork
