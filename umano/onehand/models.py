@@ -9,7 +9,7 @@ class HandFeature(object):
 
     def __init__(self, image_points=None, reference_frequency=64, source_image=None,
                  duration=15000.0, frequency_delta=50, amplitude_decrease=0.3,
-                 default_attack=3000.0, default_release=2000.0):
+                 default_attack=1000.0, default_release=1000.0):
         if isinstance(image_points, list):
             self.image_points = image_points
         else:

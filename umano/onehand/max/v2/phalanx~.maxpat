@@ -157,8 +157,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 438.0, 358.0, 135.0, 22.0 ],
-					"text" : "0, $1 $2 0.6 2000 $3 $4"
+					"patching_rect" : [ 438.0, 358.0, 129.0, 22.0 ],
+					"text" : "0, $1 $2 0.6 100 $3 $4"
 				}
 
 			}
