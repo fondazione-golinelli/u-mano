@@ -1,5 +1,6 @@
 import os
 from pymongo import MongoClient
 
-client = MongoClient(os.environ.get("MONGODB_URL", 'mongodb://localhost:27017/'))
+from umano import settings
+client = MongoClient(settings.HAL_MONGODB_URL)
 database = client.umano

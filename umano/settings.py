@@ -3,6 +3,8 @@ import os
 BASE_DIRECTORY = os.path.dirname(__file__)
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), "media")
 
+HAL_MONGODB_URL = 'mongodb://localhost:27017/'
+
 HAL_BROKER_URL = 'amqp://guest:guest@localhost'
 HAL_EXCHANGE_NAME = "umano"
 
