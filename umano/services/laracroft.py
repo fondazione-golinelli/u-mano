@@ -8,7 +8,7 @@ from umano.services.base import DataFetcher
 from umano import settings
 
 
-class IndianaJones(DataFetcher):
+class LaraCroft(DataFetcher):
 
     option_list = DataFetcher.option_list + [
         make_option(
@@ -30,7 +30,7 @@ class IndianaJones(DataFetcher):
 
     def __init__(self, data_class="OneHandFeatures", timeout=10) -> None:
         super().__init__(data_class, timeout)
-        self.name = "Indiana Jones"
+        self.name = "Lara Croft"
         self.description = "Search for lost hands prints an bring them to the museum"
         self.server = "http://localhost:9000"
         self.output_directory = os.path.join(os.getcwd(), "downloads")
