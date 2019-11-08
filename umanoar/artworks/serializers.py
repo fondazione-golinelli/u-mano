@@ -98,6 +98,7 @@ class ArtworkSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         request = self.context.get('request', None)
+        tree = self.context.get("tree")
 
         data = super().to_representation(instance)
 
@@ -109,7 +110,6 @@ class ArtworkSerializer(serializers.ModelSerializer):
             ArtworkGraphSettings.objects.filter(artwork=instance).first()).data
 
         data['nodes'] = []
-        request = self.context.get("request")
         for node in ArtworkGraphNode.objects.filter(artwork=instance).all():
             data_node = ArtworkGraphNodeSerializer(node).data
             data_node['query'] = []
@@ -124,6 +124,9 @@ class ArtworkSerializer(serializers.ModelSerializer):
                     (i, x) for i, x in enumerate(ArtworkQueryTextResult.objects.filter(artwork=instance).all())
                 ]
                 G = nx.random_internet_as_graph(len(query_results), seed=42)
+                if tree:
+                    print("tree!")
+                    G = nx.algorithms.minimum_spanning_tree(G)
                 ad_list = dict([(i, x) for i, x in enumerate(nx.adjlist.generate_adjlist(G))])
 
                 for i, q in query_results:

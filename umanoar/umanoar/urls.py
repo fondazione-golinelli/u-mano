@@ -35,5 +35,6 @@ urlpatterns = [
 
     path('demo/picture/<int:pk>', demo_views.picture_preview, name="umano_demo_picture_preview"),
     path('demo/updateshader/', demo_views.update_shader_settings, name="umano_demo_update_shader"),
+    path('privacy_policy', artwork_views.privacy_policy, name="privacy_policy"),
     path('', demo_views.demo_one)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,16 +1,20 @@
 import json
 from django.http import JsonResponse, HttpResponseBadRequest
+from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import ArtworkSerializer, ArtworkLightSerializer, Artwork
-from django.views.decorators.csrf import csrf_exempt
 
 
 class ArtworkList(APIView):
     def get(self, request, format=None):
+
+        tree = request.GET.get("tree", False)
+
         artworks = Artwork.objects.all()
-        serializer = ArtworkSerializer(artworks, many=True, context={"request": request})
+        serializer = ArtworkSerializer(artworks, many=True, context={"request": request, "tree": tree})
         return Response(serializer.data)
 
 
@@ -64,3 +68,9 @@ def post_time(request, uid):
         serializer = ArtworkLightSerializer(artwork)
         return JsonResponse(serializer.data)
     return HttpResponseBadRequest()
+
+
+def privacy_policy(request):
+    return render_to_response(
+        'artworks/privacy_policy.html'
+    )
