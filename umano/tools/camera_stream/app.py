@@ -35,10 +35,11 @@ def video_feed():
             Camera(
                 app.config.get("CAMERA_SOURCE"),
                 processor=app.config.get('IMAGE_PROCESSOR', "BaseProcessing"),
-                file_extension=app.config.get("FILE_EXTENSION")
+                file_extension=app.config.get("FILE_EXTENSION"),
+                capture=app.capture
             ),
         ),
-        mimetype='multipart/x-mixed-replace; boundary=--frame')
+        mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 def create_app(config):

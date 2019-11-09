@@ -2,6 +2,7 @@ import os
 
 BASE_DIRECTORY = os.path.dirname(__file__)
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), "media")
+UMANO_SHARE_ROOT = "/umano-share"
 
 HAL_MONGODB_URL = 'mongodb://localhost:27017/'
 
@@ -25,6 +26,7 @@ HAL_DATA_TEST_COLLECTION = "test.data"
 
 ONEHAND_MOCKUP_URL = "https://umano.fondazionegolinelli.it/onehand"
 ONEHAND_MOCKUP_DOWNLOAD_FOLDER = os.path.join(BASE_DIRECTORY, "downloads")
+
 ONEHAND_MAX_HOST = "127.0.0.1"
 ONEHAND_MAX_PORT = 8888
 ONEHAND_VUO_HOST = "127.0.0.1"
@@ -47,7 +49,10 @@ ONEHAND_HAND_PICTURES_FOLDER = os.path.join(MEDIA_ROOT, "onehand/pictures")
 ONEHAND_HAND_PICTURES_EXTENSION = ".jpg"
 ONEHAND_HAND_AUDIO_FOLDER = os.path.join(MEDIA_ROOT, "onehand/audio")
 ONEHAND_HAND_AUDIO_EXTENSION = ".aiff"
+ONEHAND_HAND_PRINTS_FOLDER = os.path.join(MEDIA_ROOT, "onehand/handprints")
+ONEHAND_HAND_PRINTS_EXTENSION = ".jpg"
 
+ONEHAND_SHARE_FOLDER = os.path.join(UMANO_SHARE_ROOT, "onehand")
 
 ADAM_SERIAL_BAUDRATE = 115200
 ADAM_SERIAL_PRESSURE_PORT = "COM4"
@@ -61,6 +66,7 @@ ADAM_OSC_PRESSURE_ADDRESS = "/umano/adam/pressure"
 
 CAMERA_STREAM_LIVE_URL = '/video_feed'
 
+
 try:
     from .local_settings import *
 except ImportError:
@@ -72,3 +78,8 @@ if not os.path.exists(ONEHAND_HAND_PICTURES_FOLDER):
     os.makedirs(ONEHAND_HAND_PICTURES_FOLDER)
 if not os.path.exists(ONEHAND_HAND_AUDIO_FOLDER):
     os.makedirs(ONEHAND_HAND_AUDIO_FOLDER)
+if not os.path.exists(ONEHAND_HAND_PRINTS_FOLDER):
+    os.makedirs(ONEHAND_HAND_PRINTS_FOLDER)
+
+if not os.path.exists(ONEHAND_SHARE_FOLDER):
+    os.makedirs(ONEHAND_SHARE_FOLDER)

@@ -1,0 +1,48 @@
+import os
+
+import cv2
+import numpy as np
+
+from umano.services.base import DataFetcher
+from umano.hal.data import last
+from umano.onehand.models import HandFeature
+from umano.onehand.utils import hand_roi, hand_print, crop, annotate_frame_with_features
+from umano import settings
+
+
+class TheChief(DataFetcher):
+    def __init__(self, data_class="OneHandFeatures", timeout=10) -> None:
+        super().__init__(data_class, timeout)
+        self.name = "The Chief"
+        self.description = "Search for new members and get their hand print"
+
+    def process_data(self):
+        for hand_feature in self.data:
+
+            hand_picture = last("OneHandPicture", query={"touch_session_id": hand_feature.touch_session_id})
+
+            if not os.path.exists(hand_picture.src):
+                continue
+            min_xy, max_xy = hand_roi(hand_feature)
+            frame = cv2.imread(hand_picture.src)
+            handprint = crop(hand_print(hand_picture, frame.shape[0], frame.shape[1]), min_xy, max_xy)
+
+            output_file = os.path.join(
+                settings.ONEHAND_HAND_PRINTS_FOLDER,
+                "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_PRINTS_EXTENSION)
+            )
+            cv2.imwrite(output_file, handprint)
+
+            features = np.zeros(shape=frame.shape)
+            hand = HandFeature(hand_feature.image_points)
+            annotate_frame_with_features(features, hand=hand)
+            output_file = os.path.join(
+                settings.ONEHAND_HAND_PRINTS_FOLDER,
+                "{}_features{}".format(hand_feature.uid, settings.ONEHAND_HAND_PRINTS_EXTENSION)
+            )
+            cv2.imwrite(output_file, crop(features, min_xy, max_xy))
+
+
+if __name__ == "__main__":
+    service = TheChief()
+    service.run()

@@ -11,3 +11,4 @@ dacite==1.0.2
 Flask-PyMongo==2.3.0
 pyserial==3.4  # on windows conda install -c conda-forge pyserial
 websockets==8.0.2
+requests==2.22.0

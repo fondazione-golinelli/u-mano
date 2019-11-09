@@ -10,7 +10,7 @@ from umano.settings import ONEHAND_HANDPOSE_MODEL_URL
 
 class HandFeatureExtractor(object):
 
-    def __init__(self, threshold=0.2, confidence=0.75, live_output=True):
+    def __init__(self, threshold=0.2, confidence=0.75, live_output=True, black_output_feature=True):
         model_directory = os.path.join(os.path.dirname(__file__), "models")
         proto_file = os.path.join(model_directory, "pose_deploy.prototxt")
         weights_file = os.path.join(model_directory, "pose_iter_102000.caffemodel")
@@ -26,12 +26,16 @@ class HandFeatureExtractor(object):
         self.points_number = 22
         self.live_output = live_output
         self.confidence = confidence
+        self.black_annotation = black_output_feature
 
     def process_frame(self, frame, denoise=False):
         if denoise:
             processed_frame = cv2.GaussianBlur(np.copy(frame), (51, 11), 0)
         else:
-            processed_frame = np.copy(frame)
+            if self.black_annotation:
+                processed_frame = np.zeros(frame.shape)
+            else:
+                processed_frame = np.copy(frame)
 
         frame_width = frame.shape[1]
         frame_height = frame.shape[0]

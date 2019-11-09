@@ -42,10 +42,11 @@ class CameraStreamService(UmanoServerService):
         )
     ]
 
-    def __init__(self) -> None:
+    def __init__(self, capture=None) -> None:
         super().__init__()
         self.streaming_document = None
         self.url = None
+        self.capture = capture
 
     def register(self):
         self.streaming_document = store(
@@ -66,6 +67,7 @@ class CameraStreamService(UmanoServerService):
         self.set_status(STATUS.STREAMING)
         app = create_app(options)
         app.service = self
+        app.capture = capture
         self.url = "http://{}:{}{}".format(self.ip, app.config.get("PORT", 5000), settings.CAMERA_STREAM_LIVE_URL)
         self.register()
         app.run(app.config.get("HOST", "0.0.0.0"), port=app.config.get("PORT", 5000), threaded=True)
@@ -74,5 +76,7 @@ class CameraStreamService(UmanoServerService):
 
 
 if __name__ == "__main__":
-    service = CameraStreamService()
+    import cv2
+    capture = cv2.VideoCapture(0)
+    service = CameraStreamService(capture=capture)
     service.run()

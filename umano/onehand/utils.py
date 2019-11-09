@@ -3,8 +3,7 @@ from math import log2, pow
 from statistics import mean
 import string
 import tempfile
-
-# import numpy as np
+import numpy as np
 
 import cv2
 from scipy.spatial import distance as dist
@@ -85,7 +84,6 @@ def points_to_frequencies(image_points, reference_frequency):
 
 
 def annotate_frame_with_features(frame, points=None, hand=None):
-
     if points is None and hand is None:
         raise RuntimeError("hand or points required")
     COLORS = [
@@ -127,9 +125,9 @@ def annotate_frame_with_features(frame, points=None, hand=None):
     if hand is not None:
         color_index = -1
         print(frame.shape)
-        x = round(frame.shape[0]/10)
-        y = frame.shape[1] - round(frame.shape[1]/3)
-        max_x = frame.shape[0] - round(frame.shape[0]/10)
+        x = round(frame.shape[0] / 10)
+        y = frame.shape[1] - round(frame.shape[1] / 3)
+        max_x = frame.shape[0] - round(frame.shape[0] / 10)
 
         mx = max_x + x
         mt = max(hand.beats) + max(hand.releases) + max(hand.attacks)
@@ -138,6 +136,7 @@ def annotate_frame_with_features(frame, points=None, hand=None):
 
         def time_to_pixel(t):
             return int(round(mx * t / mt) + x)
+
         for idx, b in enumerate(hand.beats):
             if idx % 4 == 0:
                 color_index += 1
@@ -154,9 +153,6 @@ def annotate_frame_with_features(frame, points=None, hand=None):
 
             cv2.circle(frame, (time_to_pixel(b), yy), 5, COLORS[color_index], thickness=-1, lineType=cv2.FILLED)
             cv2.putText(frame, str(idx), (time_to_pixel(b), yy), cv2.FONT_HERSHEY_SIMPLEX, 0.55, GRAY, 2)
-
-
-
 
     return frame
 
@@ -193,3 +189,81 @@ def temporary_name(with_timestamp=True):
     if with_timestamp:
         return "{}_{}".format(datetime.now().strftime("%Y_%m_%d__%H_%M_%S_%f"), temp_name)
     return temp_name
+
+
+def rgb_histogram(image):
+    bgr_planes = cv2.split(image)
+    hist_size = 256
+    hist_range = (0, 256)  # the upper boundary is exclusive
+    accumulate = False
+
+    b_hist = cv2.calcHist(bgr_planes, [0], None, [hist_size], hist_range, accumulate=accumulate)
+    g_hist = cv2.calcHist(bgr_planes, [1], None, [hist_size], hist_range, accumulate=accumulate)
+    r_hist = cv2.calcHist(bgr_planes, [2], None, [hist_size], hist_range, accumulate=accumulate)
+    hist_w = 512
+    hist_h = 400
+    bin_w = int(round(hist_w / hist_size))
+
+    hist_image = np.zeros((hist_h, hist_w, 3), dtype=np.uint8)
+
+    cv2.normalize(b_hist, b_hist, alpha=0, beta=hist_h, norm_type=cv2.NORM_MINMAX)
+    cv2.normalize(g_hist, g_hist, alpha=0, beta=hist_h, norm_type=cv2.NORM_MINMAX)
+    cv2.normalize(r_hist, r_hist, alpha=0, beta=hist_h, norm_type=cv2.NORM_MINMAX)
+
+    for i in range(1, hist_size):
+        cv2.line(hist_image, (bin_w * (i - 1), hist_h - int(b_hist[i - 1].round())),
+                 (bin_w * i, hist_h - int(b_hist[i].round())),
+                 (255, 0, 0), thickness=2)
+        cv2.line(hist_image, (bin_w * (i - 1), hist_h - int(g_hist[i - 1].round())),
+                 (bin_w * i, hist_h - int(g_hist[i].round())),
+                 (0, 255, 0), thickness=2)
+        cv2.line(hist_image, (bin_w * (i - 1), hist_h - int(r_hist[i - 1].round())),
+                 (bin_w * i, hist_h - int(r_hist[i].round())),
+                 (0, 0, 255), thickness=2)
+
+    return hist_image
+
+
+def hand_print(hp, x, y):
+
+    handprint = np.zeros([x, y], np.uint8)
+
+    white = (255, 255, 255)
+
+    for idx, pair in enumerate(HANDPOINT_PAIRS):
+        part_a = pair[0]
+        part_b = pair[1]
+
+        if hp.image_points[part_a] and hp.image_points[part_b]:
+            cv2.line(handprint, tuple(hp.image_points[part_a]), tuple(hp.image_points[part_b]), white, 40)
+            cv2.circle(handprint, tuple(hp.image_points[part_a]), 20, white, thickness=-1)
+            cv2.circle(handprint, tuple(hp.image_points[part_b]), 20, white, thickness=-1)
+
+        vertices = np.array([[
+            hp.image_points[0],
+            hp.image_points[2],
+            hp.image_points[5],
+            hp.image_points[9],
+            hp.image_points[13],
+            hp.image_points[17],
+
+        ]], np.int32)
+        cv2.fillPoly(handprint, vertices, white)
+
+    return handprint
+
+
+def hand_roi(hand, offset=100):
+    min_xy = (
+        min([p[0] for p in hand.image_points if p is not None]) - offset,
+        min([p[1] for p in hand.image_points if p is not None]) - offset,
+    )
+    max_xy = (
+        max([p[0] for p in hand.image_points if p is not None]) + offset,
+        max([p[1] for p in hand.image_points if p is not None]) + offset,
+    )
+    return min_xy, max_xy
+
+
+def crop(image, min_xy, max_xy):
+    return image[min_xy[1]:max_xy[1], min_xy[0]:max_xy[0]]

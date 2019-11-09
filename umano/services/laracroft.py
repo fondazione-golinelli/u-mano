@@ -9,7 +9,6 @@ from umano import settings
 
 
 class LaraCroft(DataFetcher):
-
     option_list = DataFetcher.option_list + [
         make_option(
             '--server',
@@ -22,10 +21,16 @@ class LaraCroft(DataFetcher):
             '--output-directory',
             dest='OUTPUT_DIRECTORY',
             type=str,
-            default=os.path.join(os.getcwd(), "downloads"),
-            help='Local directory to save images to (default downloads under current directory)'
+            default=settings.UMANO_SHARE_ROOT,
+            help='Local directory to save images to (default to umano share {})'.format(settings.UMANO_SHARE_ROOT)
         ),
-
+        make_option(
+            '--local',
+            dest='LOCAL',
+            type=str,
+            default=False,
+            help='Read images and audio from local directory'
+        ),
     ]
 
     def __init__(self, data_class="OneHandFeatures", timeout=10) -> None:
@@ -42,23 +47,43 @@ class LaraCroft(DataFetcher):
         if not os.path.exists(self.output_directory):
             os.makedirs(self.output_directory)
 
-    def process_data(self):
-        for hand_feature in self.data:
-            hand_picture = last("OneHandPicture", query={"touch_session_id": hand_feature.touch_session_id})
-            if hand_picture is None:
-                print("something bad happened!")
-                continue
-
-            url = "{}/pictures/{}".format(self.server, hand_picture.filename)
-            response = requests.get(url, stream=True)
-            output_path = os.path.join(self.output_directory, "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION))
+    @staticmethod
+    def from_url_to_file(url, output_path):
+        response = requests.get(url, stream=True)
+        print("download image from url: {} - {}".format(response.status_code, url))
+        if response.status_code == 200:
             with open(output_path, 'wb') as out_file:
                 shutil.copyfileobj(response.raw, out_file)
             del response
 
-            pass
+    def process_data(self):
+        for hand_feature in self.data:
+
+            self.from_url_to_file(
+                "{}/audio/{}".format(self.server,
+                                     "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_AUDIO_EXTENSION)),
+                os.path.join(
+                    self.output_directory, "onehand/audio",
+                    "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_AUDIO_EXTENSION))
+            )
+
+            self.from_url_to_file(
+                "{}/handprints/{}".format(self.server,
+                                        "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION)),
+                os.path.join(
+                    self.output_directory, "onehand/pictures",
+                    "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION))
+            )
+
+            self.from_url_to_file(
+                "{}/handprints/{}".format(self.server,
+                                        "{}_features{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION)),
+                os.path.join(
+                    self.output_directory, "onehand/pictures",
+                    "{}_features{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION))
+            )
 
 
 if __name__ == "__main__":
-    service = IndianaJones()
+    service = LaraCroft()
     service.run()

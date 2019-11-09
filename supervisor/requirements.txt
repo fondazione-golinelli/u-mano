@@ -1,2 +1,6 @@
 supervisor==4.1.0
-multivisor==5.0.2
+multivisor==5.0.2 # https://github.com/fondazione-golinelli/multivisor.git
+
+
+
+    

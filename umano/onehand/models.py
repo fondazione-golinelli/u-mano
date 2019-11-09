@@ -32,6 +32,8 @@ class HandFeature(object):
         self.decays = self.zeros
         self.releases = self.zeros
         self.beats = self.zeros
+        # TODO saprai sicuramente inventarti degli id più accattivanti!
+        self.uid = str(uuid.uuid4())[:8]
 
         features_length = len(self.frequencies)
 
@@ -117,8 +119,3 @@ class HandFeature(object):
     @property
     def ones(self):
         return [1.0] * len(self.frequencies)
-
-    @property
-    def uid(self):
-        # TODO saprai sicuramente inventarti degli id più accattivanti!
-        return str(uuid.uuid4())[:8]

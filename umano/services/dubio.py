@@ -32,7 +32,7 @@ class DuBio(ConsumerService):
         ),
     ]
 
-    def __init__(self, data_class="OneHandTouch", hand_data_class="OneHandPicture") -> None:
+    def __init__(self, data_class="OneHandTouch", hand_data_class="OneHandPicture", use_grabber=False) -> None:
         super().__init__(data_class)
         self.session_id = None
         self.video_source = None
@@ -42,18 +42,24 @@ class DuBio(ConsumerService):
         self.name = "DuBio"
         self.description = "Extract hand features and trigger sonification"
         self.start_time = None
+        self.capture = None
+        self.use_grabber = use_grabber
 
     def process_args_and_options(self, args, options):
         self.video_source = options.VIDEO_SOURCE
         self.hands_to_sonification = options.HANDS
+        self.capture = cv2.VideoCapture(int(self.video_source))
 
     def sonification(self):
         self.set_status(STATUS.PLAYING)
         print("ready to sonification!")
         hand = HandFeature(image_points=average_points(self.hand_frames))
         send_to_max(hand)
-        sound_duration = 10
+        sound_duration = 20
         print("time taken {}".format(time.time() - self.start_time))
+
+        print("sleeping till sounds end")
+        time.sleep(sound_duration)
 
         store(
             data_class="OneHandFeatures",
@@ -65,8 +71,6 @@ class DuBio(ConsumerService):
         )
         for picture in self.hand_frames:
             picture.save()
-
-        time.sleep(sound_duration)
         self.reset()
 
     def reset(self):
@@ -99,7 +103,10 @@ class DuBio(ConsumerService):
         self.hand_frames = find(self.hand_data_class, dict(session_id=session_id))
 
     def process_frame(self, video_source, session_id):
-        frame = VideoGrabber(video_source).grab()
+        if self.use_grabber:
+            frame = VideoGrabber(video_source).grab()
+        else:
+            _, frame = self.capture.read()
         extractor = HandFeatureExtractor(live_output=False)
         image_points, output_frame = extractor.process_frame(frame)
         if self.session_id != session_id or self.status == STATUS.PLAYING:
@@ -109,8 +116,7 @@ class DuBio(ConsumerService):
             if self.start_time is None:
                 self.start_time = time.time()
             filename = temporary_name() + settings.ONEHAND_HAND_PICTURES_EXTENSION
-            filepath = os.path.join(settings.ONEHAND_HAND_PICTURES_FOLDER,
-                                    filename) + settings.ONEHAND_HAND_PICTURES_EXTENSION
+            filepath = os.path.join(settings.ONEHAND_HAND_PICTURES_FOLDER, filename)
             cv2.imwrite(filepath, frame)
             # DEBUG
             processed_filepath = os.path.join(settings.ONEHAND_HAND_PICTURES_FOLDER,
