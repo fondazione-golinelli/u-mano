@@ -18,7 +18,7 @@ class TheChief(DataFetcher):
 
     def process_data(self):
         for hand_feature in self.data:
-
+            print("processed hand {}".format(hand_feature.uid))
             hand_picture = last("OneHandPicture", query={"touch_session_id": hand_feature.touch_session_id})
 
             if not os.path.exists(hand_picture.src):
@@ -41,6 +41,10 @@ class TheChief(DataFetcher):
                 "{}_features{}".format(hand_feature.uid, settings.ONEHAND_HAND_PRINTS_EXTENSION)
             )
             cv2.imwrite(output_file, crop(features, min_xy, max_xy))
+            hand_feature.width = handprint.shape[0]
+            hand_feature.height = handprint.shape[1]
+            hand_feature.save()
+            print("processed hand {}".format(hand_feature.uid))
 
 
 if __name__ == "__main__":

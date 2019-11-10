@@ -194,7 +194,7 @@ class DataFetcher(UmanoService):
         self.timeout = timeout
         self.data_class = data_class
         self.data = []
-        self.last_update = datetime.now() - timedelta(days=1)
+        self.last_update = datetime.now() - timedelta(days=60)
         super().__init__()
 
     def fetch_data(self):

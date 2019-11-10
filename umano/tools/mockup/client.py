@@ -12,7 +12,7 @@ sys.path.append(
 # HACK for easy terminal execution
 
 from umano.onehand.models import HandFeature
-from umano.onehand.osc import send_to_max, send_to_vuo
+from umano.onehand.osc import send_sonification_to_max, send_to_vuo
 from umano.onehand.utils import rescale_frame, annotate_frame_with_features
 from umano import settings
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
                        rescale_frame(annotate_frame_with_features(cv2.imread(output_path), hand=hand), wpercent=50,
                                      hpercent=50))
 
-            send_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
+            send_sonification_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
             send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT)
 
             while True:
@@ -54,12 +54,12 @@ if __name__ == "__main__":
                 if key == 27:
                     sys.exit(0)
                 elif key == 32:
-                    send_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
+                    send_sonification_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
                     send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT)
                     print("\n\t osc sent...")
                 elif key == ord('r'):
                     hand.reverse()
-                    send_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
+                    send_sonification_to_max(hand, host=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
                 else:
                     cv2.destroyAllWindows()
                     break

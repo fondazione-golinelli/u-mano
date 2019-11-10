@@ -5,8 +5,8 @@ from pythonosc.udp_client import SimpleUDPClient
 from umano import settings
 
 
-def send_to_max(hand, all=True, only_durer=False, only_hand=False, host=settings.ONEHAND_MAX_HOST,
-                port=settings.ONEHAND_MAX_PORT):
+def send_sonification_to_max(hand, all=True, only_durer=False, only_hand=False, host=settings.ONEHAND_MAX_HOST,
+                             port=settings.ONEHAND_MAX_PORT):
     osc_client = SimpleUDPClient(address=host, port=port)
 
     if all:
@@ -45,3 +45,18 @@ def send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_
     osc_client = SimpleUDPClient(address=host, port=port)
     for finger, i, data in hand.finger_to_finger():
         osc_client.send_message(settings.ONEHAND_OSC_FINGER_ADDRESS.format(finger, i), data)
+
+
+def send_cave_to_vuo(hands, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT):
+    osc_client = SimpleUDPClient(address=host, port=port)
+
+    osc_client.send_message("/umano/onehand/cave/hands/join",
+                            [";".join(map(str, [hand.uid, hand.position.x, hand.position.y, hand.size.w, hand.size.h, hand.rotation]))
+                             for hand in hands])
+    # osc_client.send_message("/umano/onehand/cave/hands/testlist", [[hand.uid, hand.uid, hand.uid] for hand in hands])
+    # osc_client.send_message("/umano/onehand/cave/hands/totem", [hand.uid for hand in hands])
+    # osc_client.send_message("/umano/onehand/cave/hands/features", [hand.features_image for hand in hands])
+    # osc_client.send_message("/umano/onehand/cave/hands/position/x", [hand.position.x for hand in hands])
+    # osc_client.send_message("/umano/onehand/cave/hands/position/y", [hand.position.y for hand in hands])
+    # osc_client.send_message("/umano/onehand/cave/hands/size/width", [hand.size.w for hand in hands])
+    # osc_client.send_message("/umano/onehand/cave/hands/size/height", [hand.size.h for hand in hands])

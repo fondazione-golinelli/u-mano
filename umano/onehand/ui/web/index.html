@@ -13,6 +13,7 @@
             touch-action: none; /* disable pitch zoom*/
             overflow-y: hidden;
             background-color: black;
+            cursor:none;
         }
 
         .bg {
@@ -71,7 +72,6 @@
     <span class="state_text">?</span>
 </div>
     <div class="touch_area">
-        <div class="touch_area_inside"></div>
     </div>
     <div id="particles-js"></div>
 
@@ -101,14 +101,23 @@
             // websocket = new WebSocket("ws://192.168.1.164:6789/"),
             touches = 0;
 
+        function update_touches(event){
+            try{
+                touches = event.touches.length;
+            }catch (e) {
+                touches = 0;
+            }
+        }
+
         function touch_start(event) {
             websocket.send(JSON.stringify({action: 'touch_start'}));
             $(touch_area).css("background-color", touch_bg);
-            touches = event.touches.length;
+            update_touches(event);
+
         }
 
         function touch_end(event) {
-            touches = event.touches.length;
+            update_touches(event);
             if (touches === 0){
              websocket.send(JSON.stringify({action: 'touch_end'}));
              $(touch_area).css("background-color", "#000000");
@@ -122,6 +131,9 @@
             .on(
                 "touchend", touch_end
             )
+            .on("mousedown", touch_start)
+            //.on("mouseup", touch_end)
+            //.on("click", function(){console.log("click")})
             .on(
                 "transitionend",
                 function () {

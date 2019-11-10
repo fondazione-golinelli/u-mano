@@ -10,7 +10,7 @@ from umano.hal.data import load, store, find, create
 from umano.onehand.handfeatures.extractor import HandFeatureExtractor
 from umano.onehand.utils import VideoGrabber, average_points, temporary_name
 from umano.onehand.models import HandFeature
-from umano.onehand.osc import send_to_max
+from umano.onehand.osc import send_sonification_to_max
 from umano import settings
 
 
@@ -54,7 +54,7 @@ class DuBio(ConsumerService):
         self.set_status(STATUS.PLAYING)
         print("ready to sonification!")
         hand = HandFeature(image_points=average_points(self.hand_frames))
-        send_to_max(hand)
+        send_sonification_to_max(hand)
         sound_duration = 20
         print("time taken {}".format(time.time() - self.start_time))
 

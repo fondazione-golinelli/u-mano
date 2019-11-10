@@ -40,11 +40,15 @@ def load(pk, data_class):
     return create(data_class, data)
 
 
-def find(data_class, query):
+def find(data_class, query=None, limit=None, sort_key=None, sort_direction=1):
     if isinstance(data_class, str):
         data_class = class_from_classname(data_class)
     documents = []
     cursor = data_class.get_collection().find(query)
+    if sort_key is not None:
+        cursor = cursor.sort(key_or_list=sort_key, direction=sort_direction)
+    if limit is not None:
+        cursor = cursor.limit(limit)
     for data in cursor:
         documents.append(
             create(data_class, data)

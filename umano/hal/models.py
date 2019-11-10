@@ -149,7 +149,8 @@ class OneHandFeatures(HalData):
     uid: str
     touch_session_id: str
     image_points: list
-
+    width: Optional[int]
+    height: Optional[int]
 
 @dataclass
 class OneHandSound(OneHandData):

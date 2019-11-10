@@ -6,7 +6,7 @@ import time
 from umano.onehand.utils import VideoGrabber
 from umano.onehand.handfeatures.extractor import HandFeatureExtractor
 from umano.onehand.utils import rescale_frame
-from umano.onehand.osc import send_to_max
+from umano.onehand.osc import send_sonification_to_max
 from umano.onehand.models import HandFeature
 VIDEO_SRC = 0  # "http://localhost:5000/video_feed"
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         if image_points is not None:
             print("hand detected")
             hand = HandFeature(image_points=image_points)
-            send_to_max(hand, all=True)
+            send_sonification_to_max(hand, all=True)
             time.sleep(10)
 
             if output_frame is not None and live_output:

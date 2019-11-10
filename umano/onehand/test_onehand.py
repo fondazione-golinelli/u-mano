@@ -8,7 +8,7 @@ import cv2
 from umano.onehand.models import HandFeature
 from umano.onehand.handfeatures.extractor import HandFeatureExtractor
 from umano.onehand.utils import rescale_frame, annotate_frame_with_features
-from umano.onehand.osc import send_to_max
+from umano.onehand.osc import send_sonification_to_max
 
 
 if __name__ == "__main__":
@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
         hand = HandFeature(image_points=image_points, source_image=image_path)
         cv2.imshow(file_name, rescale_frame(annotate_frame_with_features(frame_copy, hand=hand)))
-        send_to_max(hand, all=True)
+        send_sonification_to_max(hand, all=True)
 
         while True:
             usage()
@@ -68,11 +68,11 @@ if __name__ == "__main__":
                 cv2.destroyAllWindows()
                 sys.exit(0)
             elif key == ord("w"):
-                send_to_max(hand, all=True)
+                send_sonification_to_max(hand, all=True)
             elif key == ord("d"):
-                send_to_max(hand, all=False, only_durer=True)
+                send_sonification_to_max(hand, all=False, only_durer=True)
             elif key == ord("h"):
-                send_to_max(hand, all=False, only_hand=True)
+                send_sonification_to_max(hand, all=False, only_hand=True)
             elif key == ord("s"):
                 cv2.imwrite(
                     os.path.join(TEST_DIRECTORY, "{}_processed.jpg".format(file_name)),
