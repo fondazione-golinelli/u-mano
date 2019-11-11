@@ -134,3 +134,6 @@ ppath.bat
 media
 
 The_cave_app.app
+
+!.idea/*
+.DS_Store
