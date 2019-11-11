@@ -28,17 +28,17 @@ def save_image_from_url(model, image_field, image_url, image_filename):
         return False
 
 
-def create_website_for_url(url):
-    favicon = "favicon.ico"
+def create_website_for_url(url, force_update=False):
     scheme, domain = domain_from_url(url)
     try:
         website, created = ArtworkQueryResultWebsite.objects.get_or_create(domain=domain)
     except MultipleObjectsReturned:
         website = ArtworkQueryResultWebsite.objects.filter(domain=domain).first()
         created = False
-    if created:
-        filename = "{}_{}".format(domain.replace(".", "_"), favicon)
-        ok_icon = save_image_from_url(website, "favicon", urljoin("{}://{}".format(scheme, domain), favicon), filename)
+    if created or force_update:
+        icon_url = urljoin("{}://{}".format(scheme, domain), "favicon.ico")
+        filename = "{}_favicon.png".format(domain.replace(".", "_"))
+        ok_icon = save_image_from_url(website, "favicon", icon_url, filename)
         if not ok_icon:
             website.favicon = None
         website.save()
@@ -128,7 +128,6 @@ class Command(BaseCommand):
                     except AttributeError:
                         continue
 
-
                     try:
                         abstract = soup.find("meta", {"name": "description"}).attrs['content']
                     except Exception:
@@ -178,4 +177,3 @@ class Command(BaseCommand):
                     query_image.save()
                 else:
                     print("\t skip [cannot save image]")
-
