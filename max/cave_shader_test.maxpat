@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 238.0, 203.0, 1152.0, 719.0 ],
+		"rect" : [ 309.0, 153.0, 1152.0, 719.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,17 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 538.0, 642.0, 32.0, 22.0 ],
+					"text" : "print"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"data" : 					{
 						"clips" : [ 							{
 								"absolutepath" : "manosola:/Users/mini1/projects/dalena.mp3",
@@ -46,21 +57,21 @@
 								"filekind" : "audiofile",
 								"loop" : 1,
 								"content_state" : 								{
-									"speed" : [ 1.0 ],
+									"timestretch" : [ 0 ],
+									"formantcorrection" : [ 0 ],
+									"originallengthms" : [ 0.0 ],
 									"originallength" : [ 0.0, "ticks" ],
-									"slurtime" : [ 0.0 ],
+									"quality" : [ "basic" ],
+									"pitchshift" : [ 1.0 ],
 									"mode" : [ "basic" ],
+									"speed" : [ 1.0 ],
 									"originaltempo" : [ 120.0 ],
 									"basictuning" : [ 440 ],
-									"originallengthms" : [ 0.0 ],
+									"formant" : [ 1.0 ],
 									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"pitchshift" : [ 1.0 ],
 									"play" : [ 0 ],
-									"timestretch" : [ 0 ],
-									"quality" : [ "basic" ],
-									"formantcorrection" : [ 0 ],
-									"formant" : [ 1.0 ]
+									"followglobaltempo" : [ 0 ],
+									"slurtime" : [ 0.0 ]
 								}
 
 							}
@@ -114,13 +125,13 @@
 					"patching_rect" : [ 835.0, 474.0, 121.0, 47.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.gain~",
-							"parameter_type" : 0,
-							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "live.gain~",
 							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0 ]
+							"parameter_initial" : [ 0 ],
+							"parameter_shortname" : "live.gain~",
+							"parameter_type" : 0,
+							"parameter_unitstyle" : 4
 						}
 
 					}
@@ -139,21 +150,21 @@
 								"filekind" : "audiofile",
 								"loop" : 1,
 								"content_state" : 								{
-									"speed" : [ 1.0 ],
+									"timestretch" : [ 0 ],
+									"formantcorrection" : [ 0 ],
+									"originallengthms" : [ 0.0 ],
 									"originallength" : [ 0.0, "ticks" ],
-									"slurtime" : [ 0.0 ],
+									"quality" : [ "basic" ],
+									"pitchshift" : [ 1.0 ],
 									"mode" : [ "basic" ],
+									"speed" : [ 1.0 ],
 									"originaltempo" : [ 120.0 ],
 									"basictuning" : [ 440 ],
-									"originallengthms" : [ 0.0 ],
+									"formant" : [ 1.0 ],
 									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"pitchshift" : [ 1.0 ],
 									"play" : [ 0 ],
-									"timestretch" : [ 0 ],
-									"quality" : [ "basic" ],
-									"formantcorrection" : [ 0 ],
-									"formant" : [ 1.0 ]
+									"followglobaltempo" : [ 0 ],
+									"slurtime" : [ 0.0 ]
 								}
 
 							}
@@ -163,21 +174,21 @@
 								"filekind" : "audiofile",
 								"loop" : 1,
 								"content_state" : 								{
-									"speed" : [ 1.0 ],
+									"timestretch" : [ 0 ],
+									"formantcorrection" : [ 0 ],
+									"originallengthms" : [ 0.0 ],
 									"originallength" : [ 0.0, "ticks" ],
-									"slurtime" : [ 0.0 ],
+									"quality" : [ "basic" ],
+									"pitchshift" : [ 1.0 ],
 									"mode" : [ "basic" ],
+									"speed" : [ 1.0 ],
 									"originaltempo" : [ 120.0 ],
 									"basictuning" : [ 440 ],
-									"originallengthms" : [ 0.0 ],
+									"formant" : [ 1.0 ],
 									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"pitchshift" : [ 1.0 ],
 									"play" : [ 0 ],
-									"timestretch" : [ 0 ],
-									"quality" : [ "basic" ],
-									"formantcorrection" : [ 0 ],
-									"formant" : [ 1.0 ]
+									"followglobaltempo" : [ 0 ],
+									"slurtime" : [ 0.0 ]
 								}
 
 							}
@@ -187,21 +198,21 @@
 								"filekind" : "audiofile",
 								"loop" : 0,
 								"content_state" : 								{
-									"speed" : [ 1.0 ],
+									"timestretch" : [ 0 ],
+									"formantcorrection" : [ 0 ],
+									"originallengthms" : [ 0.0 ],
 									"originallength" : [ 0.0, "ticks" ],
-									"slurtime" : [ 0.0 ],
+									"quality" : [ "basic" ],
+									"pitchshift" : [ 1.0 ],
 									"mode" : [ "basic" ],
+									"speed" : [ 1.0 ],
 									"originaltempo" : [ 120.0 ],
 									"basictuning" : [ 440 ],
-									"originallengthms" : [ 0.0 ],
+									"formant" : [ 1.0 ],
 									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"pitchshift" : [ 1.0 ],
 									"play" : [ 0 ],
-									"timestretch" : [ 0 ],
-									"quality" : [ "basic" ],
-									"formantcorrection" : [ 0 ],
-									"formant" : [ 1.0 ]
+									"followglobaltempo" : [ 0 ],
+									"slurtime" : [ 0.0 ]
 								}
 
 							}
@@ -211,21 +222,21 @@
 								"filekind" : "audiofile",
 								"loop" : 1,
 								"content_state" : 								{
-									"speed" : [ 1.0 ],
+									"timestretch" : [ 0 ],
+									"formantcorrection" : [ 0 ],
+									"originallengthms" : [ 0.0 ],
 									"originallength" : [ 0.0, "ticks" ],
-									"slurtime" : [ 0.0 ],
+									"quality" : [ "basic" ],
+									"pitchshift" : [ 1.0 ],
 									"mode" : [ "basic" ],
+									"speed" : [ 1.0 ],
 									"originaltempo" : [ 120.0 ],
 									"basictuning" : [ 440 ],
-									"originallengthms" : [ 0.0 ],
+									"formant" : [ 1.0 ],
 									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"pitchshift" : [ 1.0 ],
 									"play" : [ 0 ],
-									"timestretch" : [ 0 ],
-									"quality" : [ "basic" ],
-									"formantcorrection" : [ 0 ],
-									"formant" : [ 1.0 ]
+									"followglobaltempo" : [ 0 ],
+									"slurtime" : [ 0.0 ]
 								}
 
 							}
@@ -309,7 +320,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 498.0, 274.0, 112.0, 22.0 ],
-					"text" : "0.962634"
+					"text" : "0.464573"
 				}
 
 			}
@@ -346,7 +357,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 290.0, 272.0, 112.0, 22.0 ],
-					"text" : "0.317107"
+					"text" : "0.326409"
 				}
 
 			}
@@ -601,7 +612,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 42.0, 363.0, 127.0, 23.0 ],
-					"text" : "host 192.168.109.52"
+					"text" : "host 192.168.109.53"
 				}
 
 			}
@@ -803,6 +814,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
+					"order" : 1,
+					"source" : [ "obj-57", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"order" : 0,
 					"source" : [ "obj-57", 0 ]
 				}
 
@@ -864,6 +884,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 1 ],
+					"order" : 0,
 					"source" : [ "obj-67", 1 ]
 				}
 
@@ -871,6 +892,23 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
+					"order" : 0,
+					"source" : [ "obj-67", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-47", 0 ],
+					"order" : 1,
+					"source" : [ "obj-67", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-47", 0 ],
+					"order" : 1,
 					"source" : [ "obj-67", 0 ]
 				}
 
@@ -908,35 +946,35 @@
 		"dependency_cache" : [ 			{
 				"name" : "7cb85284.aiff",
 				"bootpath" : "/umano-share/onehand/audio",
-				"patcherrelativepath" : "../../../../../../../umano-share/onehand/audio",
+				"patcherrelativepath" : "../../../../../umano-share/onehand/audio",
 				"type" : "AIFF",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "7b5693ab.aiff",
 				"bootpath" : "/umano-share/onehand/audio",
-				"patcherrelativepath" : "../../../../../../../umano-share/onehand/audio",
+				"patcherrelativepath" : "../../../../../umano-share/onehand/audio",
 				"type" : "AIFF",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "2ec4eb09.aiff",
 				"bootpath" : "/umano-share/onehand/audio",
-				"patcherrelativepath" : "../../../../../../../umano-share/onehand/audio",
+				"patcherrelativepath" : "../../../../../umano-share/onehand/audio",
 				"type" : "AIFF",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "2d557062.aiff",
 				"bootpath" : "/umano-share/onehand/audio",
-				"patcherrelativepath" : "../../../../../../../umano-share/onehand/audio",
+				"patcherrelativepath" : "../../../../../umano-share/onehand/audio",
 				"type" : "AIFF",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "dalena.mp3",
 				"bootpath" : "~/projects",
-				"patcherrelativepath" : "../../../..",
+				"patcherrelativepath" : "../..",
 				"type" : "Mp3",
 				"implicit" : 1
 			}
