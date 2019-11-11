@@ -1,0 +1,105 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @lastSavedInVuoVersion 2.0.0
+ * @copyright Copyright © 2019 [Cpt_Arloc](https://vuo.org/user/1794932)
+ * @see This is a Vuo Composition source code file.  See https://vuo.org for further information.
+ */
+
+digraph G
+{
+AppendTexts [type="vuo.text.append" version="1.1.0" label="Append Texts|<refresh>refresh\l|<texts>texts\l|<separator>separator\l|<compositeText>compositeText\r" pos="1350,-1215"];
+AppendTexts30 [type="vuo.text.append" version="1.1.0" label="Append Texts|<refresh>refresh\l|<texts>texts\l|<separator>separator\l|<compositeText>compositeText\r" pos="-255,-450" fillcolor="yellow" _separator="\"\\n\""];
+BuildList2 [type="vuo.list.build.VuoText" version="1.0.1" label="Build List|<refresh>refresh\l|<fire>fire\l|<builtItem>builtItem\l|<builtList>builtList\r|<buildItem>buildItem\r" pos="240,-1425" _fire="12" _builtList_eventThrottling="enqueue" _buildItem_eventThrottling="enqueue"];
+CombineLayersWithTransform [type="vuo.layer.combine" version="1.0.0" label="Combine Layers|<refresh>refresh\l|<transform>transform\l|<layers>layers\l|<layer>layer\r" pos="1065,-720"];
+Convert2DPointToScale [type="vuo.type.scale.point2d.transform2d" version="1.0.0" label="Convert 2D Point to Scale|<refresh>refresh\l|<scale>scale\l|<transform>transform\r" pos="360,-1140" _scale="\{\"x\":1,\"y\":1\}"];
+ConvertTextToInteger [type="vuo.type.text.integer" version="1.0.1" label="Convert Text to Integer|<refresh>refresh\l|<text>text\l|<integer>integer\r" pos="-180,-750"];
+ConvertTextToInteger2 [type="vuo.type.text.integer" version="1.0.1" label="Convert Text to Integer|<refresh>refresh\l|<text>text\l|<integer>integer\r" pos="-180,-690"];
+ConvertTextToReal [type="vuo.type.text.real" version="1.0.1" label="Convert Text to Real|<refresh>refresh\l|<text>text\l|<real>real\r" pos="660,-885"];
+ConvertTextToReal2 [type="vuo.type.text.real" version="1.0.1" label="Convert Text to Real|<refresh>refresh\l|<text>text\l|<real>real\r" pos="660,-900"];
+ConvertTextToReal3 [type="vuo.type.text.real" version="1.0.1" label="Convert Text to Real|<refresh>refresh\l|<text>text\l|<real>real\r" pos="270,-975"];
+FetchImage [type="vuo.image.fetch" version="2.0.0" label="Fetch Image|<refresh>refresh\l|<url>url\l|<image>image\r" pos="45,-960"];
+FilterByAddress7 [type="vuo.osc.filter.address" version="1.0.1" label="Filter by Address|<refresh>refresh\l|<message>message\l|<address>address\l|<filteredMessage>filteredMessage\r" pos="-150,-1275" _address="\"\\/umano\\/onehand\\/cave\\/hands\\/join\""];
+FireOnDisplayRefresh [type="vuo.event.fireOnDisplayRefresh" version="1.0.0" label="Fire on Display Refresh|<refresh>refresh\l|<requestedFrame>requestedFrame\r" pos="60,-630" fillcolor="magenta" _requestedFrame_eventThrottling="drop"];
+FireOnStart2 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-615,-1320" _started_eventThrottling="enqueue"];
+FirePeriodically [type="vuo.time.firePeriodically2" version="2.0.0" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="15,-1425" fillcolor="magenta" _seconds="10" _fired_eventThrottling="drop"];
+GetFileURLValues [type="vuo.url.get.file" version="1.0.0" label="Get File URL Values|<refresh>refresh\l|<url>url\l|<path>path\r|<folder>folder\r|<fileName>fileName\r|<extension>extension\r" pos="645,-375" fillcolor="violet" _url="\"\""];
+GetItemFromList3 [type="vuo.list.get.VuoText" version="1.0.1" label="totem|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="1035,-1245" _which="1"];
+GetItemFromList4 [type="vuo.list.get.VuoText" version="1.0.1" label="position x|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="1035,-1125" _which="2"];
+GetItemFromList5 [type="vuo.list.get.VuoText" version="1.0.1" label="position y|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="1035,-1050" _which="3"];
+GetItemFromList6 [type="vuo.list.get.VuoText" version="1.0.1" label="size width|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="1035,-975" _which="4"];
+GetItemFromList7 [type="vuo.list.get.VuoText" version="1.0.1" label="size height|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="1050,-900" _which="4"];
+GetMessageValues8 [type="vuo.osc.message.get.list.VuoText" version="1.0.0" label="Get Message Values|<refresh>refresh\l|<message>message\l|<address>address\r|<values>values\r" pos="15,-1275" fillcolor="lime"];
+GetRandomItemFromList10 [type="vuo.list.get.random.VuoText" version="1.0.0" label="Get Random Item from List|<refresh>refresh\l|<list>list\l|<randomItem>randomItem\r" pos="240,-1260"];
+InvertImageColors [type="vuo.image.color.invert" version="1.1.2" label="Invert Image Colors|<refresh>refresh\l|<image>image\l|<invertedImage>invertedImage\r" pos="480,-885"];
+Make2DPoint [type="vuo.point.make.VuoPoint2d" version="2.0.0" label="Make 2D Point|<refresh>refresh\l|<x>x\l|<y>y\l|<point>point\r" pos="570,-1005"];
+MakeImageLayer [type="vuo.layer.make.realSize2" version="3.0.0" label="Make Image Layer|<refresh>refresh\l|<image>image\l|<center>center\l|<opacity>opacity\l|<preservePhysicalSize>preservePhysicalSize\l|<layer>layer\r" pos="840,-810" _opacity="1.0" _preservePhysicalSize="true"];
+MakeList5 [type="vuo.list.make.7.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<5>5\l|<6>6\l|<7>7\l|<list>list\r" pos="-296,-439" fillcolor="yellow" _1="\"\"" _2="\"\""];
+MakeList6 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="1032,-694"];
+MakeList7 [type="vuo.list.make.3.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="1309,-1204" _1="\"\\/umano-share\\/onehand\\/pictures\\/\"" _3="\".jpg\""];
+MakeTextLayer [type="vuo.layer.make.text" version="1.1.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<anchor>anchor\l|<center>center\l|<layer>layer\r" pos="0,-450" _font="\{\"fontName\":\"CourierNewPSMT\",\"pointSize\":13,\"underline\":false,\"color\":\{\"r\":1,\"g\":1,\"b\":1,\"a\":1\},\"alignment\":\"left\",\"characterSpacing\":1,\"lineSpacing\":1\}" _anchor="\{\"horizontalAlignment\":\"center\",\"verticalAlignment\":\"center\"\}" _center="\{\"x\":0.0,\"y\":0.0\}"];
+MakeTextLayer2 [type="vuo.layer.make.text" version="1.1.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<anchor>anchor\l|<center>center\l|<layer>layer\r" pos="945,-375" _font="\{\"fontName\":\"HelveticaNeue\",\"pointSize\":10,\"underline\":false,\"color\":\{\"r\":1,\"g\":1,\"b\":1,\"a\":1\},\"alignment\":\"left\",\"characterSpacing\":1,\"lineSpacing\":1\}" _anchor="\{\"horizontalAlignment\":\"center\",\"verticalAlignment\":\"center\"\}" _center="\{\"x\":0,\"y\":0\}"];
+MaskImageByBrightness [type="vuo.image.mask.brightness" version="2.1.0" label="Mask Image by Brightness|<refresh>refresh\l|<image>image\l|<preservedBrightnesses>preservedBrightnesses\l|<sharpness>sharpness\l|<brightnessType>brightnessType\l|<showImage>showImage\l|<maskedImage>maskedImage\r" pos="510,-780" _preservedBrightnesses="\{\"minimum\":0,\"maximum\":0.29999999999999999\}" _sharpness="0.9" _brightnessType="\"rec709\"" _showImage="true"];
+ProcessList3 [type="vuo.list.process.VuoText.VuoLayer" version="1.0.1" label="Process List|<refresh>refresh\l|<fire>fire\l|<processedItem>processedItem\l|<processedList>processedList\r|<processItem>processItem\r" pos="585,-1350" _processedList_eventThrottling="enqueue" _processItem_eventThrottling="enqueue"];
+ReceiveOSCMessages2 [type="vuo.osc.receive2" version="2.0.0" label="Receive OSC Messages|<refresh>refresh\l|<device>device\l|<receivedMessage>receivedMessage\r" pos="-375,-1275" fillcolor="lime" _receivedMessage_eventThrottling="enqueue"];
+RenderLayersToImage [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="1575,-1350" _width="4096" _height="1080" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+ResizeImage [type="vuo.image.resize" version="1.1.2" label="Resize Image|<refresh>refresh\l|<image>image\l|<sizingMode>sizingMode\l|<width>width\l|<height>height\l|<resizedImage>resizedImage\r" pos="225,-900" _sizingMode="\"fit\""];
+RotateImage [type="vuo.image.rotate" version="1.0.2" label="Rotate Image|<refresh>refresh\l|<image>image\l|<rotation>rotation\l|<expandBounds>expandBounds\l|<rotatedImage>rotatedImage\r" pos="285,-1020" _expandBounds="true"];
+SendImageViaSyphon2 [type="vuo.syphon.send" version="1.0.1" label="Send Image via Syphon|<refresh>refresh\l|<serverName>serverName\l|<sendImage>sendImage\l" pos="1830,-1365" _serverName="\"VUO_mani\""];
+ShareValue [type="vuo.data.share.VuoGenericType1" version="1.0.0" label="Share Value|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="300,-450"];
+ShareValue3 [type="vuo.data.share.VuoLayer" version="1.0.0" label="Share Value|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="1740,-600"];
+SizeHeight2 [type="vuo.list.get.VuoText" version="1.0.1" label="rotation|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="600,-1140" _which="5"];
+SpecifyOSCInput2 [type="vuo.osc.make.input" version="1.0.0" label="Specify OSC Input|<refresh>refresh\l|<name>name\l|<port>port\l|<device>device\r" pos="-615,-1215" _name="\"teo\"" _port="8889"];
+SplitText [type="vuo.text.split.VuoText" version="1.0.0" label="Split Text|<refresh>refresh\l|<text>text\l|<separator>separator\l|<includeEmptyParts>includeEmptyParts\l|<splitTexts>splitTexts\r" pos="825,-1215" _separator="\";\"" _includeEmptyParts="false"];
+
+AppendTexts30:compositeText -> MakeTextLayer:text;
+AppendTexts:compositeText -> FetchImage:url;
+BuildList2:buildItem -> GetRandomItemFromList10:refresh;
+BuildList2:builtList -> ProcessList3:fire;
+CombineLayersWithTransform:layer -> ProcessList3:processedItem;
+ConvertTextToInteger2:integer -> ResizeImage:height;
+ConvertTextToInteger:integer -> ResizeImage:width;
+ConvertTextToReal2:real -> Make2DPoint:x;
+ConvertTextToReal3:real -> RotateImage:rotation;
+ConvertTextToReal:real -> Make2DPoint:y;
+FetchImage:image -> ResizeImage:image;
+FilterByAddress7:filteredMessage -> GetMessageValues8:message;
+FireOnDisplayRefresh:requestedFrame -> InvertImageColors:image [event=true];
+FireOnDisplayRefresh:requestedFrame -> MakeImageLayer:image [event=true];
+FireOnDisplayRefresh:requestedFrame -> MakeTextLayer2:text [event=true];
+FireOnStart2:started -> ReceiveOSCMessages2:device;
+FireOnStart2:started -> SpecifyOSCInput2:name;
+FirePeriodically:fired -> BuildList2:fire [event=true];
+GetFileURLValues:fileName -> MakeTextLayer2:text;
+GetItemFromList3:item -> MakeList7:2;
+GetItemFromList4:item -> ConvertTextToReal2:text;
+GetItemFromList5:item -> ConvertTextToReal:text;
+GetItemFromList6:item -> ConvertTextToInteger:text;
+GetItemFromList7:item -> ConvertTextToInteger2:text;
+GetMessageValues8:values -> GetRandomItemFromList10:list;
+GetRandomItemFromList10:randomItem -> BuildList2:builtItem;
+InvertImageColors:invertedImage -> MaskImageByBrightness:image;
+Make2DPoint:point -> MakeImageLayer:center;
+MakeImageLayer:layer -> MakeList6:1;
+MakeList5:list -> AppendTexts30:texts;
+MakeList6:list -> CombineLayersWithTransform:layers;
+MakeList7:list -> AppendTexts:texts;
+MakeTextLayer2:layer -> MakeList6:2;
+MakeTextLayer:layer -> ShareValue3:value;
+MaskImageByBrightness:maskedImage -> MakeImageLayer:image;
+ProcessList3:processItem -> SplitText:text;
+ProcessList3:processedList -> RenderLayersToImage:layers;
+ReceiveOSCMessages2:receivedMessage -> FilterByAddress7:message;
+RenderLayersToImage:image -> SendImageViaSyphon2:sendImage;
+ResizeImage:resizedImage -> RotateImage:image;
+RotateImage:rotatedImage -> InvertImageColors:image;
+SizeHeight2:item -> ConvertTextToReal3:text;
+SpecifyOSCInput2:device -> ReceiveOSCMessages2:device;
+SplitText:splitTexts -> GetItemFromList3:list;
+SplitText:splitTexts -> GetItemFromList4:list;
+SplitText:splitTexts -> GetItemFromList5:list;
+SplitText:splitTexts -> GetItemFromList6:list;
+SplitText:splitTexts -> GetItemFromList7:list;
+SplitText:splitTexts -> SizeHeight2:list;
+}
