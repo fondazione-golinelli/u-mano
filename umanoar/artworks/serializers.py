@@ -1,3 +1,4 @@
+import os
 import networkx as nx
 from rest_framework import serializers
 
@@ -24,9 +25,14 @@ def to_query_node(instance, data, request):
 
     if isinstance(instance, (ArtworkQueryTextResult, ArtworkQueryImageResult)):
         data['website'] = instance.website.domain
-        if instance.website.favicon:
-            data['favicon'] = "{}://{}/media/{}".format(request.scheme, request.META.get("HTTP_HOST"), instance.website.favicon)
-        else:
+        try:
+            if instance.website.favicon:
+                if instance.website.favicon.path.endswith(".png") or os.path.exists(instance.website.favicon.path.replace(".ico", ".png")):
+                    data['favicon'] = "{}://{}/media/{}".format(request.scheme, request.META.get("HTTP_HOST"),
+                                                                instance.website.favicon.name.replace(".ico", ".png"))
+                else:
+                    data['favicon'] = None
+        except:
             data['favicon'] = None
         data['url'] = instance.url
 
