@@ -34,7 +34,7 @@ class Command(BaseCommand):
 
                 if image.shape[0] > max_width:
                     height = round(1024 / image.shape[0] * image.shape[1])
-                    cv2.resize(image, (max_width, height), interpolation=cv2.INTER_AREA)
+                    image = cv2.resize(image, (max_width, height), interpolation=cv2.INTER_AREA)
                     cv2.imwrite(q.image.path, image)
 
                     print("\t image {} resized correctly".format(q))
