@@ -12,6 +12,8 @@ from kombu import Consumer
 from hal.messages import get_connection, get_queue_for_dataclass
 from umano.hal.data import store, find, updated_after
 
+import logging
+
 
 class STATUS(IntEnum):
     IDLE = auto()
@@ -25,7 +27,6 @@ class STATUS(IntEnum):
 
 
 class UmanoService(object):
-
     help = "unknown umano service usage"
     option_list = [
         make_option(
@@ -71,6 +72,8 @@ class UmanoService(object):
             self.name = options.NAME
         if options.DESCRIPTION:
             self.description = options.DESCRIPTION
+
+        self.process_args_and_options(args, options)
 
         store(
             data_class='ServiceStart',
@@ -121,6 +124,10 @@ class UmanoService(object):
     def process_args_and_options(self, args, options):
         pass
 
+    def log(self, msg="", level=logging.INFO):
+        logging.log(msg=msg, level=level)
+        print(msg)
+
 
 class UmanoServerService(UmanoService, ABC):
     option_list = UmanoService.option_list + [
@@ -164,7 +171,7 @@ class ConsumerService(UmanoService):
             try:
                 self.consume()
             except self.connection.connection_errors:
-                print("connection revived")
+                self.log(msg="connection revived")
 
     def consume(self):
         connection = self.establish_connection()
@@ -175,7 +182,7 @@ class ConsumerService(UmanoService):
                 connection.heartbeat_check()
 
     def process_message(self, body, message):
-        print("Message received: {}".format(body))
+        self.log(msg="Message received: {}".format(body))
         message.ack()
 
 
@@ -216,5 +223,3 @@ class DataFetcher(UmanoService):
                 time.sleep(self.timeout)
             except KeyboardInterrupt:
                 raise KeyboardInterrupt
-
-

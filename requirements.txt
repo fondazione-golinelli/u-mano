@@ -12,3 +12,7 @@ Flask-PyMongo==2.3.0
 pyserial==3.4  # on windows conda install -c conda-forge pyserial
 websockets==8.0.2
 requests==2.22.0
+google==2.0.2
+google-images-download-2.8.0
+beautifulsoup4==4.8.1
+wikipedia==1.4.0

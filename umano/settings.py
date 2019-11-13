@@ -21,6 +21,8 @@ HAL_DATA_SERVICES_STATUS_COLLECTION = "{}.status".format(HAL_DATA_SERVICES_COLLE
 HAL_DATA_SERVICES_ACKNOWLEDGE_COLLECTION = "{}.ack".format(HAL_DATA_SERVICES_COLLECTION)
 HAL_DATA_SERVICES_STREAMING_COLLECTION = "{}.streaming".format(HAL_DATA_SERVICES_COLLECTION)
 HAL_DATA_SOFTWARE_COLLECTION = "software.data"
+HAL_DATA_QUERY_WEB_COLLECTION = "query.web"
+HAL_DATA_QUERY_IMAGE_COLLECTION = "query.images"
 HAL_DATA_TEST_COLLECTION = "test.data"
 
 
@@ -73,6 +75,7 @@ ADAM_OSC_PRESSURE_ADDRESS = "/umano/adam/pressure"
 
 CAMERA_STREAM_LIVE_URL = '/video_feed'
 
+QUERY_SHARE_FOLDER = os.path.join(UMANO_SHARE_ROOT, "query")
 
 try:
     from .local_settings import *
@@ -89,4 +92,7 @@ if not os.path.exists(ONEHAND_HAND_PRINTS_FOLDER):
     os.makedirs(ONEHAND_HAND_PRINTS_FOLDER)
 
 if not os.path.exists(ONEHAND_SHARE_FOLDER):
+    os.makedirs(ONEHAND_SHARE_FOLDER)
+
+if not os.path.exists(QUERY_SHARE_FOLDER):
     os.makedirs(ONEHAND_SHARE_FOLDER)

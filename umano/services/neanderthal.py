@@ -98,10 +98,10 @@ class Column(object):
             y = round(self.padding_y + hand.size.h/2 + random.randint(0, self.height - 2 * self.padding_y - hand.size.h // 2))
 
         if not self.pixel_coordinates and self.aspect_ratio is not None:
-            # print(x, y)
+            # self.log(msg=x, y)
             x = round((x - self.center.x) / self.center.x, 2)
             y = round(self.aspect_ratio * (self.center.y - y) / self.center.y, 2)
-            # print(x, y)
+            # self.log(msg=x, y)
 
         return Position(x=x, y=y)
 
@@ -164,7 +164,7 @@ class Neanderthal(DataFetcher):
             for hand in column.hands:
                 hands.append(hand)
 
-        print("update cave {}".format(len(hands)))
+        self.log(msg="update cave {}".format(len(hands)))
         send_cave_to_vuo(hands)
 
     def fetch_data(self):

@@ -47,10 +47,9 @@ class LaraCroft(DataFetcher):
         if not os.path.exists(self.output_directory):
             os.makedirs(self.output_directory)
 
-    @staticmethod
-    def from_url_to_file(url, output_path):
+    def from_url_to_file(self, url, output_path):
         response = requests.get(url, stream=True)
-        print("download image from url: {} - {}".format(response.status_code, url))
+        self.log(msg="download image from url: {} - {}".format(response.status_code, url))
         if response.status_code == 200:
             with open(output_path, 'wb') as out_file:
                 shutil.copyfileobj(response.raw, out_file)

@@ -2,9 +2,8 @@ import random
 import sys
 import time
 from pythonosc.udp_client import SimpleUDPClient
-
+from umano.services.base import UmanoService
 from umano import settings
-
 
 client = SimpleUDPClient(settings.ONEHAND_MILLUMIN_HOST, settings.ONEHAND_MILLUMIN_PORT)
 
@@ -12,32 +11,44 @@ repetitions = [
     3.0,
     5.0,
     15.0,
-
 ]
 
-while True:
-    try:
 
-        time.sleep(10)
+class HeartBeat(UmanoService):
 
-        for x in range(10):
-            seed = round(random.random(),2)
-            client.send_message(settings.ONEHAND_OSC_RANDOM_SEED_ADDRESS, seed)
-            print("sent seed {}".format(seed))
-            time.sleep(0.5 * random.random())
-            if random.randint(0, 100) > 50:
-                repetition = round(random.random() * 12.0 + 3.0, 2)
-                client.send_message(settings.ONEHAND_OSC_RANDOM_REPETITION_ADDRESS, repetition)
-                print("sent repetition {}".format(repetition))
+    def __init__(self) -> None:
+        super().__init__()
+        self.name = "Neanderthal hearth beat"
+        self.description = "The beating cave's hearth"
 
-        if random.randint(0, 100) > 67:
-            client.send_message(settings.ONEHAND_OSC_RANDOM_ENABLE_ADDRESS, 0)
-            print("sent enable false")
-            time.sleep(21)
-            client.send_message(settings.ONEHAND_OSC_RANDOM_ENABLE_ADDRESS, 1)
-            print("sent enable enable")
+    def execute(self, args, options):
+
+        while True:
+            try:
+
+                time.sleep(10)
+
+                for x in range(10):
+                    seed = round(random.random(), 2)
+                    client.send_message(settings.ONEHAND_OSC_RANDOM_SEED_ADDRESS, seed)
+                    print("sent seed {}".format(seed))
+                    time.sleep(0.5 * random.random())
+                    if random.randint(0, 100) > 50:
+                        repetition = round(random.random() * 12.0 + 3.0, 2)
+                        client.send_message(settings.ONEHAND_OSC_RANDOM_REPETITION_ADDRESS, repetition)
+                        print("sent repetition {}".format(repetition))
+
+                if random.randint(0, 100) > 67:
+                    client.send_message(settings.ONEHAND_OSC_RANDOM_ENABLE_ADDRESS, 0)
+                    print("sent enable false")
+                    time.sleep(21)
+                    client.send_message(settings.ONEHAND_OSC_RANDOM_ENABLE_ADDRESS, 1)
+                    print("sent enable enable")
+
+            except KeyboardInterrupt:
+                sys.exit(0)
 
 
-    except KeyboardInterrupt:
-         sys.exit(0)
-
+if __name__ == "__main__":
+    service = HeartBeat()
+    service.run()

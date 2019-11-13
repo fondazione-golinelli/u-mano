@@ -27,7 +27,7 @@ class HttpServer(UmanoServerService):
         with ThreadingHTTPServer(server_address, handler_class) as httpd:
             sa = httpd.socket.getsockname()
             serve_message = "Serving HTTP on {host} port {port} (http://{host}:{port}/) ..."
-            print(serve_message.format(host=sa[0], port=sa[1]))
+            self.log(msg=serve_message.format(host=sa[0], port=sa[1]))
             try:
                 httpd.serve_forever()
             except KeyboardInterrupt:

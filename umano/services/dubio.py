@@ -52,13 +52,13 @@ class DuBio(ConsumerService):
 
     def sonification(self):
         self.set_status(STATUS.PLAYING)
-        print("ready to sonification!")
+        self.log(msg="ready to sonification!")
         hand = HandFeature(image_points=average_points(self.hand_frames))
         send_sonification_to_max(hand)
         sound_duration = 20
-        print("time taken {}".format(time.time() - self.start_time))
+        self.log(msg="time taken {}".format(time.time() - self.start_time))
 
-        print("sleeping till sounds end")
+        self.log(msg="sleeping till sounds end")
         time.sleep(sound_duration)
 
         store(
@@ -85,11 +85,11 @@ class DuBio(ConsumerService):
         touch = load(body.get("pk"), data_class=self.data_class)
         delta = now - touch.create_time
         if delta.seconds > 1:
-            print("skip frame")
+            self.log(msg="skip frame")
             return
         if self.session_id is None or touch.session_id != self.session_id or not touch.status:
             self.reset()
-        print("{} - {}".format(touch.session_id, touch.status))
+        self.log(msg="{} - {}".format(touch.session_id, touch.status))
         if touch.status:
             if self.status in [STATUS.COMPUTING, STATUS.IDLE]:
                 self.set_status(STATUS.COMPUTING)
@@ -110,7 +110,7 @@ class DuBio(ConsumerService):
         extractor = HandFeatureExtractor(live_output=False)
         image_points, output_frame = extractor.process_frame(frame)
         if self.session_id != session_id or self.status == STATUS.PLAYING:
-            print("im late!")
+            self.log(msg="im late!")
             return
         if image_points is not None:
             if self.start_time is None:
@@ -122,7 +122,7 @@ class DuBio(ConsumerService):
             processed_filepath = os.path.join(settings.ONEHAND_HAND_PICTURES_FOLDER,
                                               filename) + "processed" + settings.ONEHAND_HAND_PICTURES_EXTENSION
             cv2.imwrite(processed_filepath, output_frame)
-            print("hand detected!")
+            self.log(msg="hand detected!")
             self.hand_frames.append(
                 create(data_class="OneHandPicture",
                        data=dict(
@@ -136,7 +136,7 @@ class DuBio(ConsumerService):
             )
         else:
             # save no hands images?
-            print("no hands!")
+            self.log(msg="no hands!")
 
 
 if __name__ == "__main__":

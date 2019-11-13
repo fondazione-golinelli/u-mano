@@ -58,6 +58,7 @@ class HalData:
             return
         self.collection.delete_one({"_id": self._id})
 
+
 @dataclass
 class TestData(HalData):
     collection_name = settings.HAL_DATA_TEST_COLLECTION
@@ -152,6 +153,7 @@ class OneHandFeatures(HalData):
     width: Optional[int]
     height: Optional[int]
 
+
 @dataclass
 class OneHandSound(OneHandData):
     features: str  # ref
@@ -197,6 +199,7 @@ class ServiceStreamingData(ServiceData):
     collection_name = settings.HAL_DATA_SERVICES_STREAMING_COLLECTION
     url: str
 
+
 @dataclass
 class ServiceStart(ServiceData):
     pass
@@ -231,3 +234,17 @@ class SourceCodeFile(HalData):
     src: str
 
 
+@dataclass
+class QueryWebResult(HalData):
+    collection_name = settings.HAL_DATA_QUERY_WEB_COLLECTION
+    query: str
+    url: str
+    text: str
+
+
+@dataclass
+class QueryImageResult(HalData):
+    collection_name = settings.HAL_DATA_QUERY_IMAGE_COLLECTION
+    query: str
+    url: str
+    src: Optional[str]

@@ -18,7 +18,7 @@ class TheChief(DataFetcher):
 
     def process_data(self):
         for hand_feature in self.data:
-            print("processed hand {}".format(hand_feature.uid))
+            self.log(msg="found hand {}".format(hand_feature.uid))
             hand_picture = last("OneHandPicture", query={"touch_session_id": hand_feature.touch_session_id})
 
             if not os.path.exists(hand_picture.src):
@@ -44,7 +44,7 @@ class TheChief(DataFetcher):
             hand_feature.width = handprint.shape[0]
             hand_feature.height = handprint.shape[1]
             hand_feature.save()
-            print("processed hand {}".format(hand_feature.uid))
+            self.log(msg="processed hand {}".format(hand_feature.uid))
 
 
 if __name__ == "__main__":
