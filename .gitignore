@@ -135,5 +135,5 @@ media
 
 The_cave_app.app
 
-!.idea/*
+.idea/*
 .DS_Store

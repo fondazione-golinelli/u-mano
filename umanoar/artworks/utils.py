@@ -9,3 +9,10 @@ def domain_from_url(url):
 def base_url(url):
     r = urlparse(url)
     return urljoin("{}://{}".format(r.scheme, r.netloc), r.path)
+
+
+IMAGE_EXTENSIONS = [
+    'jpg',
+    'jpeg',
+    'png'
+]

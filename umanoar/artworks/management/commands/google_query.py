@@ -14,7 +14,7 @@ from django.core.files import File
 from django.core.exceptions import MultipleObjectsReturned
 
 from artworks.models import Artwork, ArtworkQueryTextResult, ArtworkQueryImageResult, ArtworkQueryResultWebsite
-from artworks.utils import domain_from_url, base_url
+from artworks.utils import domain_from_url, base_url, IMAGE_EXTENSIONS
 
 
 def save_image_from_url(model, image_field, image_url, image_filename):
@@ -60,7 +60,7 @@ class Command(BaseCommand):
             help='Delete existing query result',
         )
         parser.add_argument(
-            '--only_images',
+            '--only-images',
             action='store_true',
             default=False,
             help='Fetch only images',
@@ -157,14 +157,17 @@ class Command(BaseCommand):
                 'safe': 'off',
                 # 'imgSize': 'large'
             }
-
             gis.search(search_params=search_params)
 
             for google_image in gis.results():
                 print("\t processing image {}".format(google_image.url))
+                if google_image.url.split(".")[-1].lower() not in IMAGE_EXTENSIONS:
+                    continue
+
                 if check_existing(google_image.url, artwork, model=ArtworkQueryImageResult):
                     print("\t skip [already in db]")
                     continue
+
                 website = create_website_for_url(google_image.url)
                 query_image = ArtworkQueryImageResult(
                     url=base_url(google_image.url),
@@ -175,5 +178,6 @@ class Command(BaseCommand):
                 ok = save_image_from_url(query_image, "image", google_image.url, filename)
                 if ok:
                     query_image.save()
+                    print("\t image saved")
                 else:
                     print("\t skip [cannot save image]")

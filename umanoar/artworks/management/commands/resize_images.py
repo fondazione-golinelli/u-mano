@@ -1,7 +1,10 @@
-import cv2
+import os
+from PIL import Image
 
 from django.core.management.base import BaseCommand, no_translations
 from artworks.models import ArtworkQueryImageResult
+from artworks.utils import IMAGE_EXTENSIONS
+
 
 class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
@@ -25,19 +28,19 @@ class Command(BaseCommand):
     @no_translations
     def handle(self, *args, **options):
 
-        max_width = 1024
-
         for q in ArtworkQueryImageResult.objects.all():
             try:
                 print("processing {}".format(q.image.name))
-                image = cv2.imread(q.image.path)
-
-                if image.shape[0] > max_width:
-                    height = round(1024 / image.shape[0] * image.shape[1])
-                    image = cv2.resize(image, (max_width, height), interpolation=cv2.INTER_AREA)
-                    cv2.imwrite(q.image.path, image)
-
-                    print("\t image {} resized correctly".format(q))
-            except cv2.error:
-                print("error!")
-                q.delete()
+                if q.image.name.split(".")[-1].lower() not in IMAGE_EXTENSIONS:
+                    print("delete")
+                    path = q.image.path
+                    q.delete()
+                    os.remove(path)
+                max_width = 1024
+                img = Image.open(q.image.path)
+                w_percent = (max_width / float(img.size[0]))
+                h_size = int((float(img.size[1]) * float(w_percent)))
+                img = img.resize((max_width, h_size), Image.ANTIALIAS)
+                img.save(q.image.path)
+            except BaseException as e:
+                print("error {}".format(e))
