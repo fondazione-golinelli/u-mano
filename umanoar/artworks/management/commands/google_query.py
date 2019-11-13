@@ -1,7 +1,7 @@
 import os
 from io import BytesIO
 from urllib.parse import urljoin, urlsplit
-
+import uuid
 import requests
 from bs4 import BeautifulSoup
 from googlesearch import search
@@ -174,8 +174,8 @@ class Command(BaseCommand):
                     website=website,
                     artwork=artwork
                 )
-                filename = os.path.split(urlsplit(query_image.url).path)[-1]
-                ok = save_image_from_url(query_image, "image", google_image.url, filename)
+                extension = os.path.split(urlsplit(query_image.url).path)[-1].split(".")[-1]
+                ok = save_image_from_url(query_image, "image", google_image.url, "{}.{}".format(uuid.uuid4(), extension))
                 if ok:
                     query_image.save()
                     print("\t image saved")
