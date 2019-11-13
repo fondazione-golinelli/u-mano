@@ -10,13 +10,13 @@ class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
 
     def add_arguments(self, parser):
-        # parser.add_argument(
-        #     '--width',
-        #     action='store',
-        #     dest="width",
-        #
-        #     help='Delete existing query result',
-        # )
+        parser.add_argument(
+            '--width',
+            action='store',
+            dest="width",
+            default=1024,
+            help='Target width',
+        )
         # parser.add_argument(
         #     '--only_images',
         #     action='store_true',
@@ -28,6 +28,7 @@ class Command(BaseCommand):
     @no_translations
     def handle(self, *args, **options):
 
+        max_width = int(options.get("width"))
         for q in ArtworkQueryImageResult.objects.all():
             try:
                 print("processing {}".format(q.image.name))
@@ -36,7 +37,6 @@ class Command(BaseCommand):
                     path = q.image.path
                     q.delete()
                     os.remove(path)
-                max_width = 1024
                 img = Image.open(q.image.path)
                 w_percent = (max_width / float(img.size[0]))
                 h_size = int((float(img.size[1]) * float(w_percent)))

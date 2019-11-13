@@ -38,6 +38,7 @@ def to_query_node(instance, data, request):
 
     if isinstance(instance, ArtworkQueryImageResult):
         data['url'] = "{}://{}{}".format(request.scheme, request.META.get("HTTP_HOST"), data['image'])
+        data['title'] = "Scaricata da {}".format(instance.website.domain)
         data.pop("image")
 
     return data
@@ -151,6 +152,7 @@ class ArtworkSerializer(serializers.ModelSerializer):
                         to_query_node(image, ArtworkQueryImageResultSerializer(image).data, request)
                     )
 
+            data_node['title'] = node.get_title()
             data['nodes'].append(
                 data_node
             )

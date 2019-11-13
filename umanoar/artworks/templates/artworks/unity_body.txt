@@ -1,5 +1,4 @@
-<size=50>{{card.title}}</size>
-<b>{{card.author}}</b>
+<size=50>{{card.author}}</size>
 ({{card.author_info}})
 
 <i>{{card.date}}</i>

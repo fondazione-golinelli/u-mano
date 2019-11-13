@@ -75,6 +75,14 @@ class ArtworkGraphNode(models.Model):
     position = models.IntegerField(default=0, blank=False, null=False,
                                    help_text="Interactive node position in graph (zero based)")
 
+    def get_title(self):
+        if self.kind == 0:
+            return "Scheda"
+        elif self.kind == 1:
+            return "Query web"
+        else:
+            return "Query immagini"
+
     def __str__(self):
         return "{} - #{} {}  position {}".format(self.artwork.uid, self.kind, self.title, self.position)
 
