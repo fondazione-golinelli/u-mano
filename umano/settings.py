@@ -44,8 +44,7 @@ ONEHAND_OSC_DURER_AMP_ADDRESS = "/umano/onehand/durer/amp"
 ONEHAND_OSC_HAND_FREQ_ADDRESS = "/umano/onehand/hand/freq"
 ONEHAND_OSC_HAND_AMP_ADDRESS = "/umano/onehand/hand/amp"
 ONEHAND_OSC_HAND_BEAT_ADDRESS = "/umano/onehand/beat"
-ONEHAND_OSC_HAND_ATTACK_ADDRESS = "/umano/onehand/attack"
-ONEHAND_OSC_HAND_RELEASE_ADDRESS = "/umano/onehand/release"
+ONEHAND_OSC_HAND_ENVELOPE_ADDRESS = "/umano/onehand/envelope"
 ONEHAND_OSC_FINGER_ADDRESS = "/umano/onehand/{}/{}"
 
 ONEHAND_OSC_RANDOM_SEED_ADDRESS = "/umano/cave/random/seed"
@@ -103,4 +102,4 @@ if not os.path.exists(ONEHAND_SHARE_FOLDER):
     os.makedirs(ONEHAND_SHARE_FOLDER)
 
 if not os.path.exists(QUERY_SHARE_FOLDER):
-    os.makedirs(ONEHAND_SHARE_FOLDER)
+    os.makedirs(QUERY_SHARE_FOLDER)
