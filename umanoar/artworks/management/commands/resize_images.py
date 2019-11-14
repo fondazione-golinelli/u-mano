@@ -7,14 +7,14 @@ from artworks.utils import IMAGE_EXTENSIONS
 
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'Attention, to work properly make it run twice :)'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--width',
             action='store',
             dest="width",
-            default=1024,
+            default=512,
             help='Target width',
         )
         # parser.add_argument(
@@ -28,7 +28,7 @@ class Command(BaseCommand):
     @no_translations
     def handle(self, *args, **options):
 
-        max_width = int(options.get("width"))
+        max_dimension = int(options.get("width"))
         for q in ArtworkQueryImageResult.objects.all():
             try:
                 print("processing {}".format(q.image.name))
@@ -38,9 +38,18 @@ class Command(BaseCommand):
                     q.delete()
                     os.remove(path)
                 img = Image.open(q.image.path)
-                w_percent = (max_width / float(img.size[0]))
-                h_size = int((float(img.size[1]) * float(w_percent)))
-                img = img.resize((max_width, h_size), Image.ANTIALIAS)
+
+                if img.size[0] > max_dimension:
+                    w_percent = max_dimension / float(img.size[0])
+                    h_size = int(float(img.size[1]) * float(w_percent))
+                    img = img.resize((max_dimension, h_size), Image.ANTIALIAS)
+
+                elif img.size[1] > max_dimension:
+                    h_percent = max_dimension / float(img.size[1])
+                    w_size = int(float(img.size[0]) * float(h_percent))
+                    img = img.resize((w_size, max_dimension), Image.ANTIALIAS)
+
                 img.save(q.image.path)
+
             except BaseException as e:
                 print("error {}".format(e))
