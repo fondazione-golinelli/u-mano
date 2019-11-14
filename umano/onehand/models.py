@@ -44,7 +44,7 @@ class Bjorklund():
 
 class Metronome(object):
 
-    def __init__(self, bpm=120, beats=4, beat_resolution=4, bars=16):
+    def __init__(self, bpm=200, beats=4, beat_resolution=4, bars=16):
         self.bpm = bpm
         self.counter = 0
         self.beats = beats
@@ -71,8 +71,8 @@ class Metronome(object):
 class HandFeature(object):
 
     def __init__(self, image_points=None, reference_frequency=64, source_image=None,
-                 duration=15000.0, frequency_delta=50, amplitude_decrease=0.3,
-                 default_attack=1000.0, default_release=1000.0):
+                 duration=12000.0, frequency_delta=50, amplitude_decrease=0.5,
+                 default_attack=3000.0, default_decay=2000.0, default_release=500.0):
         if isinstance(image_points, list):
             self.image_points = image_points
         else:
@@ -91,39 +91,38 @@ class HandFeature(object):
         self.amplitudes = self.ones
         self.durer_amplitudes = self.ones
 
-        self.attacks = self.zeros
-        self.decays = self.zeros
-        self.releases = self.zeros
+        self.features_length = len(self.frequencies)
         self.beats = self.zeros
+        self.attacks = [default_attack] * self.features_length
+        self.decays = [default_decay] * self.features_length
+        self.releases = [default_release] * self.features_length
+        self.envelopes = [""] * self.features_length
+
         # TODO saprai sicuramente inventarti degli id più accattivanti!
         self.uid = str(uuid.uuid4())[:8]
 
-        features_length = len(self.frequencies)
-
+        metronome = Metronome(beats=4, bars=8, beat_resolution=4)
+        drum_pattern = Bjorklund(steps=metronome.bars * metronome.beats, pulses=self.features_length).pattern
+        frequency_ordered = sorted([(i, dist) for i, dist in enumerate(self.distances)], key=lambda x: x[1])
         points_per_finger = 4
-        for i in range(features_length):
-            if i % points_per_finger == 0:
-                self.beats[i] = 0.0
-            else:
-                self.beats[i] = self.distances[i - 1] + self.beats[i - 1]
 
-        for i in range(features_length):
-            self.beats[i] = round(self.duration * self.beats[i] / self.hand_length)
-            self.attacks[i] = round(self.duration * self.beats[i] / self.hand_length)
+        while metronome.has_next():
+            if metronome.counter % metronome.beat_resolution == 0 \
+                    and drum_pattern[metronome.counter // metronome.beat_resolution]:
+                i, dist = frequency_ordered.pop()
+                self.beats[i] = metronome.time * 1000
+            metronome.tick()
 
-        for i in range(features_length):
-            self.attacks[i] = self.default_attack
-            self.releases[i] = self.default_release
-            if self.beats[i] == 0.0:
-                self.attacks[i] = self.duration / points_per_finger
-                self.releases[i] = self.beats[i + 1] + self.default_release
-            elif i < features_length - 1:
-                self.attacks[i] = abs(self.beats[i + 1] - self.beats[i])
-            if i % points_per_finger == 3:
-                self.attacks[i] = self.default_attack / points_per_finger
-                self.releases[i] = self.default_release / points_per_finger
+        # for i in range(self.features_length):
+        #     self.attacks[i] = self.default_attack
+        #     self.releases[i] = self.default_release
+        #     if i < self.features_length - 1:
+        #         self.attacks[i] = abs(self.beats[i + 1] - self.beats[i])
+        #     if i % points_per_finger == 3:
+        #         self.attacks[i] = self.default_attack / points_per_finger
+        #         self.releases[i] = self.default_release / points_per_finger
 
-        for i in range(features_length):
+        for i in range(self.features_length):
             frequency_diff = abs(self.frequencies[i] - self.durer_frequencies[i])
             if frequency_diff == float('inf'):
                 continue
@@ -133,6 +132,14 @@ class HandFeature(object):
                 )])
             if self.frequencies[i] > self.reference_frequency * 8:
                 self.amplitudes[i] -= self.amplitude_decrease
+
+        self.frequencies = list(map(lambda x: round(x, 2), self.frequencies))
+        self.durer_frequencies = list(map(lambda x: round(x, 2), self.durer_frequencies))
+        self.amplitudes = list(map(lambda x: round(x, 2), self.amplitudes))
+        self.beats = list(map(lambda x: round(x, 2), self.beats))
+        self.decays = list(map(lambda x: round(x, 2), self.decays))
+        self.releases = list(map(lambda x: round(x, 2), self.releases))
+        self.attacks = list(map(lambda x: round(x, 2), self.attacks))
 
     def reverse(self):
         self.beats.reverse()

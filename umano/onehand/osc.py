@@ -28,8 +28,7 @@ def send_sonification_to_max(hand, all=True, only_durer=False, only_hand=False, 
         osc_client.send_message(settings.ONEHAND_OSC_HAND_AMP_ADDRESS, hand.amplitudes)
 
     osc_client.send_message(settings.ONEHAND_OSC_HAND_BEAT_ADDRESS, hand.beats)
-    osc_client.send_message(settings.ONEHAND_OSC_HAND_ATTACK_ADDRESS, hand.attacks)
-    osc_client.send_message(settings.ONEHAND_OSC_HAND_RELEASE_ADDRESS, hand.releases)
+    osc_client.send_message(settings.ONEHAND_OSC_HAND_ENVELOPE_ADDRESS, hand.envelopes)
 
     file_path = os.path.normpath(os.path.join(
         settings.ONEHAND_HAND_AUDIO_FOLDER,
