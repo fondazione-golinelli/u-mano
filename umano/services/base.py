@@ -6,14 +6,15 @@ import socket
 import sys
 import time
 from uuid import uuid4
+import logging
 
 from kombu import Consumer
 
-from hal.messages import get_connection, get_queue_for_dataclass
+from pythonosc.udp_client import SimpleUDPClient
+from umano.hal.messages import get_connection, get_queue_for_dataclass
 from umano.hal.data import store, find, updated_after
 
-import logging
-
+from umano import settings
 
 class STATUS(IntEnum):
     IDLE = auto()
@@ -54,6 +55,7 @@ class UmanoService(object):
         self.host = socket.gethostname()
         self.ip = socket.gethostbyname(self.host)
         self.status = STATUS.IDLE
+        self.osc_client = SimpleUDPClient(settings.SUS_EST_VUO_MILLUMIN_HOST, settings.SUS_EST_VUO_MILLUMIN_PORT)
 
     def create_parser(self):
         parser = OptionParser(option_list=self.option_list)
@@ -120,6 +122,7 @@ class UmanoService(object):
         self.status_document.status = self.status.name
         self.status_document.create_time = datetime.now()
         self.status_document.save()
+        self.osc_client.send_message(settings.SERVICE_OSC_STATUS_ADDRESS.format(self.name), self.status.name)
 
     def process_args_and_options(self, args, options):
         pass
@@ -127,6 +130,7 @@ class UmanoService(object):
     def log(self, msg="", level=logging.INFO):
         logging.log(msg=msg, level=level)
         print(msg)
+        self.osc_client.send_message(settings.SERVICE_OSC_LOG_ADDRESS.format(self.name), msg)
 
 
 class UmanoServerService(UmanoService, ABC):

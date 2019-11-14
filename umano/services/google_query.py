@@ -60,14 +60,15 @@ class GoogleQuery(UmanoService):
             if len(find(QueryWebResult, query={"query": self.query})) > self.limit:
                 suggested_queries = self.get_suggested_queries(query)
                 query = suggested_queries[1][random.randint(1, len(suggested_queries[1])-1)]
-                self.log(msg="changing query from {} to {}".format(self.query, query))
+                self.log(msg="\t expanding query to {}".format(self.query, query))
             start = len(find(QueryWebResult, query={"query": query}))
+            self.log("processing query: {}".format(query))
             for url in search(query, lang="it", safe="on", num=self.num, start=start, stop=self.num,
                               pause=self.pause, only_standard=True):
                 if '.pdf' in url:
                     continue
                 try:
-                    self.log(msg="\t- processing web url: {}".format(url))
+                    self.log(msg="\tfound web url: {}".format(url))
 
                     if len(find(QueryWebResult, query={"url": url}, limit=1)) > 0:
                         self.log("already in db, skip")
@@ -99,6 +100,8 @@ class GoogleQuery(UmanoService):
                     lines.append(p)
                 text = "\n".join(lines)[:4096]
 
+                self.log(msg="\t found text {} characters {}...".format(len(text), text[:50]))
+
                 store(
                     data_class=QueryWebResult,
                     data=dict(
@@ -108,7 +111,7 @@ class GoogleQuery(UmanoService):
                     ),
                     publish_after=True
                 )
-                self.log(msg="saved query text from url {}".format(url))
+                self.log(msg="\tsaving query to db from url{}\n".format(url))
 
             start = len(find(QueryImageResult, query={"query": query}))
             image_paths = self.image_downloader.download(

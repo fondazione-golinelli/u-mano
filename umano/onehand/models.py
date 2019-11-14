@@ -5,6 +5,69 @@ from umano.onehand.durer import durerizer
 from umano.onehand.utils import *
 
 
+class Bjorklund():
+    def __init__(self, steps: int, pulses: int):
+        if pulses > steps:
+            raise ValueError
+        self.pattern = []
+        level = 0
+        counts = []
+        remainders = []
+        divisor = steps - pulses
+
+        remainders.append(pulses)
+        while True:
+            counts.append(divisor / remainders[level])
+            remainders.append(divisor % remainders[level])
+            divisor = remainders[level]
+            level += 1
+            if remainders[level] < 2:
+                break
+        counts.append(divisor)
+
+        def build(level: int):
+            if level == -1:
+                self.pattern.append(0)
+            elif level == -2:
+                self.pattern.append(1)
+            else:
+                # recursion
+                for i in range(0, int(counts[level])):
+                    build(level - 1)
+                if remainders[level] != 0:
+                    build(level - 2)
+
+        build(level)
+        i = self.pattern.index(1)
+        self.pattern = self.pattern[i:] + self.pattern[0:i]
+
+
+class Metronome(object):
+
+    def __init__(self, bpm=120, beats=4, beat_resolution=4, bars=16):
+        self.bpm = bpm
+        self.counter = 0
+        self.beats = beats
+        self.max = bars * beat_resolution * beats
+        self.beat_resolution = beat_resolution
+        self.bars = bars
+        self.time_division = 60 / (self.bpm * beat_resolution)
+
+    def tick(self):
+        if self.has_next():
+            self.counter += 1
+
+    def reset(self):
+        self.counter = 0
+
+    @property
+    def time(self):
+        return self.counter * self.time_division
+
+    def has_next(self):
+        return self.counter < self.max
+
+
 class HandFeature(object):
 
     def __init__(self, image_points=None, reference_frequency=64, source_image=None,
@@ -42,7 +105,7 @@ class HandFeature(object):
             if i % points_per_finger == 0:
                 self.beats[i] = 0.0
             else:
-                self.beats[i] = self.distances[i-1] + self.beats[i - 1]
+                self.beats[i] = self.distances[i - 1] + self.beats[i - 1]
 
         for i in range(features_length):
             self.beats[i] = round(self.duration * self.beats[i] / self.hand_length)
@@ -55,7 +118,7 @@ class HandFeature(object):
                 self.attacks[i] = self.duration / points_per_finger
                 self.releases[i] = self.beats[i + 1] + self.default_release
             elif i < features_length - 1:
-                self.attacks[i] = abs(self.beats[i+1] - self.beats[i])
+                self.attacks[i] = abs(self.beats[i + 1] - self.beats[i])
             if i % points_per_finger == 3:
                 self.attacks[i] = self.default_attack / points_per_finger
                 self.releases[i] = self.default_release / points_per_finger
@@ -66,7 +129,7 @@ class HandFeature(object):
                 continue
             if frequency_diff > self.frequency_delta:
                 self.durer_amplitudes[i] = max([0.1, self.durer_amplitudes[i] - (
-                    self.amplitude_decrease * frequency_diff / (self.frequency_delta * points_per_finger)
+                        self.amplitude_decrease * frequency_diff / (self.frequency_delta * points_per_finger)
                 )])
             if self.frequencies[i] > self.reference_frequency * 8:
                 self.amplitudes[i] -= self.amplitude_decrease
