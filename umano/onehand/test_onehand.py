@@ -1,7 +1,7 @@
 import os
 import sys
 import random
-# import time
+import time
 import cv2
 
 
@@ -57,13 +57,14 @@ if __name__ == "__main__":
 
         while True:
             usage()
-            key = cv2.waitKey(0)
+            key = cv2.waitKey(1)
 
             # if time.time() > (timer + timeout):
             #     print("timeout")
             #     cv2.destroyAllWindows()
             #     break
 
+            time.sleep(20)
             if key == 27:
                 cv2.destroyAllWindows()
                 sys.exit(0)
