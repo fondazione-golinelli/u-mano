@@ -1,4 +1,5 @@
 import os
+import platform
 from optparse import make_option
 import shutil
 
@@ -16,21 +17,7 @@ class LaraCroft(DataFetcher):
             type=str,
             default="http://localhost:9000",
             help='Http Server url to connect to (default "http://localhost:9000")'
-        ),
-        make_option(
-            '--output-directory',
-            dest='OUTPUT_DIRECTORY',
-            type=str,
-            default=settings.UMANO_SHARE_ROOT,
-            help='Local directory to save images to (default to umano share {})'.format(settings.UMANO_SHARE_ROOT)
-        ),
-        make_option(
-            '--local',
-            dest='LOCAL',
-            type=str,
-            default=False,
-            help='Read images and audio from local directory'
-        ),
+        )
     ]
 
     def __init__(self, data_class="OneHandFeatures", timeout=10) -> None:
@@ -38,12 +25,11 @@ class LaraCroft(DataFetcher):
         self.name = "Lara Croft"
         self.description = "Search for lost hands prints an bring them to the museum"
         self.server = "http://localhost:9000"
-        self.output_directory = os.path.join(os.getcwd(), "downloads")
+        self.output_directory = settings.UMANO_SHARE_ROOT
 
     def process_args_and_options(self, args, options):
         self.timeout = options.TIMEOUT
         self.server = options.SERVER
-        self.output_directory = options.OUTPUT_DIRECTORY
         if not os.path.exists(self.output_directory):
             os.makedirs(self.output_directory)
 
@@ -54,33 +40,49 @@ class LaraCroft(DataFetcher):
             with open(output_path, 'wb') as out_file:
                 shutil.copyfileobj(response.raw, out_file)
             del response
+            return True
+        return False
 
     def process_data(self):
         for hand_feature in self.data:
-
-            self.from_url_to_file(
+            if not hand_feature.hand_print:
+                continue
+            audio_path = os.path.join(
+                self.output_directory, "onehand/audio",
+                "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_AUDIO_EXTENSION))
+            image_path = os.path.join(
+                self.output_directory, "onehand/pictures",
+                "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION))
+            download_ok = self.from_url_to_file(
                 "{}/audio/{}".format(self.server,
                                      "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_AUDIO_EXTENSION)),
-                os.path.join(
-                    self.output_directory, "onehand/audio",
-                    "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_AUDIO_EXTENSION))
+                audio_path
+            )
+            if not download_ok:
+                continue
+
+            download_ok = self.from_url_to_file(
+                "{}/handprints/{}".format(self.server,
+                                          "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION)),
+                image_path
             )
 
-            self.from_url_to_file(
-                "{}/handprints/{}".format(self.server,
-                                        "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION)),
-                os.path.join(
-                    self.output_directory, "onehand/pictures",
-                    "{}{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION))
-            )
+            if not download_ok:
+                continue
 
-            self.from_url_to_file(
-                "{}/handprints/{}".format(self.server,
-                                        "{}_features{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION)),
-                os.path.join(
-                    self.output_directory, "onehand/pictures",
-                    "{}_features{}".format(hand_feature.uid, settings.ONEHAND_HAND_PICTURES_EXTENSION))
-            )
+            for host in settings.UMANO_SHARE_HOSTS:
+                if platform.system() == "Darwin":
+                    share_in_host = "/Volumes/{}/umano-share".format(host, settings.UMANO_SHARE_ROOT)
+                    if os.path.exists(share_in_host):
+                        self.log("copy data to host {}".format(host))
+
+                        if not os.path.exists(audio_path.replace(settings.UMANO_SHARE_ROOT, share_in_host)):
+                            shutil.copy(audio_path, audio_path.replace(settings.UMANO_SHARE_ROOT, share_in_host))
+                        if not os.path.exists(image_path.replace(settings.UMANO_SHARE_ROOT, share_in_host)):
+                            shutil.copy(image_path, image_path.replace(settings.UMANO_SHARE_ROOT, share_in_host))
+
+            hand_feature.shared = True
+            hand_feature.save()
 
 
 if __name__ == "__main__":

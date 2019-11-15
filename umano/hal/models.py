@@ -152,6 +152,8 @@ class OneHandFeatures(HalData):
     image_points: list
     width: Optional[int]
     height: Optional[int]
+    hand_print: bool
+    shared: bool
 
 
 @dataclass

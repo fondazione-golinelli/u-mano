@@ -206,6 +206,7 @@ class DataFetcher(UmanoService):
         self.data_class = data_class
         self.data = []
         self.last_update = datetime.now() - timedelta(days=60)
+        self.query = None
         super().__init__()
 
     def fetch_data(self):

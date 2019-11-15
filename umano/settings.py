@@ -2,7 +2,9 @@ import os
 
 BASE_DIRECTORY = os.path.dirname(__file__)
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), "media")
+
 UMANO_SHARE_ROOT = "/umano-share"
+UMANO_SHARE_HOSTS = ["caverna"]
 
 HAL_MONGODB_URL = 'mongodb://localhost:27017/'
 
@@ -83,6 +85,9 @@ SUS_EST_VUO_MILLUMIN_PORT = 7002
 
 SERVICE_OSC_STATUS_ADDRESS = "/umano/services/{}/status"
 SERVICE_OSC_LOG_ADDRESS = "/umano/services/{}/log"
+
+
+
 
 try:
     from .local_settings import *

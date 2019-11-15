@@ -66,7 +66,9 @@ class DuBio(ConsumerService):
             data=dict(
                 uid=hand.uid,
                 touch_session_id=self.session_id,
-                image_points=hand.image_points
+                image_points=hand.image_points,
+                hand_print=False,
+                shared=False
             )
         )
         for picture in self.hand_frames:

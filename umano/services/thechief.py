@@ -43,9 +43,9 @@ class TheChief(DataFetcher):
             cv2.imwrite(output_file, crop(features, min_xy, max_xy))
             hand_feature.width = handprint.shape[0]
             hand_feature.height = handprint.shape[1]
+            hand_feature.hand_print = True
             hand_feature.save()
             self.log(msg="processed hand {}".format(hand_feature.uid))
-
 
 if __name__ == "__main__":
     service = TheChief()

@@ -1,6 +1,6 @@
 from datetime import datetime
 from math import log2, pow
-from statistics import mean
+from statistics import mean, StatisticsError
 import string
 import tempfile
 import numpy as np
@@ -36,8 +36,11 @@ def midpoint(point_a, point_b):
 
 
 def compute_distance(point_a, point_b, reference=None):
-    d = dist.euclidean((point_a[0], point_a[1]), (point_b[0], point_b[1]))
-    return d
+    try:
+        d = dist.euclidean((point_a[0], point_a[1]), (point_b[0], point_b[1]))
+        return d
+    except TypeError:
+        return 0
 
 
 def pixels_to_frequency(pixels, reference_length, reference_frequency):
@@ -107,7 +110,7 @@ def annotate_frame_with_features(frame, points=None, hand=None):
         if idx % 4 == 0:
             color_index += 1
 
-        if points[part_a] and points[part_b]:
+        if None not in points[part_a] and None not in points[part_b]:
             cv2.line(frame, tuple(points[part_a]), tuple(points[part_b]), COLORS[color_index], 2)
             cv2.circle(frame, tuple(points[part_a]), 10, (255, 255, 255), thickness=-1, lineType=cv2.FILLED)
             cv2.circle(frame, tuple(points[part_b]), 10, (255, 255, 255), thickness=-1, lineType=cv2.FILLED)
@@ -177,10 +180,15 @@ class VideoGrabber(object):
 def average_points(images):
     points = []
     for i in range(21):
-        points.append([
-            round(mean([p.image_points[i][0] for p in images if p.image_points[i] is not None])),
-            round(mean([p.image_points[i][1] for p in images if p.image_points[i] is not None]))
-        ])
+        try:
+            x = round(mean([p.image_points[i][0] for p in images if p.image_points[i] is not None]))
+        except StatisticsError:
+            x = None
+        try:
+            y = round(mean([p.image_points[i][1] for p in images if p.image_points[i] is not None]))
+        except StatisticsError:
+            y = None
+        points.append([x, y])
     return points
 
 
@@ -255,12 +263,12 @@ def hand_print(hp, x, y):
 
 def hand_roi(hand, offset=100):
     min_xy = (
-        min([p[0] for p in hand.image_points if p is not None]) - offset,
-        min([p[1] for p in hand.image_points if p is not None]) - offset,
+        min([p[0] for p in hand.image_points if p is not None and p[0] is not None]) - offset,
+        min([p[1] for p in hand.image_points if p is not None and p[1] is not None]) - offset,
     )
     max_xy = (
-        max([p[0] for p in hand.image_points if p is not None]) + offset,
-        max([p[1] for p in hand.image_points if p is not None]) + offset,
+        max([p[0] for p in hand.image_points if p is not None and p[0] is not None]) + offset,
+        max([p[1] for p in hand.image_points if p is not None and p[1] is not None]) + offset,
     )
     return min_xy, max_xy
 

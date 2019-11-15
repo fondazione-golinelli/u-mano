@@ -94,8 +94,10 @@ class Column(object):
             x = self.offset + self.width // 2
             y = self.height // 2
         else:
-            x = round(self.offset + self.padding_x + hand.size.w/2 + random.randint(0, self.width - 2 * self.padding_x))
-            y = round(self.padding_y + hand.size.h/2 + random.randint(0, self.height - 2 * self.padding_y - hand.size.h // 2))
+            x = round(
+                self.offset + self.padding_x + hand.size.w / 2 + random.randint(0, self.width - 2 * self.padding_x))
+            y = round(self.padding_y + hand.size.h / 2 + random.randint(0,
+                                                                        self.height - 2 * self.padding_y - hand.size.h // 2))
 
         if not self.pixel_coordinates and self.aspect_ratio is not None:
             # self.log(msg=x, y)
@@ -112,7 +114,8 @@ class Column(object):
 class Neanderthal(DataFetcher):
 
     def __init__(self, data_class="OneHandFeatures", timeout=10, n_columns=8, column_width=500, column_height=920,
-                 column_offset=200, column_padding_x=100, column_padding_y=100, capacity=15, n_hands=30, min_size=None, max_size=None,
+                 column_offset=200, column_padding_x=100, column_padding_y=100, capacity=15, n_hands=30, min_size=None,
+                 max_size=None,
                  pixel_coordinates=False, window_width=4096, window_height=1080) -> None:
         super().__init__(data_class, timeout)
         self.name = "Neanderthal"
@@ -170,6 +173,7 @@ class Neanderthal(DataFetcher):
     def fetch_data(self):
         self.data = find(
             self.data_class,
+            query={'hand_print': True, 'shared': True},
             sort_key="create_time",
             sort_direction=-1,
             limit=self.n_hands
@@ -179,8 +183,8 @@ class Neanderthal(DataFetcher):
         id_column = 0
         for column in self.columns:
             column.empty()
-        fake_data = self.data + self.data
-        for idx, hand_features in enumerate(fake_data):
+
+        for idx, hand_features in enumerate(self.data):
             id_column = (id_column + 1) % len(self.columns)
             if not self.columns[id_column].has_capacity:
                 continue
@@ -238,6 +242,5 @@ if __name__ == "__main__":
         column_padding_y=100,
         capacity=10
     )
-
 
     service.run()
