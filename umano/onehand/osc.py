@@ -1,7 +1,9 @@
 import os
+import random
 import time
 from pythonosc.udp_client import SimpleUDPClient
 
+from umano.onehand.models import Bjorklund
 from umano import settings
 
 
@@ -38,6 +40,14 @@ def send_sonification_to_max(hand, all=True, only_durer=False, only_hand=False, 
 
     time.sleep(1)
     osc_client.send_message(settings.ONEHAND_OSC_BANG_ADDRESS, ["bang"])
+    hand.metronome.reset()
+    while hand.metronome.has_next():
+        # if random.randint(0, 100) > 50:
+        if hand.metronome.counter % hand.metronome.beat_resolution == 0 \
+                and hand.drum_pattern[hand.metronome.counter // hand.metronome.beat_resolution] or random.randint(0, 100) > 70:
+            osc_client.send_message(settings.ONEHAND_OSC_HAND_BEAT_BANG_ADDRESS, [1])
+        time.sleep(hand.metronome.time_division)
+        hand.metronome.tick()
 
 
 def send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT):

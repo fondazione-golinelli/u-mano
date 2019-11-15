@@ -46,6 +46,7 @@ ONEHAND_OSC_DURER_AMP_ADDRESS = "/umano/onehand/durer/amp"
 ONEHAND_OSC_HAND_FREQ_ADDRESS = "/umano/onehand/hand/freq"
 ONEHAND_OSC_HAND_AMP_ADDRESS = "/umano/onehand/hand/amp"
 ONEHAND_OSC_HAND_BEAT_ADDRESS = "/umano/onehand/beat"
+ONEHAND_OSC_HAND_BEAT_BANG_ADDRESS = "/umano/onehand/beat/bang"
 ONEHAND_OSC_HAND_ENVELOPE_ADDRESS = "/umano/onehand/envelope"
 ONEHAND_OSC_FINGER_ADDRESS = "/umano/onehand/{}/{}"
 

@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     extractor = HandFeatureExtractor(live_output=False)
 
-    random_image = False
+    random_image = True
     # timer = None
     # timeout = 10
 
@@ -57,18 +57,20 @@ if __name__ == "__main__":
 
         while True:
             usage()
-            key = cv2.waitKey(1)
+            key = cv2.waitKey(-1)
 
             # if time.time() > (timer + timeout):
             #     print("timeout")
             #     cv2.destroyAllWindows()
             #     break
 
-            time.sleep(20)
             if key == 27:
                 cv2.destroyAllWindows()
                 sys.exit(0)
             elif key == ord("w"):
+                send_sonification_to_max(hand, all=True)
+            elif key == ord("r"):
+                hand.reverse()
                 send_sonification_to_max(hand, all=True)
             elif key == ord("d"):
                 send_sonification_to_max(hand, all=False, only_durer=True)

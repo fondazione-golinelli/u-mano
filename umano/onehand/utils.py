@@ -110,7 +110,7 @@ def annotate_frame_with_features(frame, points=None, hand=None):
         if idx % 4 == 0:
             color_index += 1
 
-        if None not in points[part_a] and None not in points[part_b]:
+        if points[part_a] and points[part_b] and None not in points[part_a] and None not in points[part_b]:
             cv2.line(frame, tuple(points[part_a]), tuple(points[part_b]), COLORS[color_index], 2)
             cv2.circle(frame, tuple(points[part_a]), 10, (255, 255, 255), thickness=-1, lineType=cv2.FILLED)
             cv2.circle(frame, tuple(points[part_b]), 10, (255, 255, 255), thickness=-1, lineType=cv2.FILLED)
