@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>{% block title %}U.MANO - AR APP{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="/static/assets/css/noscript.css"/>
+    </noscript>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">
+
+        </div>
+        <div class="content">
+            {% block content %}
+                <div class="inner">
+                    <h1>U.MANO</h1>
+                    <p>La app per vivere la realtà aumentata nella mostra U.MANO sarà presto disponibile per Android e
+                        iOS</p>
+                    <p>Orari di apertura Mar, Mer, Gio, Ven 10 - 19 | Sab, Dom 10-20</p>
+
+                    <p><strong>Opificio Golinelli - Centro Arti e Scienze</strong><br/>
+                        Via Paolo Nanni Costa, 14
+                        40133 Bologna</p>
+                </div>{% endblock %}
+        </div>
+        <nav>
+            <ul>
+                {% block nav %}
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                {% endblock %}
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main -->
+
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p class="copyright">&copy;2019 Fondazione Golinelli. Design: <a target="_blank" href="https://html5up.net">HTML5
+            UP</a>.</p>
+    </footer>
+
+</div>
+
+<!-- BG -->
+<div id="bg"></div>
+
+<!-- Scripts -->
+<script src="static/assets/js/jquery.min.js"></script>
+<script src="static/assets/js/browser.min.js"></script>
+<script src="static/assets/js/breakpoints.min.js"></script>
+<script src="static/assets/js/util.js"></script>
+<script src="static/assets/js/main.js"></script>
+
+</body>
+</html>

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from artworks import views as artwork_views
 from demo import views as demo_views
+from website import views as website_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -36,6 +37,7 @@ urlpatterns = [
 
     path('demo/picture/<int:pk>', demo_views.picture_preview, name="umano_demo_picture_preview"),
     path('demo/updateshader/', demo_views.update_shader_settings, name="umano_demo_update_shader"),
-    path('privacy-policy', artwork_views.privacy_policy, name="privacy_policy"),
-    path('', demo_views.demo_one)
+    # path('', demo_views.demo_one)
+    path('privacy-policy', website_views.privacy_policy, name="privacy_policy"),
+    path('', website_views.home)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -72,11 +72,6 @@ def post_time(request, uid):
     return HttpResponseBadRequest()
 
 
-def privacy_policy(request):
-    return render_to_response(
-        'artworks/privacy_policy.html'
-    )
-
 
 @csrf_exempt
 def count_missing_contents(request):
