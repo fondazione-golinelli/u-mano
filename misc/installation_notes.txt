@@ -1,0 +1,17 @@
+Install brew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Mongodb 
+brew tap mongodb/brew
+brew install mongodb-community@4.2
+
+Rabbitmq
+brew install rabbitmq
+
+brew service start rabbitmq
+
+
+modifica il file umano.supervisord.plist inserendo il path al file di configurazione
+
+copia umano.supervisord.plist in /Library/LaunchDaemons/
+sudo launchctl load /Library/LaunchDaemons/umano.supervisord.plist
