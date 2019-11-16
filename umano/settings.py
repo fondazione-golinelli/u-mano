@@ -6,7 +6,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), "media")
 UMANO_SHARE_ROOT = "/umano-share"
 UMANO_SHARE_HOSTS = ["caverna"]
 
-HAL_MONGODB_URL = 'mongodb://localhost:27017/'
+HAL_MONGODB_URL = 'mongodb://hal:27017/'
 
 HAL_BROKER_URL = 'amqp://guest:guest@localhost'
 HAL_EXCHANGE_NAME = "umano"
@@ -33,10 +33,10 @@ ONEHAND_MOCKUP_DOWNLOAD_FOLDER = os.path.join(BASE_DIRECTORY, "downloads")
 
 ONEHAND_MAX_HOST = "127.0.0.1"
 ONEHAND_MAX_PORT = 8888
-ONEHAND_VUO_HOST = "192.168.109.102"
+ONEHAND_VUO_HOST = "caverna"
 ONEHAND_VUO_PORT = 8889
 
-ONEHAND_MILLUMIN_HOST = "192.168.109.102"
+ONEHAND_MILLUMIN_HOST = "caverna"
 ONEHAND_MILLUMIN_PORT = 7000
 
 ONEHAND_OSC_BANG_ADDRESS = "/umano/onehand/bang"
