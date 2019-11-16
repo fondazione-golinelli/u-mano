@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 122.0, 81.0, 1261.0, 961.0 ],
+		"rect" : [ 122.0, 85.0, 1261.0, 961.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -85,7 +85,7 @@
 								"parameter_values" : 								{
 									"Dry/Wet" : 79.51181102362203,
 									"EchoEnable" : 1.0,
-									"EchoFeedback" : 99.0,
+									"EchoFeedback" : 49.656189099765569,
 									"EchoMode" : 0.0,
 									"EchoMultL" : 0.0,
 									"EchoMultR" : 0.0,
@@ -131,7 +131,7 @@
 											"parameter_values" : 											{
 												"Dry/Wet" : 79.51181102362203,
 												"EchoEnable" : 1.0,
-												"EchoFeedback" : 99.0,
+												"EchoFeedback" : 49.656189099765569,
 												"EchoMode" : 0.0,
 												"EchoMultL" : 0.0,
 												"EchoMultR" : 0.0,

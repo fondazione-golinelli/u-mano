@@ -41,11 +41,14 @@ def send_sonification_to_max(hand, all=True, only_durer=False, only_hand=False, 
     time.sleep(1)
     osc_client.send_message(settings.ONEHAND_OSC_BANG_ADDRESS, ["bang"])
     hand.metronome.reset()
+    idf = 0
     while hand.metronome.has_next():
-        # if random.randint(0, 100) > 50:
+
         if hand.metronome.counter % hand.metronome.beat_resolution == 0 \
-                and hand.drum_pattern[hand.metronome.counter // hand.metronome.beat_resolution] or random.randint(0, 100) > 70:
-            osc_client.send_message(settings.ONEHAND_OSC_HAND_BEAT_BANG_ADDRESS, [1])
+                and hand.drum_pattern[hand.metronome.counter // hand.metronome.beat_resolution] or random.randint(0, 100) > 80:
+            osc_client.send_message(settings.ONEHAND_OSC_HAND_BEAT_BANG_ADDRESS,
+                                    [1, hand.frequencies[idf]])
+            idf = (idf + 1) % len(hand.frequencies)
         time.sleep(hand.metronome.time_division)
         hand.metronome.tick()
 
@@ -60,7 +63,8 @@ def send_cave_to_vuo(hands, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAN
     osc_client = SimpleUDPClient(address=host, port=port)
 
     osc_client.send_message("/umano/onehand/cave/hands/join",
-                            [";".join(map(str, [hand.uid, hand.position.x, hand.position.y, hand.size.w, hand.size.h, hand.rotation]))
+                            [";".join(map(str, [hand.uid, hand.position.x, hand.position.y, hand.size.w, hand.size.h,
+                                                hand.rotation]))
                              for hand in hands])
     # osc_client.send_message("/umano/onehand/cave/hands/testlist", [[hand.uid, hand.uid, hand.uid] for hand in hands])
     # osc_client.send_message("/umano/onehand/cave/hands/totem", [hand.uid for hand in hands])
