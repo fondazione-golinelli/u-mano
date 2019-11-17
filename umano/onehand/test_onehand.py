@@ -17,6 +17,7 @@ if __name__ == "__main__":
         print("\t - ESC to quit \n\t - d only durer \n\t - h only hand \n\t - w all freq \t\n - any other key next")
 
     TEST_DIRECTORY = "C:\\Users\\u-man\\Projects\\Hands\\processed"
+    TEST_DIRECTORY = "/Users/mini1/projects/u-mano/media/onehand/pictures"
 
     extractor = HandFeatureExtractor(live_output=False)
 

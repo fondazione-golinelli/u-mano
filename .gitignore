@@ -138,3 +138,5 @@ The_cave_app.app
 .idea/*
 .DS_Store
 /umano/services/downloads
+
+*.app

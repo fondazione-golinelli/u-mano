@@ -37,7 +37,9 @@ def load(pk, data_class):
     if isinstance(data_class, str):
         data_class = class_from_classname(data_class)
     data = data_class.get_collection().find_one({"_id": ObjectId(pk)})
-    return create(data_class, data)
+    if data:
+        return create(data_class, data)
+    return None
 
 
 def find(data_class, query=None, limit=None, sort_key=None, sort_direction=1):

@@ -72,7 +72,7 @@ class HandFeature(object):
 
     def __init__(self, image_points=None, reference_frequency=64, source_image=None,
                  duration=12000.0, frequency_delta=50, amplitude_decrease=0.2,
-                 default_attack=200.0, default_decay=500.0, default_release=1000.0):
+                 default_attack=2000.0, default_decay=1000.0, default_release=3000.0):
         if isinstance(image_points, list):
             self.image_points = image_points
         else:
@@ -100,31 +100,12 @@ class HandFeature(object):
 
         # TODO saprai sicuramente inventarti degli id più accattivanti!
         self.uid = str(uuid.uuid4())[:8]
-
-        self.metronome = Metronome(beats=4, bars=8, beat_resolution=4)
-        self.drum_pattern = Bjorklund(steps=self.metronome.bars * self.metronome.beats,
-                                      pulses=self.features_length).pattern
-        frequency_ordered = sorted([(i, dist) for i, dist in enumerate(self.distances)], key=lambda x: x[1])
         points_per_finger = 4
 
-        while self.metronome.has_next():
-            if self.metronome.counter % self.metronome.beat_resolution == 0 \
-                    and self.drum_pattern[self.metronome.counter // self.metronome.beat_resolution]:
-                i, dist = frequency_ordered.pop()
-                self.beats[i] = self.metronome.time * 1000
-            self.metronome.tick()
-
         for i in range(self.features_length):
-            # if i < self.features_length - 1:
-            #     self.attacks[i] = abs(self.beats[i + 1] - self.beats[i])
-            if i % points_per_finger == 3:
-                self.attacks[i] = self.default_attack / points_per_finger
-                self.releases[i] = self.default_release
-            elif i % points_per_finger == 0:
-                self.attacks[i] = 4 * self.default_attack
-            else:
-                self.attacks[i] = self.default_attack
-                self.releases[i] = self.default_release
+            self.attacks[i] = self.default_attack * (i % points_per_finger + 1)
+            self.releases[i] = self.default_release * (4 - (i % points_per_finger))
+            self.beats[i] = self.default_attack * (i % points_per_finger) * 1000
 
         for i in range(self.features_length):
             self.durer_amplitudes[i] = self.amplitude_decrease
@@ -139,16 +120,13 @@ class HandFeature(object):
                 self.amplitudes[i] -= self.amplitude_decrease
 
         for i in range(self.features_length):
-            half_beat = self.metronome.time_division * 1000
-            half_half_beat = self.metronome.time_division * 500
-            self.envelopes[i] = "\"0, 1 {hb} 0 {hhb} {amp} {att} {amp2} {dec} 0. {rel} 1 {hhb} 0 {hb}\"".format(
-                hb=half_beat, hhb=half_half_beat, amp=self.amplitudes[i], att=self.attacks[i], amp2=self.amplitudes[i] - amplitude_decrease,
+            self.envelopes[i] = "\"0, {amp} {att} {amp2} {dec} 0. {rel}\"".format(
+                amp=self.amplitudes[i], att=self.attacks[i], amp2=self.amplitudes[i] - amplitude_decrease,
                 dec=self.decays[i], rel=self.releases[i])
 
         self.frequencies = list(map(lambda x: round(x, 2), self.frequencies))
         self.durer_frequencies = list(map(lambda x: round(x, 2), self.durer_frequencies))
         self.amplitudes = list(map(lambda x: round(x, 2), self.amplitudes))
-        self.beats = list(map(lambda x: round(x, 2), self.beats))
         self.decays = list(map(lambda x: round(x, 2), self.decays))
         self.releases = list(map(lambda x: round(x, 2), self.releases))
         self.attacks = list(map(lambda x: round(x, 2), self.attacks))

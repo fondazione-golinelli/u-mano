@@ -85,6 +85,9 @@ class DuBio(ConsumerService):
         super().process_message(body, message)
         now = datetime.now()
         touch = load(body.get("pk"), data_class=self.data_class)
+        if touch is None:
+            self.log("touch is none! skip")
+            return
         delta = now - touch.create_time
         if delta.seconds > 1:
             self.log(msg="skip frame")
