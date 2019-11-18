@@ -66,6 +66,7 @@ def post_time(request, uid):
         if tt < artwork.min_time or artwork.min_time == 0.0:
             artwork.min_time = tt
         artwork.avg_time += tt / max([artwork.visits, 1])
+        artwork.score = round(artwork.likes * 10 / max(1, artwork.visits))
         artwork.save()
         serializer = ArtworkLightSerializer(artwork)
         return JsonResponse(serializer.data)
