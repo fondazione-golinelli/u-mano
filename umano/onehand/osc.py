@@ -7,6 +7,11 @@ from umano.onehand.models import Bjorklund
 from umano import settings
 
 
+def send_teaser_to_max():
+    osc_client = SimpleUDPClient(address=settings.ONEHAND_MAX_HOST, port=settings.ONEHAND_MAX_PORT)
+    osc_client.send_message(settings.ONEHAND_OSC_HAND_TEASER_ADDRESS, 1)
+
+
 def send_sonification_to_max(hand, all=True, only_durer=False, only_hand=False, host=settings.ONEHAND_MAX_HOST,
                              port=settings.ONEHAND_MAX_PORT):
     osc_client = SimpleUDPClient(address=host, port=port)

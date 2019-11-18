@@ -1,4 +1,5 @@
 import time
+import random
 from datetime import datetime
 from optparse import make_option
 import os
@@ -11,7 +12,7 @@ from umano.hal.data import load, store, find, create
 from umano.onehand.handfeatures.extractor import HandFeatureExtractor
 from umano.onehand.utils import VideoGrabber, average_points, temporary_name
 from umano.onehand.models import HandFeature
-from umano.onehand.osc import send_sonification_to_max
+from umano.onehand.osc import send_sonification_to_max, send_teaser_to_max
 from umano import settings
 
 
@@ -155,6 +156,8 @@ class DuBio(ConsumerService):
             # save no hands images?
             self.log(msg="no hands!")
             self.post_message(state="IDLE")
+            if random.randint(0, 100) > 90:
+                send_teaser_to_max()
 
 
 if __name__ == "__main__":

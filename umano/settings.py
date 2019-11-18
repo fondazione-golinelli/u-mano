@@ -6,7 +6,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), "media")
 UMANO_SHARE_ROOT = "/umano-share"
 UMANO_SHARE_HOSTS = ["caverna"]
 
-HAL_MONGODB_URL = 'mongodb://hal:27017/, mongodb://manosola:27017'
+HAL_MONGODB_URL = 'hal:27017,manosola:27017'
 
 HAL_BROKER_URL = 'amqp://guest:guest@localhost'
 HAL_EXCHANGE_NAME = "umano"
@@ -46,7 +46,7 @@ ONEHAND_OSC_DURER_AMP_ADDRESS = "/umano/onehand/durer/amp"
 ONEHAND_OSC_HAND_FREQ_ADDRESS = "/umano/onehand/hand/freq"
 ONEHAND_OSC_HAND_AMP_ADDRESS = "/umano/onehand/hand/amp"
 ONEHAND_OSC_HAND_BEAT_ADDRESS = "/umano/onehand/beat"
-ONEHAND_OSC_HAND_BEAT_BANG_ADDRESS = "/umano/onehand/beat/bang"
+ONEHAND_OSC_HAND_TEASER_ADDRESS = "/umano/onehand/teaser"
 ONEHAND_OSC_HAND_ENVELOPE_ADDRESS = "/umano/onehand/envelope"
 ONEHAND_OSC_FINGER_ADDRESS = "/umano/onehand/{}/{}"
 
