@@ -98,6 +98,7 @@ class ArtworkLightSerializer(serializers.ModelSerializer):
         exclude = ['id', 'query_keyword', 'shader']
 
 
+
 class ArtworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artwork

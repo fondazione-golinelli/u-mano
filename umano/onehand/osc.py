@@ -53,17 +53,16 @@ def send_to_vuo(hand, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_
         osc_client.send_message(settings.ONEHAND_OSC_FINGER_ADDRESS.format(finger, i), data)
 
 
-def send_cave_to_vuo(hands, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT):
+def send_cave_to_vuo(hands, duration, host=settings.ONEHAND_VUO_HOST, port=settings.ONEHAND_VUO_PORT):
     osc_client = SimpleUDPClient(address=host, port=port)
 
-    osc_client.send_message("/umano/onehand/cave/hands/join",
+    osc_client.send_message(settings.ONEHAND_OSC_CAVE_HANDS_ADDRESS,
                             [";".join(map(str, [hand.uid, hand.position.x, hand.position.y, hand.size.w, hand.size.h,
                                                 hand.rotation]))
                              for hand in hands])
-    # osc_client.send_message("/umano/onehand/cave/hands/testlist", [[hand.uid, hand.uid, hand.uid] for hand in hands])
-    # osc_client.send_message("/umano/onehand/cave/hands/totem", [hand.uid for hand in hands])
-    # osc_client.send_message("/umano/onehand/cave/hands/features", [hand.features_image for hand in hands])
-    # osc_client.send_message("/umano/onehand/cave/hands/position/x", [hand.position.x for hand in hands])
-    # osc_client.send_message("/umano/onehand/cave/hands/position/y", [hand.position.y for hand in hands])
-    # osc_client.send_message("/umano/onehand/cave/hands/size/width", [hand.size.w for hand in hands])
-    # osc_client.send_message("/umano/onehand/cave/hands/size/height", [hand.size.h for hand in hands])
+
+    osc_client.send_message(settings.ONEHAND_OSC_CAVE_START_ADDRESS, 1)
+    osc_client.send_message(settings.ONEHAND_OSC_CAVE_FADE_ADDRESS, 1)
+    time.sleep(duration)
+    osc_client.send_message(settings.ONEHAND_OSC_CAVE_FADE_ADDRESS, 2)
+
