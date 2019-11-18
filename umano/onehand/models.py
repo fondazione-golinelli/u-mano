@@ -99,7 +99,7 @@ class HandFeature(object):
         self.envelopes = [""] * self.features_length
 
         # TODO saprai sicuramente inventarti degli id più accattivanti!
-        self.uid = str(uuid.uuid4())[:8]
+        self.uid = str(uuid.uuid4())[:4]
         points_per_finger = 4
 
         for i in range(self.features_length):

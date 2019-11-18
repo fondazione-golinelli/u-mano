@@ -5,6 +5,7 @@ import os
 
 import cv2
 
+from hal.db import database
 from umano.services.base import ConsumerService, STATUS
 from umano.hal.data import load, store, find, create
 from umano.onehand.handfeatures.extractor import HandFeatureExtractor
@@ -44,6 +45,11 @@ class DuBio(ConsumerService):
         self.start_time = None
         self.capture = None
         self.use_grabber = use_grabber
+        self.messages = database.onehand.messages
+
+    def post_message(self, state="IDLE", value="NO VALUE"):
+        message = dict(state=state, value=value)
+        self.messages.insert_one(message)
 
     def process_args_and_options(self, args, options):
         self.video_source = options.VIDEO_SOURCE
@@ -59,6 +65,7 @@ class DuBio(ConsumerService):
         self.log(msg="time taken {}".format(time.time() - self.start_time))
 
         self.log(msg="sleeping till sounds end")
+        self.post_message(state="PLAYING", value=hand.uid)
         time.sleep(sound_duration)
 
         store(
@@ -73,6 +80,9 @@ class DuBio(ConsumerService):
         )
         for picture in self.hand_frames:
             picture.save()
+
+        self.post_message(state="GREETINGS", value=hand.uid)
+        time.sleep(10)
         self.reset()
 
     def reset(self):
@@ -108,15 +118,17 @@ class DuBio(ConsumerService):
         self.hand_frames = find(self.hand_data_class, dict(session_id=session_id))
 
     def process_frame(self, video_source, session_id):
+        self.post_message(state="IDLE")
         if self.use_grabber:
             frame = VideoGrabber(video_source).grab()
         else:
             _, frame = self.capture.read()
         extractor = HandFeatureExtractor(live_output=False)
-        image_points, output_frame = extractor.process_frame(frame)
         if self.session_id != session_id or self.status == STATUS.PLAYING:
             self.log(msg="im late!")
             return
+        self.post_message(state="PROCESSING")
+        image_points, output_frame = extractor.process_frame(frame)
         if image_points is not None:
             if self.start_time is None:
                 self.start_time = time.time()
@@ -142,6 +154,7 @@ class DuBio(ConsumerService):
         else:
             # save no hands images?
             self.log(msg="no hands!")
+            self.post_message(state="IDLE")
 
 
 if __name__ == "__main__":

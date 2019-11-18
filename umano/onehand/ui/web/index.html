@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet">
     <style type="text/css">
         body {
             font-family: "Courier New", sans-serif;
             text-align: center;
-            height: 800px;
             touch-action: none; /* disable pitch zoom*/
             overflow-y: hidden;
             background-color: #2E2E2E;
-            cursor:none;
+            cursor: none;
+            background-image: url("/img/HoSo_back.png");
+            background-size: cover;
         }
 
         .bg {
@@ -36,8 +38,8 @@
             font-size: 2em;
             color: white;
             position: absolute;
-            top: 90%;
-            display:none;
+            top: 80%;
+            left: 10%
         }
 
         .touch_area {
@@ -51,6 +53,7 @@
             -o-transition: 3s ease;
             background-color: black;
         }
+
         .touch_area_inside {
             padding: 10%;
             background-color: black;
@@ -66,25 +69,71 @@
             user-select: none;
         }
 
+        .icon{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0%;
+            left: 0%
+        }
+
+        .totem {
+            background-color: transparent;
+            width: 600px;
+            height: 200px;
+            position: absolute;
+            top: 5%;
+            left: 25%;
+            border-radius: 25px;
+            text-align: center;
+            display: none;
+        }
+        h1{
+            color: #dedede;
+            vertical-align: middle;
+            font-size: 4em;
+        }
+
+        .info{
+            position: absolute;
+            top: 1%;
+            left: 7%;
+            width: 70%;
+            color: #7a7a7a;
+            text-align: left;
+            font-size: 2em;
+        }
+
 
     </style>
+
+    <link href="/css/animate.css" rel="stylesheet">
 </head>
 <body>
-<div class="state unselectable">
-    <span class="state_text">?</span>
+
+<div id="totem" class="totem">
+    <h1 id="totem-value">You are AA78</h1>
 </div>
 
-    <div id="particles-js"></div>
+<div class="unselectable" id="state">
+    <img  id="idle" class="icon animated fadeIn infinite slow" src="/img/HoSo_lampHand.png" />
+    <img  id="processing" class="icon animated fadeIn infinite fast" src="/img/HoSo_lampHand.png" />
+    <img  id="playing-hand" style="display: none" class="icon" src="/img/HoSo_lampHand.png" />
+    <img  id="playing" class="icon animated fadeIn infinite slow" src="/img/HoSo_wave.png" />
+</div>
 
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/particles.js"></script>
+<div class="info">
+    lascia la tua impronta
+</div>
+
+
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script src="js/particles.js"></script>
 </body>
 <script type="text/javascript">
     jQuery(function ($) {
 
-        particlesJS.load('particles-js', 'assets/particles.json', function () {
-            console.log('callback - particles.js config loaded');
-        });
+
 
         $("body").on("contextmenu", function (e) {
             return false;  //disable right click
@@ -99,13 +148,12 @@
         var touch_area = document.querySelector('.touch_area'),
             state_text = document.querySelector('.state_text'),
             websocket = new WebSocket("ws://127.0.0.1:6789/"),
-            // websocket = new WebSocket("ws://192.168.1.164:6789/"),
             touches = 0;
 
-        function update_touches(event){
-            try{
+        function update_touches(event) {
+            try {
                 touches = event.touches.length;
-            }catch (e) {
+            } catch (e) {
                 touches = 0;
             }
         }
@@ -119,9 +167,9 @@
 
         function touch_end(event) {
             update_touches(event);
-            if (touches === 0){
-             websocket.send(JSON.stringify({action: 'touch_end'}));
-             $(touch_area).css("background-color", "#000000");
+            if (touches === 0) {
+                websocket.send(JSON.stringify({action: 'touch_end'}));
+                $(touch_area).css("background-color", "#000000");
             }
         }
 
@@ -158,13 +206,67 @@
 
         setInterval(send_hand_state, 1000);
 
+        var idle_icon = $("#idle");
+        var processing_icon = $("#processing");
+        var playing_icon = $("#playing");
+        var playing_hand = $("#playing-hand");
+        var totem = $("#totem");
+        var totem_value = $("#totem-value");
+
+        function idle(data) {
+            idle_icon.show();
+            processing_icon.hide();
+            playing_icon.hide();
+        }
+
+        function processing(data) {
+            idle_icon.hide();
+            processing_icon.show();
+            playing_icon.hide();
+        }
+
+        function playing(data) {
+            idle_icon.hide();
+            processing_icon.hide();
+            playing_icon.show();
+            playing_hand.show();
+        }
+
+        function greetings(data) {
+            idle_icon.hide();
+            processing_icon.hide();
+
+            totem_value.text("You are " + data.value);
+            totem.addClass("animated fadeIn slow");
+            totem.show();
+
+            setTimeout(function(){
+                totem.removeClass("animated fadeIn slow").addClass("animated fadeOut slow");
+                playing_icon.hide();
+                playing_hand.hide();
+                setTimeout(function(){
+                    totem.removeClass("animated fadeOut slow");
+                    totem.hide();
+                }, 4000);
+            }, 8000);
+        }
 
         websocket.onmessage = function (event) {
             var data = JSON.parse(event.data);
             console.log(data);
-            switch (data.type) {
-                case 'state':
-                    state_text.textContent = data.value;
+
+            switch (data.state) {
+                case 'IDLE':
+                    idle(data);
+                    break;
+                case 'PROCESSING':
+                    processing(data);
+                    break;
+                case 'PLAYING':
+                    playing(data);
+                    break;
+                case 'GREETINGS':
+                    greetings(data);
                     break;
                 default:
                     console.error(
