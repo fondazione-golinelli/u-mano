@@ -1,10 +1,11 @@
+
 from serial.tools.miniterm import Miniterm
 
 from umano import settings
-from umano.adam.models import pressure_sensors_serial, OSCConsole
+from umano.adam.models import emg_sensors_serial, OSCConsole
 
 if __name__ == "__main__":
-    ser = pressure_sensors_serial()
+    ser = emg_sensors_serial()
     ser.open()
     terminal = Miniterm(ser)
     terminal.console = OSCConsole(host=settings.ADAM_OSC_RECEIVER_HOST, port=settings.ADAM_OSC_RECEIVER_PORT,
