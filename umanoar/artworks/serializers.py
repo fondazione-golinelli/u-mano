@@ -113,7 +113,7 @@ class ArtworkSerializer(serializers.ModelSerializer):
         # if instance.shader is not None:
         #     data['shader'] = dict(parameters=map(float, instance.shader.parameters.split(",")))
 
-        data['score'] = round(instance.likes / max(1, instance.visits)) * 100
+        data['score'] = round(instance.likes * 10 / max(1, instance.visits))
 
         data['settings'] = ArtworkGraphSettingsSerializer(
             ArtworkGraphSettings.objects.filter(artwork=instance).first()).data
