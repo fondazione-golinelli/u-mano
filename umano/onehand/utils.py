@@ -57,11 +57,11 @@ def wavelength_to_frequency(l):
 
 def frequency_to_note(f, A4=432):
     C0 = A4 * pow(2, -4.75)
-    name = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    name = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
     h = round(12 * log2(f / C0))
     octave = h // 12
     n = h % 12
-    return name[n] + str(octave)
+    return "{}_{}".format(name[n], str(octave))
 
 
 def points_to_frequencies(image_points, reference_frequency):

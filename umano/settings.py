@@ -35,9 +35,10 @@ ONEHAND_MAX_HOST = "127.0.0.1"
 ONEHAND_MAX_PORT = 8888
 ONEHAND_VUO_HOST = "caverna"
 ONEHAND_VUO_PORT = 8889
-
 ONEHAND_MILLUMIN_HOST = "caverna"
 ONEHAND_MILLUMIN_PORT = 7000
+ONEHAND_LIVE_HOST = "live"
+ONEHAND_LIVE_PORT = 8000
 
 ONEHAND_OSC_BANG_ADDRESS = "/umano/onehand/bang"
 ONEHAND_OSC_RECORD_FILENAME_ADDRESS = "/umano/onehand/filename"
@@ -54,6 +55,10 @@ ONEHAND_OSC_RANDOM_SEED_ADDRESS = "/umano/cave/random/seed"
 ONEHAND_OSC_RANDOM_REPETITION_ADDRESS = "/umano/cave/random/repetition"
 ONEHAND_OSC_RANDOM_ENABLE_ADDRESS = "/umano/cave/random/enable"
 
+ONEHAND_OSC_CAVE_HANDS_ADDRESS = "/umano/onehand/cave/hands/join"
+ONEHAND_OSC_CAVE_START_ADDRESS = "/umano/onehand/cave/start"
+ONEHAND_OSC_CAVE_FADE_ADDRESS = "/umano/onehand/cave/stop"
+
 ONEHAND_HANDPOSE_MODEL_URL = "http://posefs1.perception.cs.cmu.edu/OpenPose/models/hand/pose_iter_102000.caffemodel"
 
 ONEHAND_HAND_PICTURES_FOLDER = os.path.join(MEDIA_ROOT, "onehand/pictures")
@@ -64,6 +69,13 @@ ONEHAND_HAND_PRINTS_FOLDER = os.path.join(MEDIA_ROOT, "onehand/handprints")
 ONEHAND_HAND_PRINTS_EXTENSION = ".jpg"
 
 ONEHAND_SHARE_FOLDER = os.path.join(UMANO_SHARE_ROOT, "onehand")
+
+ANGHIARI_MILLUMIN_HOST = "anghiari"
+ANGHIARI_MILLUMIN_PORT = 7000
+
+ANGHIARI_OSC_RANDOM_SEED_ADDRESS = "/umano/anghiari/random/seed"
+ANGHIARI_OSC_RANDOM_REPETITION_ADDRESS = "/umano/anghiari/random/repetition"
+ANGHIARI_OSC_RANDOM_ENABLE_ADDRESS = "/umano/anghiari/random/enable"
 
 ADAM_SERIAL_BAUDRATE = 115200
 ADAM_SERIAL_PRESSURE_PORT = "COM4"
