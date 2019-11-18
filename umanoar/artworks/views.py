@@ -25,6 +25,7 @@ def post_like(request, uid):
     if request.method == "POST":
         artwork = Artwork.objects.get(uid=uid)
         artwork.likes += 1
+        artwork.score = round(artwork.likes * 10 / max(1, artwork.visits))
         artwork.save()
         serializer = ArtworkLightSerializer(artwork)
         return JsonResponse(serializer.data)
