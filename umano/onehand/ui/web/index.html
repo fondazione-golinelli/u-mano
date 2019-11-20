@@ -147,8 +147,10 @@
 
         var touch_area = document.querySelector('.touch_area'),
             state_text = document.querySelector('.state_text'),
-            websocket = new WebSocket("ws://127.0.0.1:6789/"),
+            websocket = null,
             touches = 0;
+
+
 
         function update_touches(event) {
             try {
@@ -189,13 +191,12 @@
                     var bg = $(touch_area).css("background-color");
                     console.log("transition end; touches " + touches + "bg " + bg);
                     hand_on = bg === touch_bg;
-                    send_hand_state();
-
+                    //send_hand_state();
                 }
             )
         ;
 
-        function send_hand_state() {
+        /*function send_hand_state() {
             if (hand_on) {
                 websocket.send(JSON.stringify({action: 'hand_on'}));
             } else {
@@ -203,8 +204,7 @@
             }
             //console.log(hand_on);
         }
-
-        setInterval(send_hand_state, 1000);
+        setInterval(send_hand_state, 1000);*/
 
         var idle_icon = $("#idle");
         var processing_icon = $("#processing");
@@ -251,28 +251,43 @@
             }, 8000);
         }
 
-        websocket.onmessage = function (event) {
-            var data = JSON.parse(event.data);
-            console.log(data);
+        function connect(){
+            try {
+                websocket = new WebSocket("ws://127.0.0.1:6789/");
+                websocket.onerror=function(event){
+                     console.log("websocket not yet ready, retry in 5 seconds");
+                     setTimeout(connect, 5000);
+                };
+                websocket.onmessage = function (event) {
+                    var data = JSON.parse(event.data);
+                    console.log(data);
 
-            switch (data.state) {
-                case 'IDLE':
-                    idle(data);
-                    break;
-                case 'PROCESSING':
-                    processing(data);
-                    break;
-                case 'PLAYING':
-                    playing(data);
-                    break;
-                case 'GREETINGS':
-                    greetings(data);
-                    break;
-                default:
-                    console.error(
-                        "unsupported event", data);
+                    switch (data.state) {
+                        case 'IDLE':
+                            idle(data);
+                            break;
+                        case 'PROCESSING':
+                            processing(data);
+                            break;
+                        case 'PLAYING':
+                            playing(data);
+                            break;
+                        case 'GREETINGS':
+                            greetings(data);
+                            break;
+                        default:
+                            console.error(
+                                "unsupported event", data);
+                    }
+                }
+
+            } catch (e) {
+
             }
         }
+        connect();
+
+
     })
     ;
 </script>

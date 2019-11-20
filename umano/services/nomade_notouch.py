@@ -3,7 +3,7 @@ import json
 import websockets
 
 
-from hal.db import database
+from umano.hal.db import database
 messages = database.onehand.messages
 
 UI = set()
