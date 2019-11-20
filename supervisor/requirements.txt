@@ -1,5 +1,5 @@
 supervisor==4.1.0
-[-e] git+https://github.com/fondazione-golinelli/multivisor.git
+git+https://github.com/fondazione-golinelli/multivisor.git
 
 
 
