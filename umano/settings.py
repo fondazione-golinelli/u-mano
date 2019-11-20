@@ -6,7 +6,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), "media")
 UMANO_SHARE_ROOT = "/umano-share"
 UMANO_SHARE_HOSTS = ["caverna"]
 
-HAL_MONGODB_URL = 'hal:27017,manosola:27017'
+HAL_MONGODB_URL = 'mongodb://hal:27017'
 
 HAL_BROKER_URL = 'amqp://guest:guest@localhost'
 HAL_EXCHANGE_NAME = "umano"
