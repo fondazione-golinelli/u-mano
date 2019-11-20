@@ -39,6 +39,120 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-109",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 206.0, 1543.0, 70.0, 22.0 ],
+					"text" : "loadmess 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-99",
+					"maxclass" : "number",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 110.0, 1570.0, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"data" : 					{
+						"clips" : [ 							{
+								"absolutepath" : "eroica.aiff",
+								"filename" : "eroica.aiff",
+								"filekind" : "audiofile",
+								"loop" : 0,
+								"content_state" : 								{
+									"pitchshift" : [ 1.0 ],
+									"originaltempo" : [ 120.0 ],
+									"basictuning" : [ 440 ],
+									"mode" : [ "basic" ],
+									"slurtime" : [ 0.0 ],
+									"pitchcorrection" : [ 0 ],
+									"followglobaltempo" : [ 0 ],
+									"originallengthms" : [ 0.0 ],
+									"timestretch" : [ 0 ],
+									"formantcorrection" : [ 0 ],
+									"play" : [ 0 ],
+									"speed" : [ 1.0 ],
+									"quality" : [ "basic" ],
+									"formant" : [ 1.0 ],
+									"originallength" : [ 0.0, "ticks" ]
+								}
+
+							}
+ ]
+					}
+,
+					"id" : "obj-95",
+					"maxclass" : "playlist~",
+					"numinlets" : 1,
+					"numoutlets" : 5,
+					"outlettype" : [ "signal", "signal", "signal", "", "dictionary" ],
+					"patching_rect" : [ 110.0, 1612.0, 150.0, 30.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-90",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 110.0, 1510.0, 150.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 591.0, 34.0, 150.0, 20.0 ],
+					"text" : "test sound"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-89",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 110.0, 1535.0, 24.0, 24.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 591.0, 59.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-87",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 326.0, 1573.983831346035004, 67.0, 22.0 ],
+					"text" : "delay 1000"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-86",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 326.0, 1535.0, 58.0, 22.0 ],
+					"text" : "loadbang"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-113",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -3465,6 +3579,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-99", 0 ],
+					"source" : [ "obj-109", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-16", 0 ],
 					"midpoints" : [ 125.300000000000011, 168.0, 125.300000000000011, 168.0 ],
 					"source" : [ "obj-11", 0 ]
@@ -6033,9 +6154,44 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-87", 0 ],
+					"source" : [ "obj-86", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-27", 0 ],
+					"source" : [ "obj-87", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-99", 0 ],
+					"source" : [ "obj-89", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
 					"midpoints" : [ 1592.421988058090164, 45.0, 1592.421988058090164, 45.0 ],
 					"source" : [ "obj-9", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-50", 0 ],
+					"source" : [ "obj-95", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-53", 0 ],
+					"source" : [ "obj-95", 1 ]
 				}
 
 			}
@@ -6128,39 +6284,46 @@
 				}
 
 			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-95", 0 ],
+					"source" : [ "obj-99", 0 ]
+				}
+
+			}
  ],
 		"parameters" : 		{
-			"obj-157::obj-47" : [ "amxd~[15]", "amxd~[1]", 0 ],
-			"obj-189::obj-47" : [ "amxd~[5]", "amxd~[1]", 0 ],
-			"obj-3::obj-25" : [ "Damping", "Damping", 0 ],
-			"obj-181::obj-47" : [ "amxd~[12]", "amxd~[1]", 0 ],
-			"obj-149::obj-47" : [ "amxd~[13]", "amxd~[1]", 0 ],
-			"obj-8::obj-1" : [ "Time", "Time", 0 ],
-			"obj-237::obj-47" : [ "amxd~[3]", "amxd~[1]", 0 ],
-			"obj-173::obj-47" : [ "amxd~[10]", "amxd~[1]", 0 ],
-			"obj-133::obj-47" : [ "amxd~[18]", "amxd~[1]", 0 ],
 			"obj-129::obj-47" : [ "amxd~[19]", "amxd~[1]", 0 ],
-			"obj-3::obj-55" : [ "Mix", "Mix", 0 ],
+			"obj-173::obj-47" : [ "amxd~[10]", "amxd~[1]", 0 ],
 			"obj-77::obj-47" : [ "amxd~[20]", "amxd~[1]", 0 ],
-			"obj-3::obj-1" : [ "Size", "Size", 0 ],
-			"obj-8::obj-28" : [ "Mix[1]", "Mix", 0 ],
+			"obj-233::obj-47" : [ "amxd~[2]", "amxd~[1]", 0 ],
+			"obj-177::obj-47" : [ "amxd~[11]", "amxd~[1]", 0 ],
+			"obj-137::obj-47" : [ "amxd~[17]", "amxd~[1]", 0 ],
+			"obj-8::obj-25" : [ "Cutoff", "Cutoff", 0 ],
 			"obj-161::obj-47" : [ "amxd~[16]", "amxd~[1]", 0 ],
 			"obj-3::obj-26" : [ "Decay", "Decay", 0 ],
-			"obj-193::obj-47" : [ "amxd~[6]", "amxd~[1]", 0 ],
 			"obj-197::obj-47" : [ "amxd~[7]", "amxd~[1]", 0 ],
-			"obj-8::obj-47" : [ "bypass[1]", "bypass", 0 ],
 			"obj-153::obj-47" : [ "amxd~[14]", "amxd~[1]", 0 ],
-			"obj-3::obj-50" : [ "bypass", "bypass", 0 ],
-			"obj-241::obj-47" : [ "amxd~[4]", "amxd~[1]", 0 ],
-			"obj-177::obj-47" : [ "amxd~[11]", "amxd~[1]", 0 ],
-			"obj-233::obj-47" : [ "amxd~[2]", "amxd~[1]", 0 ],
-			"obj-8::obj-26" : [ "Reflections", "Reflections", 0 ],
 			"obj-201::obj-47" : [ "amxd~[8]", "amxd~[1]", 0 ],
+			"obj-8::obj-1" : [ "Time", "Time", 0 ],
+			"obj-237::obj-47" : [ "amxd~[3]", "amxd~[1]", 0 ],
+			"obj-189::obj-47" : [ "amxd~[5]", "amxd~[1]", 0 ],
+			"obj-181::obj-47" : [ "amxd~[12]", "amxd~[1]", 0 ],
+			"obj-3::obj-1" : [ "Size", "Size", 0 ],
+			"obj-133::obj-47" : [ "amxd~[18]", "amxd~[1]", 0 ],
 			"obj-169::obj-47" : [ "amxd~[9]", "amxd~[1]", 0 ],
-			"obj-137::obj-47" : [ "amxd~[17]", "amxd~[1]", 0 ],
+			"obj-3::obj-55" : [ "Mix", "Mix", 0 ],
+			"obj-8::obj-28" : [ "Mix[1]", "Mix", 0 ],
 			"obj-3::obj-20" : [ "Diffusion", "Diffusion", 0 ],
+			"obj-157::obj-47" : [ "amxd~[15]", "amxd~[1]", 0 ],
+			"obj-3::obj-50" : [ "bypass", "bypass", 0 ],
+			"obj-8::obj-47" : [ "bypass[1]", "bypass", 0 ],
+			"obj-3::obj-25" : [ "Damping", "Damping", 0 ],
+			"obj-241::obj-47" : [ "amxd~[4]", "amxd~[1]", 0 ],
+			"obj-193::obj-47" : [ "amxd~[6]", "amxd~[1]", 0 ],
 			"obj-229::obj-47" : [ "amxd~[1]", "amxd~[1]", 0 ],
-			"obj-8::obj-25" : [ "Cutoff", "Cutoff", 0 ],
+			"obj-149::obj-47" : [ "amxd~[13]", "amxd~[1]", 0 ],
+			"obj-8::obj-26" : [ "Reflections", "Reflections", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -6222,6 +6385,12 @@
 				"name" : "bp.Reverb 1.maxpat",
 				"bootpath" : "C74:/packages/BEAP/clippings/BEAP/Effects",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "eroica.aiff",
+				"bootpath" : "C74:/docs/tutorial-patchers/msp-tut",
+				"type" : "AIFF",
 				"implicit" : 1
 			}
  ],
