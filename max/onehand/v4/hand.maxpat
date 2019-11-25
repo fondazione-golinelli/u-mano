@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-88",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 74.0, 1472.367925405502319, 60.0, 22.0 ],
+					"text" : "cycle~ 64"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-109",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -71,20 +83,20 @@
 								"loop" : 0,
 								"content_state" : 								{
 									"pitchshift" : [ 1.0 ],
-									"originaltempo" : [ 120.0 ],
-									"basictuning" : [ 440 ],
-									"mode" : [ "basic" ],
-									"slurtime" : [ 0.0 ],
-									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"originallengthms" : [ 0.0 ],
+									"play" : [ 0 ],
 									"timestretch" : [ 0 ],
 									"formantcorrection" : [ 0 ],
-									"play" : [ 0 ],
+									"slurtime" : [ 0.0 ],
+									"mode" : [ "basic" ],
+									"originallength" : [ 0.0, "ticks" ],
+									"originallengthms" : [ 0.0 ],
 									"speed" : [ 1.0 ],
-									"quality" : [ "basic" ],
+									"originaltempo" : [ 120.0 ],
+									"basictuning" : [ 440 ],
 									"formant" : [ 1.0 ],
-									"originallength" : [ 0.0, "ticks" ]
+									"quality" : [ "basic" ],
+									"pitchcorrection" : [ 0 ],
+									"followglobaltempo" : [ 0 ]
 								}
 
 							}
@@ -213,8 +225,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 127.5, 1352.367925405502319, 209.0, 22.0 ],
-					"text" : "0, 0.8 1000 0.5 200 0 2000"
+					"patching_rect" : [ 127.5, 1352.367925405502319, 145.0, 22.0 ],
+					"text" : "0, 0.3 800 0.1 200 0 2000"
 				}
 
 			}
@@ -262,7 +274,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 48.903225898742676, 1414.367925405502319, 66.0, 22.0 ],
-					"text" : "cycle~ 64"
+					"text" : "cycle~ 128"
 				}
 
 			}
@@ -6069,7 +6081,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-53", 0 ],
+					"destination" : [ "obj-56", 0 ],
 					"order" : 0,
 					"source" : [ "obj-70", 0 ]
 				}
@@ -6168,6 +6180,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-70", 0 ],
+					"source" : [ "obj-88", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-99", 0 ],
 					"source" : [ "obj-89", 0 ]
 				}
@@ -6190,7 +6209,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-53", 0 ],
+					"destination" : [ "obj-56", 0 ],
 					"source" : [ "obj-95", 1 ]
 				}
 
@@ -6293,37 +6312,37 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-129::obj-47" : [ "amxd~[19]", "amxd~[1]", 0 ],
-			"obj-173::obj-47" : [ "amxd~[10]", "amxd~[1]", 0 ],
-			"obj-77::obj-47" : [ "amxd~[20]", "amxd~[1]", 0 ],
-			"obj-233::obj-47" : [ "amxd~[2]", "amxd~[1]", 0 ],
-			"obj-177::obj-47" : [ "amxd~[11]", "amxd~[1]", 0 ],
-			"obj-137::obj-47" : [ "amxd~[17]", "amxd~[1]", 0 ],
-			"obj-8::obj-25" : [ "Cutoff", "Cutoff", 0 ],
-			"obj-161::obj-47" : [ "amxd~[16]", "amxd~[1]", 0 ],
 			"obj-3::obj-26" : [ "Decay", "Decay", 0 ],
-			"obj-197::obj-47" : [ "amxd~[7]", "amxd~[1]", 0 ],
-			"obj-153::obj-47" : [ "amxd~[14]", "amxd~[1]", 0 ],
-			"obj-201::obj-47" : [ "amxd~[8]", "amxd~[1]", 0 ],
-			"obj-8::obj-1" : [ "Time", "Time", 0 ],
-			"obj-237::obj-47" : [ "amxd~[3]", "amxd~[1]", 0 ],
+			"obj-133::obj-47" : [ "amxd~[18]", "amxd~[1]", 0 ],
+			"obj-77::obj-47" : [ "amxd~[20]", "amxd~[1]", 0 ],
 			"obj-189::obj-47" : [ "amxd~[5]", "amxd~[1]", 0 ],
 			"obj-181::obj-47" : [ "amxd~[12]", "amxd~[1]", 0 ],
-			"obj-3::obj-1" : [ "Size", "Size", 0 ],
-			"obj-133::obj-47" : [ "amxd~[18]", "amxd~[1]", 0 ],
-			"obj-169::obj-47" : [ "amxd~[9]", "amxd~[1]", 0 ],
-			"obj-3::obj-55" : [ "Mix", "Mix", 0 ],
+			"obj-229::obj-47" : [ "amxd~[1]", "amxd~[1]", 0 ],
+			"obj-8::obj-26" : [ "Reflections", "Reflections", 0 ],
+			"obj-161::obj-47" : [ "amxd~[16]", "amxd~[1]", 0 ],
+			"obj-237::obj-47" : [ "amxd~[3]", "amxd~[1]", 0 ],
+			"obj-173::obj-47" : [ "amxd~[10]", "amxd~[1]", 0 ],
+			"obj-201::obj-47" : [ "amxd~[8]", "amxd~[1]", 0 ],
+			"obj-153::obj-47" : [ "amxd~[14]", "amxd~[1]", 0 ],
+			"obj-8::obj-25" : [ "Cutoff", "Cutoff", 0 ],
 			"obj-8::obj-28" : [ "Mix[1]", "Mix", 0 ],
 			"obj-3::obj-20" : [ "Diffusion", "Diffusion", 0 ],
-			"obj-157::obj-47" : [ "amxd~[15]", "amxd~[1]", 0 ],
-			"obj-3::obj-50" : [ "bypass", "bypass", 0 ],
-			"obj-8::obj-47" : [ "bypass[1]", "bypass", 0 ],
+			"obj-129::obj-47" : [ "amxd~[19]", "amxd~[1]", 0 ],
+			"obj-3::obj-1" : [ "Size", "Size", 0 ],
+			"obj-193::obj-47" : [ "amxd~[6]", "amxd~[1]", 0 ],
+			"obj-149::obj-47" : [ "amxd~[13]", "amxd~[1]", 0 ],
+			"obj-8::obj-1" : [ "Time", "Time", 0 ],
+			"obj-137::obj-47" : [ "amxd~[17]", "amxd~[1]", 0 ],
 			"obj-3::obj-25" : [ "Damping", "Damping", 0 ],
 			"obj-241::obj-47" : [ "amxd~[4]", "amxd~[1]", 0 ],
-			"obj-193::obj-47" : [ "amxd~[6]", "amxd~[1]", 0 ],
-			"obj-229::obj-47" : [ "amxd~[1]", "amxd~[1]", 0 ],
-			"obj-149::obj-47" : [ "amxd~[13]", "amxd~[1]", 0 ],
-			"obj-8::obj-26" : [ "Reflections", "Reflections", 0 ],
+			"obj-177::obj-47" : [ "amxd~[11]", "amxd~[1]", 0 ],
+			"obj-3::obj-55" : [ "Mix", "Mix", 0 ],
+			"obj-157::obj-47" : [ "amxd~[15]", "amxd~[1]", 0 ],
+			"obj-8::obj-47" : [ "bypass[1]", "bypass", 0 ],
+			"obj-233::obj-47" : [ "amxd~[2]", "amxd~[1]", 0 ],
+			"obj-169::obj-47" : [ "amxd~[9]", "amxd~[1]", 0 ],
+			"obj-197::obj-47" : [ "amxd~[7]", "amxd~[1]", 0 ],
+			"obj-3::obj-50" : [ "bypass", "bypass", 0 ],
 			"parameterbanks" : 			{
 
 			}
