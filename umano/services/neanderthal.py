@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 import os
+from optparse import make_option
 import time
 import random
 from threading import Thread
@@ -10,11 +11,14 @@ from pythonosc.udp_client import SimpleUDPClient
 
 from umano.onehand import midi
 from umano.onehand.models import HandFeature, Metronome, Bjorklund
-from umano.onehand.utils import frequency_to_note
+from umano.onehand.utils import frequency_to_note, rescale_frame
 from umano.onehand.osc import send_cave_to_vuo
 from umano.hal.data import find
 from umano.services.base import DataFetcher
 from umano import settings
+
+import cv2
+import numpy as np
 
 
 def stop_note(note, port, delta):
@@ -51,6 +55,11 @@ class CaveHand:
     size: Optional[ImageSize]
     rotation: Optional[float]
     features: HandFeature
+
+    def roi(self):
+        return Position(self.pixel_position.x - 50 + self.size.w // 2,
+                        self.pixel_position.y - 50 + self.size.h // 2), Position(
+            self.pixel_position.x + 50 + self.size.w // 2, self.pixel_position.y + 50 + self.size.h // 2)
 
 
 @dataclass(repr=True)
@@ -136,17 +145,12 @@ class Column(object):
                 h=h
             )
 
-    def hand_roi(self, hand):
-        return Position(hand.pixel_position.x - 50 + hand.size.w // 2,
-                        hand.pixel_position.y - 50 + hand.size.h // 2), Position(
-            hand.pixel_position.x + 50 + hand.size.w // 2, hand.pixel_position.y + 50 + hand.size.h // 2)
-
     def overlap(self, x, y):
         if x is None or y is None:
             return True
 
         for hand in self.hands:
-            roi_min, roi_max = self.hand_roi(hand)
+            roi_min, roi_max = hand.roi()
             if roi_min.x < x < roi_max.x and roi_max.y < y < roi_min.y:
                 return True
 
@@ -176,10 +180,19 @@ class Column(object):
 
 
 class Neanderthal(DataFetcher):
+    option_list = DataFetcher.option_list + [
+        make_option(
+            '--debug',
+            dest='DEBUG',
+            action="store_true",
+            default=False,
+            help='Show debug image'
+        )
+    ]
 
-    def __init__(self, data_class="OneHandFeatures", timeout=10, n_columns=8, column_width=500, column_height=920,
-                 column_offset=200, column_padding_x=100, column_padding_y=100, capacity=15, n_hands=30, min_size=None,
-                 max_size=None,
+    def __init__(self, data_class="OneHandFeatures", timeout=10, n_columns=8, column_width=None, column_height=920,
+                 column_offset=None, column_padding_x=100, column_padding_y=100, capacity=15, n_hands=30, min_size=None,
+                 max_size=None, debug=False,
                  pixel_coordinates=False, window_width=4096, window_height=1080) -> None:
         super().__init__(data_class, timeout)
         self.name = "Neanderthal"
@@ -203,22 +216,40 @@ class Neanderthal(DataFetcher):
         self.timeout = 25
         self.duration = 0
 
+        self.debug = debug
+        self.window = ImageSize(w=window_width, h=window_height)
+
+        if not isinstance(column_offset, list):
+            column_offset = [column_offset] * n_columns
+
+        if not isinstance(column_width, list):
+            column_width = [column_width] * n_columns
+
         for i in range(n_columns):
+
+            offset = column_offset[i]
+            for k in range(i):
+                offset += column_offset[k] + column_width[k]
+
             column = Column(
                 idx=i + 1,
                 padding_x=column_padding_x,
                 padding_y=column_padding_y,
-                width=isinstance(column_width, list) and column_width[i] or column_width,
+                width=column_width[i],
                 height=column_height,
-                offset=(column_width + column_offset) * i,
+                offset=offset,
                 capacity=isinstance(capacity, list) and capacity[i] or capacity,
                 pixel_coordinates=pixel_coordinates,
-                window=ImageSize(w=window_width, h=window_height)
+                window=self.window
             )
 
             self.columns.append(
                 column
             )
+
+    def process_args_and_options(self, args, options):
+        super().process_args_and_options(args, options)
+        self.debug = options.DEBUG
 
     def audio_path(self, uid):
         return os.path.join(self.audio_directory, "{}{}".format(uid, settings.ONEHAND_HAND_AUDIO_EXTENSION))
@@ -261,10 +292,26 @@ class Neanderthal(DataFetcher):
         print(self.duration)
 
     def send_osc(self):
-        self.log(msg="update cave {}".format(len(self.hands)))
-        pattern = Pattern(notes=self.symphony)
-        Thread(target=pattern.play).start()
-        send_cave_to_vuo(self.hands, self.duration)
+        if self.debug:
+            frame = np.zeros(shape=[self.window.h, self.window.w, 3])
+
+            WHITE = (255, 255, 255)
+            for column in self.columns:
+                print((column.offset, 0), (column.offset+column.width, column.height))
+                cv2.rectangle(frame, (column.offset, 0), (column.offset+column.width, column.height), WHITE, thickness=2)
+            for hand in self.hands:
+                p1, p2 = hand.roi()
+                cv2.rectangle(frame, (p1.x, p1.y), (p2.x, p2.y), WHITE,
+                              thickness=2)
+            cv2.imshow("debug", rescale_frame(frame))
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
+
+        else:
+            self.log(msg="update cave {}".format(len(self.hands)))
+            pattern = Pattern(notes=self.symphony)
+            Thread(target=pattern.play).start()
+            send_cave_to_vuo(self.hands, self.duration)
 
     def fetch_data(self):
         self.data = find(
@@ -316,7 +363,6 @@ class Neanderthal(DataFetcher):
 if __name__ == "__main__":
     screen_w = 4096
     screen_h = 1080
-    offset = 25
     n_columns = 8
     column_width = [
         485,
@@ -326,23 +372,30 @@ if __name__ == "__main__":
         479,
         519,
         519,
-        440,
+        440
     ]
     column_offset = [
-
+        0,
+        25,
+        25,
+        25,
+        0,
+        25,
+        25,
+        25
     ]
     service = Neanderthal(
         n_columns=n_columns,
         column_height=screen_h,
-        column_offset=offset,
+        column_offset=column_offset,
         min_size=ImageSize(250, 250),
         max_size=ImageSize(400, 400),
         n_hands=50,
         pixel_coordinates=False,
         window_height=screen_h,
         window_width=screen_w,
-        column_width=519,
-        column_padding_x=37,
+        column_width=column_width,
+        column_padding_x=150,
         column_padding_y=100,
         capacity=10
     )
