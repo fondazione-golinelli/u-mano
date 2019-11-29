@@ -129,7 +129,10 @@ class DuBio(ConsumerService):
             self.log(msg="im late!")
             return
         self.post_message(state="PROCESSING")
-        image_points, output_frame = extractor.process_frame(frame)
+        try:
+            image_points, output_frame = extractor.process_frame(frame)
+        except:
+            image_points = None
         if image_points is not None:
             if self.start_time is None:
                 self.start_time = time.time()
