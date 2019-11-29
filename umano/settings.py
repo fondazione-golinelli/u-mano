@@ -92,15 +92,16 @@ CAMERA_STREAM_LIVE_URL = '/video_feed'
 
 QUERY_SHARE_FOLDER = os.path.join(UMANO_SHARE_ROOT, "query")
 
-SUS_VUO_MILLUMIN_HOST = "127.0.0.1"
-SUS_VUO_MILLUMIN_PORT = 7001
+SUS_MILLUMIN_HOST = "sus"
+SUS_MILLUMIN_PORT = 7000
 SUS_EST_VUO_MILLUMIN_HOST = "127.0.0.1"
 SUS_EST_VUO_MILLUMIN_PORT = 7002
 
+SUS_OSC_MASTERS_DMX_ADDRESS = "/umano/sus/masters/dmx"
+SUS_OSC_LIGHTS_CORRIDOR_INTENSITY_ADDRESS = "/umano/sus/lights/corridor/intensity"
+
 SERVICE_OSC_STATUS_ADDRESS = "/umano/services/{}/status"
 SERVICE_OSC_LOG_ADDRESS = "/umano/services/{}/log"
-
-
 
 
 try:

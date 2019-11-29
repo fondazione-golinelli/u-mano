@@ -46,8 +46,8 @@ class HalData:
             d.pop("_id", None)
         return d
 
-    def save(self):
-        if not self._id:
+    def save(self, force=False):
+        if not self._id or force:
             result = self.collection.insert_one(self.to_dict())
             self._id = result.inserted_id
         else:

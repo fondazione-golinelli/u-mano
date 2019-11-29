@@ -20,12 +20,12 @@ def create(data_class, data):
     return from_dict(data_class=data_class, data=default)
 
 
-def store(instance=None, data_class=None, data=None, publish_after=True):
+def store(instance=None, data_class=None, data=None, publish_after=True, force=False):
     if instance is None:
         if isinstance(data_class, str):
             data_class = class_from_classname(data_class)
         instance = create(data_class, data)
-    instance.save()
+    instance.save(force=force)
 
     if publish_after:
         publish(instance)

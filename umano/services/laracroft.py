@@ -3,8 +3,11 @@ import platform
 from optparse import make_option
 import shutil
 
+from pymongo import MongoClient
 import requests
-from umano.hal.data import last
+
+from umano.hal.data import store
+from umano.hal.models import OneHandFeatures
 from umano.services.base import DataFetcher
 from umano import settings
 
@@ -26,6 +29,7 @@ class LaraCroft(DataFetcher):
         self.description = "Search for lost hands prints an bring them to the museum"
         self.server = "http://localhost:9000"
         self.output_directory = settings.UMANO_SHARE_ROOT
+        self.onehand_remote = MongoClient('mongodb://manosola:27017').umano[settings.HAL_DATA_ONEHAND_FEATURES_COLLECTION]
 
     def process_args_and_options(self, args, options):
         self.timeout = options.TIMEOUT
@@ -43,9 +47,28 @@ class LaraCroft(DataFetcher):
             return True
         return False
 
+    def fetch_data(self):
+
+        # HACK! import hands from manosola
+        cursor = self.onehand_remote.find({"create_time": {"$gte": self.last_update}})
+        onehand_local = OneHandFeatures.get_collection()
+        for data in cursor:
+            if not data.get("hand_print"):
+                continue
+            if onehand_local.count_documents({"_id": data.get("_id")}) > 0:
+                continue
+            data['shared'] = False
+            hand = store(data_class=OneHandFeatures, data=data, force=True)
+            self.log("unburied hand {} from manosola pit".format(hand.uid))
+            # break
+
+        super().fetch_data()
+
     def process_data(self):
         for hand_feature in self.data:
             if not hand_feature.hand_print:
+                continue
+            if hand_feature.shared:
                 continue
             audio_path = os.path.join(
                 self.output_directory, "onehand/audio",

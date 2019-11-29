@@ -1,12 +1,15 @@
 from dataclasses import dataclass
 from datetime import datetime
-import os
 from optparse import make_option
-import time
+import os
 import random
+import sys
+import time
 from threading import Thread
 from dacite import from_dict, Optional
 
+import cv2
+import numpy as np
 from pythonosc.udp_client import SimpleUDPClient
 
 from umano.onehand import midi
@@ -16,9 +19,6 @@ from umano.onehand.osc import send_cave_to_vuo
 from umano.hal.data import find
 from umano.services.base import DataFetcher
 from umano import settings
-
-import cv2
-import numpy as np
 
 
 def stop_note(note, port, delta):
@@ -91,7 +91,7 @@ class Pattern(object):
             time.sleep(note.timestamp - previous_timestamp)
             previous_timestamp = note.timestamp
             clients[round_robin].send_message("/midi/note", note.note.to_list())
-            Thread(target=stop_note, args=(note.note, base_port + round_robin, note.duration)).start()
+            Thread(target=stop_note, daemon=True, args=(note.note, base_port + round_robin, note.duration)).start()
             round_robin = (round_robin + 1) % len(clients)
 
 
@@ -306,11 +306,12 @@ class Neanderthal(DataFetcher):
             cv2.imshow("debug", rescale_frame(frame))
             cv2.waitKey(0)
             cv2.destroyAllWindows()
+            sys.exit(0)
 
         else:
             self.log(msg="update cave {}".format(len(self.hands)))
             pattern = Pattern(notes=self.symphony)
-            Thread(target=pattern.play).start()
+            Thread(target=pattern.play, daemon=True).start()
             send_cave_to_vuo(self.hands, self.duration)
 
     def fetch_data(self):
@@ -358,6 +359,8 @@ class Neanderthal(DataFetcher):
 
         self.compose_symphony()
         self.send_osc()
+        time.sleep(self.timeout)
+        sys.exit(0)
 
 
 if __name__ == "__main__":

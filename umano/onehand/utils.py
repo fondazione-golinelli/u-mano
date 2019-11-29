@@ -3,10 +3,16 @@ from math import log2, pow
 from statistics import mean, StatisticsError
 import string
 import tempfile
-import numpy as np
+import time
 
+
+import numpy as np
 import cv2
 from scipy.spatial import distance as dist
+
+from pythonosc import udp_client
+
+from umano import settings
 
 SPEED_OF_SOUND = 344  # m/s in air
 HANDPOINT_PAIRS = [
@@ -275,3 +281,17 @@ def hand_roi(hand, offset=100):
 
 def crop(image, min_xy, max_xy):
     return image[min_xy[1]:max_xy[1], min_xy[0]:max_xy[0]]
+
+
+def toggle_corridor_light(on=True, steps=25, duration=3.0, max_intensity=255.0):
+
+    client = udp_client.SimpleUDPClient(settings.SUS_MILLUMIN_HOST, settings.SUS_MILLUMIN_PORT)
+
+    intensity = not on and max_intensity or 0.0
+    for x in range(steps):
+        time.sleep(duration/steps)
+        # client.send_message(settings.SUS_OSC_LIGHTS_CORRIDOR_INTENSITY_ADDRESS, intensity)
+        intensity = intensity + (on and 1.0 or -1.0) * max_intensity/steps
+        print(intensity)
+
+
