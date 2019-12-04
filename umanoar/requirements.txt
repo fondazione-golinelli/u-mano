@@ -9,3 +9,4 @@ wikipedia==1.4.0
 Google-Images-Search  # https://github.com/arrrlo/Google-Images-Search
 # in windows pip install windows-curses
 networkx==2.4
+user-agents==2.0

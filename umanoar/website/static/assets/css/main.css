@@ -637,6 +637,12 @@ input, select, textarea {
 
 /* Image */
 
+	.clearfix{
+		content: " ";
+  		display: table;
+		clear: both;
+	}
+
 	.image {
 		border-radius: 4px;
 		border: 0;

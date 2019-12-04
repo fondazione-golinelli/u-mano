@@ -137,6 +137,9 @@ if not os.path.exists(MEDIA_ROOT):
 GOOGLE_CUSTOMSEARCH_DEVELOPER_API_KEY = None
 GOOGLE_CUSTOMSEARCH_ENGINE_ID = None
 
+PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.fondazionegolinelli.umano"
+APP_STORE_URL = "https://apps.apple.com/us/app/u-mano/id1487466772?l=it&ls=1"
+
 try:
     from .local_settings import *
 except ImportError:
