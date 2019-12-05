@@ -10,7 +10,7 @@ def home(request):
     useragent = user_agents.parse(request.META.get("HTTP_USER_AGENT"))
     if useragent.os.family == "Android":
         return HttpResponseRedirect(settings.PLAY_STORE_URL)
-    elif useragent.os.family == "iOS":
+    elif useragent.os.family == "iOS" or "Mac OS" in useragent.os.family:
         return HttpResponseRedirect(settings.APP_STORE_URL)
     return render_to_response(
         'website/index.html', {},
