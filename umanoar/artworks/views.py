@@ -1,5 +1,6 @@
-import os
 import json
+import os
+import random
 
 from django.conf import settings
 from django.http import JsonResponse, HttpResponseBadRequest
@@ -85,3 +86,17 @@ def count_missing_contents(request):
             return JsonResponse(dict(size=total_size))
 
     return HttpResponseBadRequest()
+
+
+@csrf_exempt
+def live(request):
+    ret = []
+
+    for artwork in Artwork.objects.all():
+        ret.append(
+            dict(
+                uid=artwork.uid,
+                users=random.randint(0, 10)
+            )
+        )
+    return JsonResponse(ret, safe=False)

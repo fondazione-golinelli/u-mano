@@ -34,6 +34,7 @@ urlpatterns = [
     path('api/artworks/<str:uid>/time', artwork_views.post_time),
     path('api/artworks/<str:uid>/time/', artwork_views.post_time),
     path('api/artworks/missing/', artwork_views.count_missing_contents),
+    path('api/artworks/live/', artwork_views.live),
 
     path('demo/picture/<int:pk>', demo_views.picture_preview, name="umano_demo_picture_preview"),
     path('demo/updateshader/', demo_views.update_shader_settings, name="umano_demo_update_shader"),
