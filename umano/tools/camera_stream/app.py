@@ -1,7 +1,8 @@
 import argparse
 import pyclbr
 
-from flask import Flask, render_template, Response, g
+from flask import Flask, render_template, Response, send_file
+from io import BytesIO
 
 from umano.tools.camera_stream.camera_opencv import Camera
 from umano.tools.camera_stream import image_processing
@@ -35,11 +36,28 @@ def video_feed():
             Camera(
                 app.config.get("CAMERA_SOURCE"),
                 processor=app.config.get('IMAGE_PROCESSOR', "BaseProcessing"),
-                file_extension=app.config.get("FILE_EXTENSION"),
-                capture=app.capture
+                file_extension=app.config.get("FILE_EXTENSION", ".jpeg"),
+                capture=getattr(app, 'camera', None)
             ),
         ),
         mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/frame.jpeg')
+def return_frame():
+    camera = Camera(
+        app.config.get("CAMERA_SOURCE"),
+        processor=app.config.get('IMAGE_PROCESSOR', "BaseProcessing"),
+        file_extension=app.config.get("FILE_EXTENSION", ".jpeg"),
+        capture=getattr(app, 'camera', None)
+    )
+    frame = camera.get_frame()
+    l = str(len(frame)).encode("utf-8")
+    return send_file(
+        BytesIO(frame),
+        mimetype='image/jpeg',
+        as_attachment=False,
+        attachment_filename='frame.jpeg')
 
 
 def create_app(config):
@@ -77,7 +95,7 @@ if __name__ == '__main__':
         '--camera',
         dest='CAMERA_SOURCE',
         type=str,
-        default="0",
+        default="2",
         help='local camera index to stream from (default 0) or camera stream url')
     parser.add_argument(
         '--processor',

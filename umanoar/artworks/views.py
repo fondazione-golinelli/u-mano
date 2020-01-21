@@ -2,6 +2,8 @@ import json
 import os
 import random
 
+import lorem
+
 from django.conf import settings
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
@@ -10,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import ArtworkSerializer, ArtworkLightSerializer, Artwork
+from .models import UmanoProcess
 
 
 class ArtworkList(APIView):
@@ -90,13 +93,24 @@ def count_missing_contents(request):
 
 @csrf_exempt
 def live(request):
-    ret = []
+    ret = dict(pictures=[], processes=[])
 
     for artwork in Artwork.objects.all():
-        ret.append(
+        ret['pictures'].append(
             dict(
                 uid=artwork.uid,
                 users=random.randint(0, 10)
             )
         )
+
+    for process in UmanoProcess.objects.all():
+        if random.random() > 0.3:
+            ret['processes'].append(
+                dict(
+                    uid=process.uid,
+                    name=process.name.upper(),
+                    log=lorem.sentence().upper()
+                )
+            )
+
     return JsonResponse(ret, safe=False)

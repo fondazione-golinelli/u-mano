@@ -140,3 +140,13 @@ class ArtworkQueryImageResult(ArtworkQueryResult):
 
     def __str__(self):
         return "{} - {} {}".format(self.artwork.title, self.website.domain, self.image.name)
+
+
+class UmanoProcess(models.Model):
+    uid = models.CharField(max_length=36, blank=False, null=False)
+    name = models.CharField(max_length=64, blank=False, null=False)
+    host = models.CharField(max_length=64, blank=False, null=False, default="HAL")
+
+    def __str__(self):
+        return "{} - {} @ {}".format(self.uid, self.name, self.host)
+

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Artwork, ShaderParameters, ApplicationSettings, ArtworkQueryResultWebsite, \
-    ArtworkQueryTextResult, ArtworkQueryImageResult, ArtworkGraphNode, ArtworkCard, ArtworkGraphSettings
+    ArtworkQueryTextResult, ArtworkQueryImageResult, ArtworkGraphNode, ArtworkCard, ArtworkGraphSettings, UmanoProcess
 
 
 class ArtworkAdmin(admin.ModelAdmin):
@@ -64,3 +64,10 @@ class ArtworkGraphSettingsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ArtworkGraphSettings, ArtworkGraphSettingsAdmin)
+
+
+class UmanoProcessAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(UmanoProcess, UmanoProcessAdmin)

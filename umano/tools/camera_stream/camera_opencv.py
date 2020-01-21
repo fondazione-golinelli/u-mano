@@ -50,6 +50,9 @@ class Camera(BaseCamera):
             # read current frame
             _, frame = camera.read()
 
+            from umano.onehand.utils import rescale_frame
+            frame = rescale_frame(frame, wpercent=50, hpercent=50)
+
             if Camera.processor is not None:
                 frame = Camera.processor.process_frame(frame)
 
