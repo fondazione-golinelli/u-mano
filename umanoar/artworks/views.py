@@ -99,7 +99,7 @@ def live(request):
         ret['pictures'].append(
             dict(
                 uid=artwork.uid,
-                users=random.randint(0, 10)
+                users=random.randint(0, 3)
             )
         )
 
