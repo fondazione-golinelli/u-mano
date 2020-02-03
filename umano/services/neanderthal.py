@@ -81,6 +81,8 @@ class Pattern(object):
             1: SimpleUDPClient(address=ip, port=base_port + 1),
             2: SimpleUDPClient(address=ip, port=base_port + 2),
             3: SimpleUDPClient(address=ip, port=base_port + 3),
+            4: SimpleUDPClient(address=ip, port=base_port + 4),
+            5: SimpleUDPClient(address=ip, port=base_port + 5),
         }
 
         previous_timestamp = 0

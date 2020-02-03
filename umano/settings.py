@@ -4,7 +4,7 @@ BASE_DIRECTORY = os.path.dirname(__file__)
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), "media")
 
 UMANO_SHARE_ROOT = "/umano-share"
-UMANO_SHARE_HOSTS = ["caverna"]
+UMANO_SHARE_HOSTS = []
 
 HAL_MONGODB_URL = 'mongodb://hal:27017'
 
