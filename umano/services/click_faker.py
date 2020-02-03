@@ -18,7 +18,7 @@ def trigger_touch_event(session_id, status):
 if __name__ == "__main__":
     print("hello faker")
     while True:
-        if 8 < datetime.now().hour < 22:
+        if 6 < datetime.now().hour < 22:
             try:
                 time.sleep(2)
                 session_id = new_touch_session_id()

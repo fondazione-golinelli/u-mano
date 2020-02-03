@@ -39,13 +39,91 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-88",
+					"id" : "obj-100",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 119.0, 1455.0, 150.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 591.0, 73.0, 150.0, 20.0 ],
+					"text" : "test sound low sine"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-93",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 1,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 74.0, 1472.367925405502319, 60.0, 22.0 ],
-					"text" : "cycle~ 64"
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 195.0, 1308.0, 70.0, 22.0 ],
+					"text" : "loadmess 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-94",
+					"maxclass" : "number",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 99.0, 1335.0, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-96",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 99.0, 1300.0, 24.0, 24.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 565.0, 73.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"data" : 					{
+						"clips" : [ 							{
+								"absolutepath" : "manosola:/Users/mini1/projects/u-mano/max/onehand/v4/teaser_manosola.wav",
+								"filename" : "teaser_manosola.wav",
+								"filekind" : "audiofile",
+								"loop" : 0,
+								"content_state" : 								{
+									"mode" : [ "basic" ],
+									"formant" : [ 1.0 ],
+									"pitchcorrection" : [ 0 ],
+									"followglobaltempo" : [ 0 ],
+									"play" : [ 0 ],
+									"timestretch" : [ 0 ],
+									"speed" : [ 1.0 ],
+									"pitchshift" : [ 1.0 ],
+									"formantcorrection" : [ 0 ],
+									"quality" : [ "basic" ],
+									"slurtime" : [ 0.0 ],
+									"originallength" : [ 0.0, "ticks" ],
+									"originallengthms" : [ 0.0 ],
+									"originaltempo" : [ 120.0 ],
+									"basictuning" : [ 440 ]
+								}
+
+							}
+ ]
+					}
+,
+					"id" : "obj-92",
+					"maxclass" : "playlist~",
+					"numinlets" : 1,
+					"numoutlets" : 5,
+					"outlettype" : [ "signal", "signal", "signal", "", "dictionary" ],
+					"patching_rect" : [ 91.0, 1385.0, 150.0, 30.0 ]
 				}
 
 			}
@@ -82,21 +160,21 @@
 								"filekind" : "audiofile",
 								"loop" : 0,
 								"content_state" : 								{
-									"pitchshift" : [ 1.0 ],
+									"mode" : [ "basic" ],
+									"formant" : [ 1.0 ],
+									"pitchcorrection" : [ 0 ],
+									"followglobaltempo" : [ 0 ],
 									"play" : [ 0 ],
 									"timestretch" : [ 0 ],
+									"speed" : [ 1.0 ],
+									"pitchshift" : [ 1.0 ],
 									"formantcorrection" : [ 0 ],
+									"quality" : [ "basic" ],
 									"slurtime" : [ 0.0 ],
-									"mode" : [ "basic" ],
 									"originallength" : [ 0.0, "ticks" ],
 									"originallengthms" : [ 0.0 ],
-									"speed" : [ 1.0 ],
 									"originaltempo" : [ 120.0 ],
-									"basictuning" : [ 440 ],
-									"formant" : [ 1.0 ],
-									"quality" : [ "basic" ],
-									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ]
+									"basictuning" : [ 440 ]
 								}
 
 							}
@@ -121,7 +199,7 @@
 					"patching_rect" : [ 110.0, 1510.0, 150.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 591.0, 34.0, 150.0, 20.0 ],
-					"text" : "test sound"
+					"text" : "test sound eroica"
 				}
 
 			}
@@ -135,7 +213,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 110.0, 1535.0, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 591.0, 59.0, 24.0, 24.0 ]
+					"presentation_rect" : [ 565.0, 34.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -218,44 +296,6 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-51",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 127.5, 1352.367925405502319, 145.0, 22.0 ],
-					"text" : "0, 0.3 800 0.1 200 0 2000"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-52",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "signal", "bang" ],
-					"patching_rect" : [ 127.5, 1414.367925405502319, 34.0, 22.0 ],
-					"text" : "line~"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-70",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 232.5, 1472.367925405502319, 29.5, 22.0 ],
-					"text" : "*~"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-14",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -263,18 +303,6 @@
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 91.096774101257324, 1245.0, 184.806451797485352, 22.0 ],
 					"text" : "route /umano/onehand/teaser"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-7",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 48.903225898742676, 1414.367925405502319, 66.0, 22.0 ],
-					"text" : "cycle~ 128"
 				}
 
 			}
@@ -3739,7 +3767,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-51", 0 ],
+					"destination" : [ "obj-96", 0 ],
 					"source" : [ "obj-14", 0 ]
 				}
 
@@ -5896,20 +5924,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-52", 0 ],
-					"source" : [ "obj-51", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-70", 1 ],
-					"source" : [ "obj-52", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-34", 1 ],
 					"order" : 0,
 					"source" : [ "obj-53", 0 ]
@@ -6066,29 +6080,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-70", 0 ],
-					"source" : [ "obj-7", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-50", 0 ],
-					"order" : 1,
-					"source" : [ "obj-70", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-56", 0 ],
-					"order" : 0,
-					"source" : [ "obj-70", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-15", 0 ],
 					"source" : [ "obj-71", 0 ]
 				}
@@ -6103,7 +6094,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-51", 0 ],
+					"destination" : [ "obj-96", 0 ],
 					"source" : [ "obj-74", 0 ]
 				}
 
@@ -6180,13 +6171,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-70", 0 ],
-					"source" : [ "obj-88", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-99", 0 ],
 					"source" : [ "obj-89", 0 ]
 				}
@@ -6203,6 +6187,34 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-50", 0 ],
+					"source" : [ "obj-92", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-56", 0 ],
+					"source" : [ "obj-92", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-94", 0 ],
+					"source" : [ "obj-93", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-92", 0 ],
+					"source" : [ "obj-94", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-50", 0 ],
 					"source" : [ "obj-95", 0 ]
 				}
 
@@ -6211,6 +6223,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-56", 0 ],
 					"source" : [ "obj-95", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-94", 0 ],
+					"source" : [ "obj-96", 0 ]
 				}
 
 			}
@@ -6312,37 +6331,37 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-3::obj-26" : [ "Decay", "Decay", 0 ],
-			"obj-133::obj-47" : [ "amxd~[18]", "amxd~[1]", 0 ],
-			"obj-77::obj-47" : [ "amxd~[20]", "amxd~[1]", 0 ],
-			"obj-189::obj-47" : [ "amxd~[5]", "amxd~[1]", 0 ],
-			"obj-181::obj-47" : [ "amxd~[12]", "amxd~[1]", 0 ],
-			"obj-229::obj-47" : [ "amxd~[1]", "amxd~[1]", 0 ],
 			"obj-8::obj-26" : [ "Reflections", "Reflections", 0 ],
-			"obj-161::obj-47" : [ "amxd~[16]", "amxd~[1]", 0 ],
-			"obj-237::obj-47" : [ "amxd~[3]", "amxd~[1]", 0 ],
-			"obj-173::obj-47" : [ "amxd~[10]", "amxd~[1]", 0 ],
-			"obj-201::obj-47" : [ "amxd~[8]", "amxd~[1]", 0 ],
-			"obj-153::obj-47" : [ "amxd~[14]", "amxd~[1]", 0 ],
-			"obj-8::obj-25" : [ "Cutoff", "Cutoff", 0 ],
-			"obj-8::obj-28" : [ "Mix[1]", "Mix", 0 ],
-			"obj-3::obj-20" : [ "Diffusion", "Diffusion", 0 ],
-			"obj-129::obj-47" : [ "amxd~[19]", "amxd~[1]", 0 ],
-			"obj-3::obj-1" : [ "Size", "Size", 0 ],
-			"obj-193::obj-47" : [ "amxd~[6]", "amxd~[1]", 0 ],
 			"obj-149::obj-47" : [ "amxd~[13]", "amxd~[1]", 0 ],
+			"obj-189::obj-47" : [ "amxd~[5]", "amxd~[1]", 0 ],
+			"obj-3::obj-26" : [ "Decay", "Decay", 0 ],
+			"obj-193::obj-47" : [ "amxd~[6]", "amxd~[1]", 0 ],
+			"obj-237::obj-47" : [ "amxd~[3]", "amxd~[1]", 0 ],
+			"obj-8::obj-25" : [ "Cutoff", "Cutoff", 0 ],
+			"obj-173::obj-47" : [ "amxd~[10]", "amxd~[1]", 0 ],
+			"obj-161::obj-47" : [ "amxd~[16]", "amxd~[1]", 0 ],
+			"obj-8::obj-28" : [ "Mix[1]", "Mix", 0 ],
+			"obj-201::obj-47" : [ "amxd~[8]", "amxd~[1]", 0 ],
 			"obj-8::obj-1" : [ "Time", "Time", 0 ],
-			"obj-137::obj-47" : [ "amxd~[17]", "amxd~[1]", 0 ],
-			"obj-3::obj-25" : [ "Damping", "Damping", 0 ],
+			"obj-133::obj-47" : [ "amxd~[18]", "amxd~[1]", 0 ],
+			"obj-153::obj-47" : [ "amxd~[14]", "amxd~[1]", 0 ],
+			"obj-3::obj-20" : [ "Diffusion", "Diffusion", 0 ],
+			"obj-3::obj-1" : [ "Size", "Size", 0 ],
+			"obj-197::obj-47" : [ "amxd~[7]", "amxd~[1]", 0 ],
+			"obj-181::obj-47" : [ "amxd~[12]", "amxd~[1]", 0 ],
 			"obj-241::obj-47" : [ "amxd~[4]", "amxd~[1]", 0 ],
-			"obj-177::obj-47" : [ "amxd~[11]", "amxd~[1]", 0 ],
 			"obj-3::obj-55" : [ "Mix", "Mix", 0 ],
-			"obj-157::obj-47" : [ "amxd~[15]", "amxd~[1]", 0 ],
-			"obj-8::obj-47" : [ "bypass[1]", "bypass", 0 ],
+			"obj-177::obj-47" : [ "amxd~[11]", "amxd~[1]", 0 ],
+			"obj-3::obj-25" : [ "Damping", "Damping", 0 ],
+			"obj-137::obj-47" : [ "amxd~[17]", "amxd~[1]", 0 ],
 			"obj-233::obj-47" : [ "amxd~[2]", "amxd~[1]", 0 ],
 			"obj-169::obj-47" : [ "amxd~[9]", "amxd~[1]", 0 ],
-			"obj-197::obj-47" : [ "amxd~[7]", "amxd~[1]", 0 ],
 			"obj-3::obj-50" : [ "bypass", "bypass", 0 ],
+			"obj-129::obj-47" : [ "amxd~[19]", "amxd~[1]", 0 ],
+			"obj-157::obj-47" : [ "amxd~[15]", "amxd~[1]", 0 ],
+			"obj-77::obj-47" : [ "amxd~[20]", "amxd~[1]", 0 ],
+			"obj-229::obj-47" : [ "amxd~[1]", "amxd~[1]", 0 ],
+			"obj-8::obj-47" : [ "bypass[1]", "bypass", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -6410,6 +6429,13 @@
 				"name" : "eroica.aiff",
 				"bootpath" : "C74:/docs/tutorial-patchers/msp-tut",
 				"type" : "AIFF",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "teaser_manosola.wav",
+				"bootpath" : "~/projects/u-mano/max/onehand/v4",
+				"patcherrelativepath" : ".",
+				"type" : "WAVE",
 				"implicit" : 1
 			}
  ],
