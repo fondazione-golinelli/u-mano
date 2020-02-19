@@ -104,12 +104,22 @@ def live(request):
         )
 
     for process in UmanoProcess.objects.all():
+
+        name = process.name
+        log = lorem.sentence()
+
         if random.random() > 0.3:
+            if random.random() > 0.6:
+                name = "Fuori Luogo"
+                log = "Una installazione di Carlo Fiorini, Jack Beccegato, TNTC e Matteo Balasso"
+            elif random.random() > 0.6:
+                name = "Fondazione Golinelli"
+                log = "Be intellgent be there"
             ret['processes'].append(
                 dict(
                     uid=process.uid,
-                    name=process.name.upper(),
-                    log=lorem.sentence().upper()
+                    name=name.upper(),
+                    log=log.upper()
                 )
             )
 
